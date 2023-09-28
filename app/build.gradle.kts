@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.blueleaf"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.blueleaf"
@@ -33,6 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures { dataBinding=true }
 }
 
 dependencies {
