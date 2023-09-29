@@ -9,35 +9,33 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView
+import com.example.blueleaf.auth.IntroActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        auth = Firebase.auth
 
-        // 일정 시간 지연 이후 실행하기 위한 코드
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            // 일정 시간이 지나면 MainActivity로 이동
-            val intent= Intent(this,MainActivity::class.java)
-            startActivity(intent)
-
-            // 이전 키를 눌렀을 때 splash 화면으로 이동을 방지하기 위해
-            // 이동한 다음 사용안함으로 finish 처리
-            finish()
-
-
-        },3000) // 시간 3초 이후 실행
-
-        // 나와 함께하는 식물 -> '함께' 부분 색 따로 지정
-        val splashText = findViewById<TextView>(R.id.splash_text)
-        val ssb = SpannableStringBuilder(splashText.text)
-
-        ssb.apply{
-            setSpan(ForegroundColorSpan(getColor(R.color.lightGreen)), 3, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // 이미 로그인 된 유저가 아니면 IntroActivity로 이동
+        if(auth.currentUser?.uid == null) {
+            Handler().postDelayed({
+                startActivity(Intent(this, IntroActivity::class.java))
+                finish()
+            }, 3000)
 
         }
+        // 이미 로그인 된 유저이면 Main으로 이동
+        else {
+            Handler().postDelayed({
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }, 3000)
+        }
 
-        splashText.text = ssb
     }
 }

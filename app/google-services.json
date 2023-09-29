@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "103688065945",
+    "project_id": "blue-leaf-0",
+    "storage_bucket": "blue-leaf-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103688065945:android:da1d7620888c4bd5fef908",
+        "android_client_info": {
+          "package_name": "com.example.blueleaf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaPodCA1JiwlM26H2P4cD-R6SAtndNSV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
