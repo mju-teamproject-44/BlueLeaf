@@ -11,12 +11,22 @@ import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 
 class ContentRVAdapter(val context : Context, val items:MutableList<ContentModel>): RecyclerView.Adapter<ContentRVAdapter.ViewHolder>() {
+    interface ItemClick {
+        fun onClick(view:View, position: Int)
+    }
+
+    var itemClick:ItemClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item,parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ContentRVAdapter.ViewHolder, position: Int) {
+        if(itemClick != null) {
+            holder.itemView.setOnClickListener{v->
+                itemClick?.onClick(v, position)
+            }
+        }
         holder.bindItems(items[position])
     }
 
