@@ -36,8 +36,10 @@ class TipFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.talkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_tipFragment_to_talkFragment)
+        binding.category3.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category3")
+            startActivity(intent)
         }
 
         binding.bookmarkTag.setOnClickListener(){
