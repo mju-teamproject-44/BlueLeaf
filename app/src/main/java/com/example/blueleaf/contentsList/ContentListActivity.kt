@@ -19,6 +19,8 @@ import com.google.firebase.ktx.Firebase
 
 class ContentListActivity : AppCompatActivity() {
     lateinit var myRef : DatabaseReference
+    val bookmarkIdList = mutableListOf<String>()
+    lateinit var rvAdapter: ContentRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -27,7 +29,8 @@ class ContentListActivity : AppCompatActivity() {
         val rv:RecyclerView = findViewById(R.id.rv)
         val items = mutableListOf<ContentModel>()
         val database = Firebase.database
-        val rvAdapter = ContentRVAdapter(baseContext, items)
+        val itemKeyList = mutableListOf<String>() // 키 값 저
+        val rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
         val category = intent.getStringExtra("category")
         Log.d("CLA", category.toString())
 
@@ -67,7 +70,7 @@ class ContentListActivity : AppCompatActivity() {
         }
 
 
-
+        // 데이터 읽 (컨텐츠 리스트 읽기)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // 스냅샷에 데이터가 있다!
@@ -80,6 +83,7 @@ class ContentListActivity : AppCompatActivity() {
                     // 그래서 이미 만들어진 리사이클러뷰에 데이터가 안들어가 있음
                     val item = dataModel.getValue(ContentModel::class.java)
                     items.add(item!!)
+                    itemKeyList.add(dataModel.key.toString())
                 }
 
                 rvAdapter.notifyDataSetChanged()
@@ -95,16 +99,6 @@ class ContentListActivity : AppCompatActivity() {
         myRef.addValueEventListener(postListener)
         rv.adapter = rvAdapter
         rv.layoutManager = GridLayoutManager(this,2)
-
-        rvAdapter.itemClick = object : ContentRVAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                Toast.makeText(baseContext, items[position].title, Toast.LENGTH_LONG).show()
-
-                val intent = Intent(this@ContentListActivity, ContentShowActivity::class.java)
-                intent.putExtra("url", items[position].webUrl)
-                startActivity(intent)
-            }
-        }
 
     }
 

@@ -1,33 +1,33 @@
 package com.example.blueleaf.contentsList
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.blueleaf.R
+import com.example.blueleaf.utils.FBAuth
+import com.example.blueleaf.utils.FBRef
 
-class ContentRVAdapter(val context : Context, val items:MutableList<ContentModel>): RecyclerView.Adapter<ContentRVAdapter.ViewHolder>() {
-    interface ItemClick {
-        fun onClick(view:View, position: Int)
-    }
+class ContentRVAdapter(val context : Context,
+                       val items:MutableList<ContentModel>,
+                       val keyList : MutableList<String>,
+                       val bookmarkIdList : MutableList<String>)
+    : RecyclerView.Adapter<ContentRVAdapter.ViewHolder>() {
 
-    var itemClick:ItemClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item,parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ContentRVAdapter.ViewHolder, position: Int) {
-        if(itemClick != null) {
-            holder.itemView.setOnClickListener{v->
-                itemClick?.onClick(v, position)
-            }
-        }
-        holder.bindItems(items[position])
+        holder.bindItems(items[position], keyList[position]) //22 키를 하나 하나 씩 뽑아냄
     }
 
     override fun getItemCount(): Int {
@@ -35,9 +35,46 @@ class ContentRVAdapter(val context : Context, val items:MutableList<ContentModel
     }
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        fun bindItems(item:ContentModel){
+        fun bindItems(item:ContentModel, key:String){
+
+            itemView.setOnClickListener() {
+                val intent = Intent(context, ContentShowActivity::class.java)
+                itemView.context.startActivity(Intent(context, ContentShowActivity::class.java))
+                intent.putExtra("url",item.webUrl)
+                itemView.context.startActivity(intent)
+            }
+
             val contentTitle = itemView.findViewById<TextView>(R.id.textArea)
             val imageViewArea = itemView.findViewById<ImageView>(R.id.imageArea)
+            val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
+
+            if(bookmarkIdList.contains(key)) {
+                bookmarkArea.setImageResource(R.drawable.bookmark_color)
+            } else {
+                bookmarkArea.setImageResource(R.drawable.bookmark_white)
+            }
+
+            bookmarkArea.setOnClickListener {
+                Log.d("ContentRVAdapter", FBAuth.getUid())
+                Toast.makeText(context, key, Toast.LENGTH_LONG).show()
+
+                if(bookmarkIdList.contains(key)) {
+                    // 북마크가 있을 때 삭제
+                    FBRef.bookmarkRef
+                        .child(FBAuth.getUid())
+                        .child(key)
+                        .removeValue()
+
+                } else {
+                    // 북마크가 없을 때
+                    FBRef.bookmarkRef
+                        .child(FBAuth.getUid())
+                        .child(key)
+                        .setValue(BookmarkModel(true))
+
+                }
+
+            }
 
             contentTitle.text = item.title
             Glide.with(context)
