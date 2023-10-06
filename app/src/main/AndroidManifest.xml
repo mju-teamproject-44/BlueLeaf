@@ -23,6 +23,7 @@
         <activity
             android:name=".auth.JoinActivity"
             android:exported="false" />
+
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false" />
