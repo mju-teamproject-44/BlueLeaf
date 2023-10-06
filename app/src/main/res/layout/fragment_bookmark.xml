@@ -6,33 +6,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.BookmarkFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="BOOKMARK"
-            android:textSize="50sp"/>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bookmarkRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="70dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,23 +41,20 @@
                     android:background="@color/MainColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"
-                android:orientation="horizontal"
                 android:weightSum="5"
                 app:layout_constraintBottom_toBottomOf="parent">
 
@@ -72,37 +66,35 @@
                     android:src="@drawable/bottom_hometap" />
 
                 <ImageView
-                    android:id="@+id/tipTab"
+                    android:id="@+id/tipTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_goodtip" />
 
                 <ImageView
-                    android:id="@+id/talkTag"
+                    android:id="@+id/talkTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_talk" />
 
                 <ImageView
-                    android:id="@+id/bookmarkTag"
+                    android:id="@+id/bookmarkTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_bookmark" />
 
                 <ImageView
-                    android:id="@+id/storeTag"
+                    android:id="@+id/storeTap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_store" />
 
-
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </FrameLayout>
 </layout>
