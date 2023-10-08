@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout">
-                
+
                 <LinearLayout
                     android:background="@color/MainColor"
                     android:layout_width="match_parent"
@@ -67,23 +67,23 @@
                 >
 
                 <ImageView
-                    android:id="@+id/homeTap"
+                    android:id="@+id/homeTag"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_hometap"
+                    android:src="@drawable/bottom_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/tipTab"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_goodtip"
+                    android:id="@+id/tipTab2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/bottom_plant" />
 
                 <ImageView
-                    android:id="@+id/talkTag"
+                    android:id="@+id/wateringTag"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_talk"
+                    android:src="@drawable/bottom_watering"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

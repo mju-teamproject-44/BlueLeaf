@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
-import com.example.blueleaf.databinding.FragmentTalkBinding
+import com.example.blueleaf.databinding.FragmentWateringBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class TalkFragment : Fragment() {
-    private lateinit var binding:FragmentTalkBinding
+class WateringFragment : Fragment() {
+    private lateinit var binding:FragmentWateringBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,14 +25,14 @@ class TalkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_talk,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_watering,container,false)
 
-        binding.homeTap.setOnClickListener(){
+        binding.homeTag.setOnClickListener(){
             it.findNavController().navigate(R.id.action_talkFragment_to_homeFragment)
         }
 
-        binding.tipTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_talkFragment_to_tipFragment)
+        binding.plantTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_talkFragment_to_plantFragment)
         }
 
         binding.bookmarkTag.setOnClickListener(){

@@ -17,11 +17,11 @@
             android:id="@+id/action_homeFragment_to_storeFragment"
             app:destination="@id/storeFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_tipFragment"
-            app:destination="@id/tipFragment" />
+            android:id="@+id/action_homeFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            android:id="@+id/action_homeFragment_to_wateringFragment"
+            app:destination="@id/wateringFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookmarkFragment"
@@ -29,8 +29,8 @@
         android:label="fragment_bookmark"
         tools:layout="@layout/fragment_bookmark" >
         <action
-            android:id="@+id/action_bookmarkFragment_to_tipFragment"
-            app:destination="@id/tipFragment" />
+            android:id="@+id/action_bookmarkFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
             android:id="@+id/action_bookmarkFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -38,8 +38,8 @@
             android:id="@+id/action_bookmarkFragment_to_storeFragment"
             app:destination="@id/storeFragment" />
         <action
-            android:id="@+id/action_bookmarkFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            android:id="@+id/action_bookmarkFragment_to_wateringFragment"
+            app:destination="@id/wateringFragment" />
     </fragment>
     <fragment
         android:id="@+id/storeFragment"
@@ -47,11 +47,11 @@
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" >
         <action
-            android:id="@+id/action_storeFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            android:id="@+id/action_storeFragment_to_wateringFragment"
+            app:destination="@id/wateringFragment" />
         <action
-            android:id="@+id/action_storeFragment_to_tipFragment"
-            app:destination="@id/tipFragment" />
+            android:id="@+id/action_storeFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
             android:id="@+id/action_storeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -60,13 +60,13 @@
             app:destination="@id/bookmarkFragment" />
     </fragment>
     <fragment
-        android:id="@+id/talkFragment"
-        android:name="com.example.blueleaf.fragments.TalkFragment"
-        android:label="fragment_talk"
-        tools:layout="@layout/fragment_talk" >
+        android:id="@+id/wateringFragment"
+        android:name="com.example.blueleaf.fragments.WateringFragment"
+        android:label="fragment_watering"
+        tools:layout="@layout/fragment_watering">
         <action
-            android:id="@+id/action_talkFragment_to_tipFragment"
-            app:destination="@id/tipFragment" />
+            android:id="@+id/action_talkFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
             android:id="@+id/action_talkFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
@@ -78,10 +78,10 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/tipFragment"
-        android:name="com.example.blueleaf.fragments.TipFragment"
-        android:label="fragment_tip"
-        tools:layout="@layout/fragment_tip" >
+        android:id="@+id/plantFragment"
+        android:name="com.example.blueleaf.fragments.PlantFragment"
+        android:label="fragment_plant"
+        tools:layout="@layout/fragment_plant">
         <action
             android:id="@+id/action_tipFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
@@ -92,7 +92,7 @@
             android:id="@+id/action_tipFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_tipFragment_to_talkFragment"
-            app:destination="@id/talkFragment" />
+            android:id="@+id/action_tipFragment_to_wateringFragment"
+            app:destination="@id/wateringFragment" />
     </fragment>
 </navigation>

@@ -25,16 +25,16 @@ class StoreFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_store,container,false)
 
-        binding.homeTap.setOnClickListener(){
+        binding.homeTag.setOnClickListener(){
             it.findNavController().navigate(R.id.action_storeFragment_to_homeFragment)
         }
 
-        binding.tipTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_storeFragment_to_tipFragment)
+        binding.plantTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_storeFragment_to_plantFragment)
         }
 
-        binding.talkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_storeFragment_to_talkFragment)
+        binding.wateringTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_storeFragment_to_wateringFragment)
         }
 
         binding.bookmarkTag.setOnClickListener(){

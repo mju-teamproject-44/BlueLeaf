@@ -39,6 +39,7 @@ class BookmarkFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_bookmark,container,false)
 
+
         // 2. 사용자가 북마크한 정보를 다 가져옴
         getBookmarkData()
         rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
@@ -58,6 +59,18 @@ class BookmarkFragment : Fragment() {
 
         binding.talkTap.setOnClickListener(){
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
+
+        binding.homeTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
+        }
+
+        binding.plantTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
+        }
+
+        binding.wateringTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_wateringFragment)
+
         }
 
         binding.storeTap.setOnClickListener(){

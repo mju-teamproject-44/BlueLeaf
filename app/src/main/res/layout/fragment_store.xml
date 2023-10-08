@@ -66,25 +66,25 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
-                    android:id="@+id/homeTap"
+                    android:id="@+id/homeTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_hometap" />
+                    android:src="@drawable/bottom_home" />
 
                 <ImageView
-                    android:id="@+id/tipTab"
+                    android:id="@+id/plantTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_goodtip" />
+                    android:src="@drawable/bottom_plant" />
 
                 <ImageView
-                    android:id="@+id/talkTag"
+                    android:id="@+id/wateringTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_talk" />
+                    android:src="@drawable/bottom_watering" />
 
                 <ImageView
                     android:id="@+id/bookmarkTag"
