@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
@@ -23,16 +22,16 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        binding.homeTap.setOnClickListener(){
+        binding.homeTag.setOnClickListener(){
 
         }
 
-        binding.tipTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homeFragment_to_tipFragment)
+        binding.tipTab2.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_homeFragment_to_plantFragment)
         }
 
-        binding.talkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homeFragment_to_talkFragment)
+        binding.wateringTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_homeFragment_to_wateringFragment)
         }
 
         binding.bookmarkTag.setOnClickListener(){

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.TipFragment"
+        tools:context=".fragments.PlantFragment"
 
         >
 
@@ -145,25 +145,25 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
-                    android:id="@+id/homeTap"
+                    android:id="@+id/homeTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_hometap" />
+                    android:src="@drawable/bottom_home" />
 
                 <ImageView
-                    android:id="@+id/tipTab"
+                    android:id="@+id/plantTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_goodtip" />
+                    android:src="@drawable/bottom_plant" />
 
                 <ImageView
-                    android:id="@+id/talkTag"
+                    android:id="@+id/wateringTag"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_talk" />
+                    android:src="@drawable/bottom_watering" />
 
                 <ImageView
                     android:id="@+id/bookmarkTag"

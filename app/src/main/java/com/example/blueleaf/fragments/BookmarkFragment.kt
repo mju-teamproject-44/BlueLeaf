@@ -1,7 +1,6 @@
 package com.example.blueleaf.fragments
 
 import android.os.Bundle
-import android.provider.ContactsContract.RawContacts.Data
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,16 +23,16 @@ class BookmarkFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_bookmark,container,false)
 
-        binding.homeTap.setOnClickListener(){
+        binding.homeTag.setOnClickListener(){
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
         }
 
-        binding.tipTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_tipFragment)
+        binding.plantTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
         }
 
-        binding.talkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_talkFragment)
+        binding.wateringTag.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_wateringFragment)
         }
 
         binding.storeTag.setOnClickListener(){
