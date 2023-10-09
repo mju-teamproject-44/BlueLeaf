@@ -145,35 +145,35 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
-                    android:id="@+id/homeTag"
+                    android:id="@+id/homeTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_home" />
 
                 <ImageView
-                    android:id="@+id/plantTag"
+                    android:id="@+id/plantTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_plant" />
 
                 <ImageView
-                    android:id="@+id/wateringTag"
+                    android:id="@+id/boardTab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_watering" />
+                    android:src="@drawable/bottom_board" />
 
                 <ImageView
-                    android:id="@+id/bookmarkTag"
+                    android:id="@+id/bookmarkTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_bookmark" />
 
                 <ImageView
-                    android:id="@+id/storeTag"
+                    android:id="@+id/storeTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

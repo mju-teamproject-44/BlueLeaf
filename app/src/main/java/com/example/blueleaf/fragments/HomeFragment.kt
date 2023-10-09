@@ -15,30 +15,29 @@ class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        binding.homeTag.setOnClickListener(){
+        binding.homeTab.setOnClickListener(){
 
         }
 
-        binding.tipTab2.setOnClickListener(){
+        binding.plantTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_homeFragment_to_plantFragment)
         }
 
-        binding.wateringTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homeFragment_to_wateringFragment)
+        binding.boardTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_homeFragment_to_boardFragment)
         }
 
-        binding.bookmarkTag.setOnClickListener(){
+        binding.bookmarkTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_homeFragment_to_bookmarkFragment)
         }
 
-        binding.storeTag.setOnClickListener(){
+        binding.storeTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_homeFragment_to_storeFragment)
         }
 

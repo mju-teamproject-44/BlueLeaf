@@ -40,13 +40,20 @@ class PlantFragment : Fragment() {
             intent.putExtra("category","category3")
             startActivity(intent)
         }
-
-        binding.bookmarkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_tipFragment_to_bookmarkFragment)
+        binding.homeTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_homeFragment)
         }
 
-        binding.storeTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_tipFragment_to_storeFragment)
+        binding.boardTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_boardFragment)
+        }
+
+        binding.bookmarkTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_bookmarkFragment)
+        }
+
+        binding.storeTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_storeFragment)
         }
 
         return binding.root

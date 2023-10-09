@@ -67,35 +67,35 @@
                 >
 
                 <ImageView
-                    android:id="@+id/homeTag"
+                    android:id="@+id/homeTab"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/tipTab2"
+                    android:id="@+id/plantTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_plant" />
 
                 <ImageView
-                    android:id="@+id/wateringTag"
+                    android:id="@+id/boardTab"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_watering"
+                    android:src="@drawable/bottom_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/bookmarkTag"
+                    android:id="@+id/bookmarkTab"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_bookmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/storeTag"
+                    android:id="@+id/storeTab"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_store"
                     android:layout_width="match_parent"
