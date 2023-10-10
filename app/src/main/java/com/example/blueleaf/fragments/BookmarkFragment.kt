@@ -53,16 +53,16 @@ class BookmarkFragment : Fragment() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
         }
 
-        binding.plantTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
+        binding.informationTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_informationFragment)
         }
 
         binding.boardTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_boardFragment)
         }
 
-        binding.storeTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_storeFragment)
+        binding.plantTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
         }
 
         return binding.root

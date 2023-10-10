@@ -14,11 +14,11 @@
             android:id="@+id/action_homeFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_storeFragment"
-            app:destination="@id/storeFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_plantFragment"
             app:destination="@id/plantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
         <action
             android:id="@+id/action_homeFragment_to_boardFragment"
             app:destination="@id/boardFragment" />
@@ -29,34 +29,34 @@
         android:label="fragment_bookmark"
         tools:layout="@layout/fragment_bookmark" >
         <action
-            android:id="@+id/action_bookmarkFragment_to_plantFragment"
-            app:destination="@id/plantFragment" />
+            android:id="@+id/action_bookmarkFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
         <action
             android:id="@+id/action_bookmarkFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_bookmarkFragment_to_storeFragment"
-            app:destination="@id/storeFragment" />
+            android:id="@+id/action_bookmarkFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
             android:id="@+id/action_bookmarkFragment_to_boardFragment"
             app:destination="@id/boardFragment" />
     </fragment>
     <fragment
-        android:id="@+id/storeFragment"
-        android:name="com.example.blueleaf.fragments.StoreFragment"
+        android:id="@+id/plantFragment"
+        android:name="com.example.blueleaf.fragments.PlantFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" >
         <action
-            android:id="@+id/action_storeFragment_to_boardFragment"
+            android:id="@+id/action_plantFragment_to_boardFragment"
             app:destination="@id/boardFragment" />
         <action
-            android:id="@+id/action_storeFragment_to_plantFragment"
-            app:destination="@id/plantFragment" />
+            android:id="@+id/action_plantFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
         <action
-            android:id="@+id/action_storeFragment_to_homeFragment"
+            android:id="@+id/action_plantFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_storeFragment_to_bookmarkFragment"
+            android:id="@+id/action_plantFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
     </fragment>
     <fragment
@@ -65,34 +65,34 @@
         android:label="fragment_board"
         tools:layout="@layout/fragment_board">
         <action
-            android:id="@+id/action_boardFragment_to_plantFragment"
-            app:destination="@id/plantFragment" />
+            android:id="@+id/action_boardFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
         <action
             android:id="@+id/action_boardFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
         <action
-            android:id="@+id/action_boardFragment_to_storeFragment"
-            app:destination="@id/storeFragment" />
+            android:id="@+id/action_boardFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
             android:id="@+id/action_boardFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/plantFragment"
-        android:name="com.example.blueleaf.fragments.PlantFragment"
-        android:label="fragment_plant"
+        android:id="@+id/informationFragment"
+        android:name="com.example.blueleaf.fragments.InformationFragment"
+        android:label="fragment_information"
         tools:layout="@layout/fragment_plant">
         <action
-            android:id="@+id/action_plantFragment_to_bookmarkFragment"
+            android:id="@+id/action_informationFragment_to_bookmarkFragment"
             app:destination="@id/bookmarkFragment" />
         <action
-            android:id="@+id/action_plantFragment_to_storeFragment"
-            app:destination="@id/storeFragment" />
+            android:id="@+id/action_informationFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
         <action
-            android:id="@+id/action_plantFragment_to_homeFragment"
+            android:id="@+id/action_informationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_plantFragment_to_boardFragment"
+            android:id="@+id/action_informationFragment_to_boardFragment"
             app:destination="@id/boardFragment" />
     </fragment>
 </navigation>
