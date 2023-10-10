@@ -74,11 +74,11 @@
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/plantTab"
+                    android:id="@+id/informationTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_plant" />
+                    android:src="@drawable/bottom_information" />
 
                 <ImageView
                     android:id="@+id/boardTab"
@@ -95,9 +95,9 @@
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/storeTab"
+                    android:id="@+id/plantTab"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_store"
+                    android:src="@drawable/bottom_plant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

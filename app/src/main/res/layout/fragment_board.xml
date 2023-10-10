@@ -14,6 +14,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout">
@@ -21,33 +22,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    />
-
-                <LinearLayout
-                    android:background="@color/MainColor"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:background="@color/MainColor" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -68,11 +64,11 @@
                     android:src="@drawable/bottom_home" />
 
                 <ImageView
-                    android:id="@+id/plantTab"
+                    android:id="@+id/informationTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_plant" />
+                    android:src="@drawable/bottom_information" />
 
                 <ImageView
                     android:id="@+id/boardTab"
@@ -89,11 +85,11 @@
                     android:src="@drawable/bottom_bookmark" />
 
                 <ImageView
-                    android:id="@+id/storeTab"
+                    android:id="@+id/plantTab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_store" />
+                    android:src="@drawable/bottom_plant" />
 
 
             </LinearLayout>
@@ -112,13 +108,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="56dp"
                 android:fontFamily="@font/korail_round_gothic_medium"
                 android:text="모두를 위한 식물"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.139"
+                app:layout_constraintHorizontal_bias="0.196"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

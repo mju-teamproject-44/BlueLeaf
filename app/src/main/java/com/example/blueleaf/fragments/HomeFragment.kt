@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
 
         }
 
-        binding.plantTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homeFragment_to_plantFragment)
+        binding.informationTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_homeFragment_to_informationFragment)
         }
 
         binding.boardTab.setOnClickListener(){
@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(R.id.action_homeFragment_to_bookmarkFragment)
         }
 
-        binding.storeTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homeFragment_to_storeFragment)
+        binding.plantTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_homeFragment_to_plantFragment)
         }
 
         return binding.root

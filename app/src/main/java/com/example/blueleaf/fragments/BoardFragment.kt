@@ -38,16 +38,16 @@ class BoardFragment : Fragment() {
             it.findNavController().navigate(R.id.action_boardFragment_to_homeFragment)
         }
 
-        binding.plantTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_boardFragment_to_plantFragment)
+        binding.informationTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_boardFragment_to_informationFragment)
         }
 
         binding.bookmarkTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_boardFragment_to_bookmarkFragment)
         }
 
-        binding.storeTab.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_boardFragment_to_storeFragment)
+        binding.plantTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_boardFragment_to_plantFragment)
         }
 
         return binding.root
