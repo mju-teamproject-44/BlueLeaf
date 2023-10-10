@@ -32,6 +32,41 @@ class BookmarkFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
+        // 2. 사용자가 북마크한 정보를 다 가져옴
+
+        getBookmarkData()
+        rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
+
+        val rv: RecyclerView = binding.bookmarkRV
+        rv.adapter = rvAdapter
+
+        rv.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        binding.homeTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
+        }
+
+        binding.plantTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
+        }
+
+        binding.boardTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_boardFragment)
+        }
+
+        binding.storeTab.setOnClickListener() {
+            it.findNavController().navigate(R.id.action_bookmarkFragment_to_storeFragment)
+        }
+
+        return binding.root
+    }
     private fun getCategoryData() {
 
         val postListener = object : ValueEventListener {
@@ -87,57 +122,6 @@ class BookmarkFragment : Fragment() {
         }
         FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
 
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
-
-
-        binding.homeTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
-        }
-
-        binding.plantTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
-        }
-
-        binding.boardTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_boardFragment)
-
-            // 2. 사용자가 북마크한 정보를 다 가져옴
-
-            getBookmarkData()
-            rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
-
-            val rv: RecyclerView = binding.bookmarkRV
-            rv.adapter = rvAdapter
-
-            rv.layoutManager = GridLayoutManager(requireContext(), 2)
-
-            binding.homeTab.setOnClickListener() {
-                it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
-            }
-
-            binding.plantTab.setOnClickListener() {
-                it.findNavController().navigate(R.id.action_bookmarkFragment_to_plantFragment)
-            }
-
-            binding.boardTab.setOnClickListener() {
-                it.findNavController().navigate(R.id.action_bookmarkFragment_to_boardFragment)
-            }
-
-            binding.storeTab.setOnClickListener() {
-                it.findNavController().navigate(R.id.action_bookmarkFragment_to_storeFragment)
-            }
-
-        }
-        binding.storeTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_bookmarkFragment_to_storeFragment)
-        }
-        return binding.root
     }
 }
 
