@@ -14,7 +14,7 @@ import com.example.blueleaf.databinding.FragmentBoardBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
+// pr test
 class BoardFragment : Fragment() {
     private lateinit var binding:FragmentBoardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
