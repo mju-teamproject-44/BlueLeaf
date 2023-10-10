@@ -10,12 +10,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
 import com.example.blueleaf.contentsList.ContentListActivity
-import com.example.blueleaf.databinding.FragmentHomeBinding
-import com.example.blueleaf.databinding.FragmentTipBinding
+import com.example.blueleaf.databinding.FragmentPlantBinding
 
 
-class TipFragment : Fragment() {
-    private lateinit var binding: FragmentTipBinding
+class PlantFragment : Fragment() {
+    private lateinit var binding: FragmentPlantBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,7 +22,7 @@ class TipFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tip, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_plant, container, false)
 
         binding.category1.setOnClickListener(){
             val intent = Intent(context,ContentListActivity::class.java)
@@ -41,13 +40,20 @@ class TipFragment : Fragment() {
             intent.putExtra("category","category3")
             startActivity(intent)
         }
-
-        binding.bookmarkTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_tipFragment_to_bookmarkFragment)
+        binding.homeTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_homeFragment)
         }
 
-        binding.storeTag.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_tipFragment_to_storeFragment)
+        binding.boardTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_boardFragment)
+        }
+
+        binding.bookmarkTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_bookmarkFragment)
+        }
+
+        binding.storeTab.setOnClickListener(){
+            it.findNavController().navigate(R.id.action_plantFragment_to_storeFragment)
         }
 
         return binding.root

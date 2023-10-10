@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout">
-                
+
                 <LinearLayout
                     android:background="@color/MainColor"
                     android:layout_width="match_parent"
@@ -67,35 +67,35 @@
                 >
 
                 <ImageView
-                    android:id="@+id/homeTap"
+                    android:id="@+id/homeTab"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_hometap"
+                    android:src="@drawable/bottom_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/tipTab"
+                    android:id="@+id/plantTab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/bottom_goodtip"
+                    android:src="@drawable/bottom_plant" />
+
+                <ImageView
+                    android:id="@+id/boardTab"
+                    android:layout_weight="1"
+                    android:src="@drawable/bottom_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/talkTag"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_talk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:id="@+id/bookmarkTag"
+                    android:id="@+id/bookmarkTab"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_bookmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:id="@+id/storeTag"
+                    android:id="@+id/storeTab"
                     android:layout_weight="1"
                     android:src="@drawable/bottom_store"
                     android:layout_width="match_parent"
