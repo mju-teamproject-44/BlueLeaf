@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
-import com.example.blueleaf.databinding.FragmentStoreBinding
+import com.example.blueleaf.databinding.FragmentPlantBinding
 
 
 class PlantFragment : Fragment() {
-    private lateinit var binding: FragmentStoreBinding
+    private lateinit var binding: FragmentPlantBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,7 +23,7 @@ class PlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_store,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_plant,container,false)
 
         binding.homeTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_plantFragment_to_homeFragment)

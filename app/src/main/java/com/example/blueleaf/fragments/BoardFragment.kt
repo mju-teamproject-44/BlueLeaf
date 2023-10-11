@@ -42,10 +42,7 @@ class BoardFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_board,container,false)
-
-//        val boardList = mutableListOf<BoardModel>()
-//        boardList.add(BoardModel("a","b","c","d"))
-
+        
         boardRVAdapter = BoardListLVAdapter(boardDataList)
         binding.boardListView.adapter = boardRVAdapter
 
