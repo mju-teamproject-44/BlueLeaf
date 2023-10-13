@@ -14,6 +14,7 @@ import com.example.blueleaf.contentsList.BookmarkModel
 import com.example.blueleaf.databinding.ActivityBoardWriteBinding
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
+import com.example.blueleaf.utils.FBRef.Companion.storageRef
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -71,8 +72,9 @@ class BoardWriteActivity : AppCompatActivity() {
 
     private fun imageUpload(key:String){
         // Get the data from an ImageView as bytes
-        val storage = Firebase.storage
-        val storageRef = storage.reference
+//        val storage = Firebase.storage
+//        val storageRef = storage.reference
+
         val mountainsRef = storageRef.child(key+".png")
 
         val imageView = binding.imageArea

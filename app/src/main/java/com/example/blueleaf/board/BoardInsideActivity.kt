@@ -1,10 +1,14 @@
 package com.example.blueleaf.board
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.blueleaf.R
@@ -22,13 +26,18 @@ class BoardInsideActivity : AppCompatActivity() {
     private val TAG = BoardInsideActivity::class.java.simpleName
 
     private lateinit var binding: ActivityBoardInsideBinding
+
+    private lateinit var key: String
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
 
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_board_inside)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
 
+        binding.boardSettingIcon.setOnClickListener {
+            showDialog()
+        }
         // 첫 번째 방법으로 게시판 내용 전달 받기(각각의 내용을 전달받음)
 //
 //        // 각각의 값을 불러와 변수에 저장
@@ -50,24 +59,49 @@ class BoardInsideActivity : AppCompatActivity() {
 //        Log.d(TAG,uid)
 
         // 두 번째 방법으로 게시판 내용 전달 받기(key값 하나만 전달받음)
-        val key = intent.getStringExtra("key")
-        getBoardData(key.toString())
-        getImageData(key.toString())
+        key = intent.getStringExtra("key").toString()
+        getBoardData(key)
+        getImageData(key)
+    }
+
+    private fun showDialog() {
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("게시글 수정/삭제")
+
+        val alertDialog = mBuilder.show()
+        alertDialog.findViewById<Button>(R.id.editBtn)?.setOnClickListener {
+            Toast.makeText(this, "editBtnClick", Toast.LENGTH_LONG).show()
+            val intent = Intent(this,BoardEditActivity::class.java)
+            intent.putExtra("key",key)
+            startActivity(intent)
+        }
+        alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
+            FBRef.boardRef.child(key).removeValue() //
+            Toast.makeText(this, "삭제 완료", Toast.LENGTH_LONG).show()
+            finish()
+        }
     }
 
     private fun getBoardData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                Log.d(TAG, dataSnapshot.toString())
-                // BoardFragment.kt에서의 getFBBoardData와 다르게 하나의 값만 받아오면 되므로 반복문이 필요없다.
-                val dataModel = dataSnapshot.getValue(BoardModel::class.java)
-                Log.d(TAG,dataModel!!.title)
+                // 예외 처리를 해줘야 게시글이 삭제됐을 때 정상적으로 빠져나올 수 있다.
+                try {
+                    // BoardFragment.kt에서의 getFBBoardData와 다르게 하나의 값만 받아오면 되므로 반복문이 필요없다.
+                    val dataModel = dataSnapshot.getValue(BoardModel::class.java)
+                    Log.d(TAG, dataModel!!.title)
 
-                binding.titleArea.text = dataModel!!.title
-                binding.contentArea.text = dataModel!!.content
-                binding.timeArea.text = dataModel!!.time
-                binding.uidArea.text = dataModel!!.uid
+                    binding.titleArea.text = dataModel!!.title
+                    binding.contentArea.text = dataModel!!.content
+                    binding.timeArea.text = dataModel!!.time
+                    binding.uidArea.text = dataModel!!.uid
+                } catch (e: Exception) {
+                    Log.d(TAG, "삭제 완료")
+                }
+
 
             }
 
@@ -80,21 +114,21 @@ class BoardInsideActivity : AppCompatActivity() {
         FBRef.boardRef.child(key).addValueEventListener(postListener)
     }
 
-    private fun getImageData(key:String){
+    private fun getImageData(key: String) {
         // Reference to an image file in Cloud Storage
-        val storageReference = Firebase.storage.reference.child(key+".png")
+        val storageReference = FBRef.storageRef.child(key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = binding.getImageArea
 
-       storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener{ task->
-           if(task.isSuccessful){
-               Glide.with(this)
-                   .load(task.result)
-                   .into(imageViewFromFB)
-           }else{
+        storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Glide.with(this)
+                    .load(task.result)
+                    .into(imageViewFromFB)
+            } else {
 
-           }
-       })
+            }
+        })
     }
 }
