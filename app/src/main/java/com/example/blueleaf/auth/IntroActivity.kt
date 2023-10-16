@@ -49,7 +49,7 @@ class IntroActivity : AppCompatActivity() {
                         val userUID = Firebase.auth.currentUser?.uid
 
                         if(userUID!=null){
-                            val userData = UserModel("비회원 사용자", "NoProfile", "비회원 사용자")
+                            val userData = UserModel("비회원 사용자", "비회원 사용자")
                             database.child("users").child(userUID!!).setValue(userData)
                         }else{
                             Toast.makeText(this,"uid fail", Toast.LENGTH_LONG).show()

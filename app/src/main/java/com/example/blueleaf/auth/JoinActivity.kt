@@ -87,7 +87,7 @@ class JoinActivity : AppCompatActivity() {
                             val userUID = Firebase.auth.currentUser?.uid
 
                             if(userUID!=null){
-                                val userData = UserModel("사용자", "NoProfile", email)
+                                val userData = UserModel("사용자", email)
                                 database.child("users").child(userUID!!).setValue(userData)
                             }else{
                                 Toast.makeText(this,"uid fail", Toast.LENGTH_LONG).show()

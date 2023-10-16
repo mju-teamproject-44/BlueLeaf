@@ -48,7 +48,7 @@ class SplashActivity : AppCompatActivity() {
             if(userUID!=null){
                 database.child("users").child(userUID!!).child("userName").get().addOnSuccessListener {
                     if(it.value == null){
-                        val userData = UserModel("사용자", "NoProfile", "temporary@email.com")
+                        val userData = UserModel("사용자", "temporary@email.com")
                         database.child("users").child(userUID!!).setValue(userData)
                     }
                 }.addOnFailureListener {
