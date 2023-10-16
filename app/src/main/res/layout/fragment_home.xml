@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/homeProfileImageView"
 
                     android:src="@drawable/home_profile"
@@ -34,7 +34,21 @@
 
                     android:layout_width="200dp"
                     android:layout_height="200dp">
-                </ImageView>
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <Button
+                    android:id="@+id/homeProfileImageUploadButton"
+
+                    android:visibility="gone"
+
+                    android:text="Upload"
+
+                    android:layout_toRightOf="@+id/homeProfileImageView"
+                    android:layout_alignBottom="@+id/homeProfileImageView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Button>
 
                 <EditText
                     android:id="@+id/homeUsernameEditText"
