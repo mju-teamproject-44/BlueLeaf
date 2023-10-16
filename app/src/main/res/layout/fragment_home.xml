@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/home_profile_imageview"
+                    android:id="@+id/homeProfileImageView"
 
                     android:src="@drawable/home_profile"
 
@@ -36,11 +36,14 @@
                     android:layout_height="200dp">
                 </ImageView>
 
-                <TextView
-                    android:id="@+id/home_username_textview"
-                    android:visibility="visible"
+                <EditText
+                    android:id="@+id/homeUsernameEditText"
+                    android:visibility="gone"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:privateImeOptions="defaultInputmode=korean"
 
-                    android:text="사용자 명"
+                    android:hint=""
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -49,41 +52,41 @@
                     android:gravity="center"
 
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/home_profile_imageview"
+                    android:layout_below="@id/homeProfileImageView"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </EditText>
+
+                <TextView
+                    android:id="@+id/homeUsernameTextView"
+                    android:visibility="visible"
+
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/korail_round_gothic_bold"
+
+                    android:gravity="center"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeProfileImageView"
                     android:layout_marginTop="20dp"
 
                     android:layout_width="wrap_content"
                     android:layout_height="25dp">
                 </TextView>
 
-                <EditText
-                    android:id="@+id/home_username_edittext"
-                    android:visibility="gone"
-
-                    android:text="사용자 명"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/korail_round_gothic_bold"
-
-                    android:gravity="center"
-
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/home_profile_imageview"
-                    android:layout_marginTop="20dp"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp">
-                </EditText>
-
                 <ImageView
-                    android:id="@+id/home_edit_emageview"
-                    android:visibility="visible"
+                    android:id="@+id/homeSaveImageView"
+                    android:visibility="gone"
 
                     android:src="@drawable/home_icon_pen"
 
-                    android:layout_toEndOf="@id/home_username_textview"
-                    android:layout_alignBottom="@id/home_username_textview"
+                    android:layout_toEndOf="@id/homeUsernameEditText"
+                    android:layout_alignBottom="@id/homeUsernameEditText"
                     android:layout_marginLeft="10dp"
 
                     android:layout_width="wrap_content"
@@ -91,13 +94,13 @@
                 </ImageView>
 
                 <ImageView
-                    android:id="@+id/home_save_emageview"
-                    android:visibility="gone"
+                    android:id="@+id/homeEditImageView"
+                    android:visibility="visible"
 
                     android:src="@drawable/home_icon_pen"
 
-                    android:layout_toEndOf="@id/home_username_textview"
-                    android:layout_alignBottom="@id/home_username_textview"
+                    android:layout_toEndOf="@id/homeUsernameTextView"
+                    android:layout_alignBottom="@id/homeUsernameTextView"
                     android:layout_marginLeft="10dp"
 
                     android:layout_width="wrap_content"
@@ -105,15 +108,15 @@
                 </ImageView>
 
                 <TextView
-                    android:id="@+id/home_email_textview"
+                    android:id="@+id/homeEmailTextView"
 
-                    android:text="testemail@email.com"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="#46826B"
                     android:fontFamily="@font/korail_round_gothic_light"
 
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/home_username_textview"
+                    android:layout_below="@id/homeUsernameTextView"
                     android:layout_marginTop="0dp"
 
                     android:layout_width="wrap_content"
