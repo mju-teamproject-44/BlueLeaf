@@ -41,6 +41,24 @@ class InformationFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.moneyTree.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category4")
+            startActivity(intent)
+        }
+
+        binding.flower.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category5")
+            startActivity(intent)
+        }
+
+        binding.indoorVegetableGarden.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category6")
+            startActivity(intent)
+        }
+
         binding.homeTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_informationFragment_to_homeFragment)
         }
