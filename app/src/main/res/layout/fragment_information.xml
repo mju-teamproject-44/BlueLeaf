@@ -132,7 +132,7 @@
                         >
                         <ImageView
                             android:id="@+id/moneyTree"
-                            android:src="@drawable/moneyTree"
+                            android:src="@drawable/money_tree"
                             android:layout_weight="1"
                             android:layout_width="120dp"
                             android:layout_height="120dp"/>
@@ -163,7 +163,7 @@
                         >
                         <ImageView
                             android:id="@+id/flower"
-                            android:src="@drawable/infoFlower"
+                            android:src="@drawable/info_flower"
                             android:layout_weight="1"
                             android:layout_width="120dp"
                             android:layout_height="120dp"/>
