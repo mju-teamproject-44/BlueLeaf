@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
+import com.example.blueleaf.board.BoardInsideActivity
 import com.example.blueleaf.board.BoardListLVAdapter
 import com.example.blueleaf.board.BoardModel
 import com.example.blueleaf.board.BoardWriteActivity
@@ -27,6 +28,7 @@ class BoardFragment : Fragment() {
     private lateinit var binding:FragmentBoardBinding
 
     private val boardDataList = mutableListOf<BoardModel>()
+    private val boardKeyList = mutableListOf<String>()
 
     private lateinit var boardRVAdapter : BoardListLVAdapter
 
@@ -42,9 +44,29 @@ class BoardFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_board,container,false)
-        
+
+
         boardRVAdapter = BoardListLVAdapter(boardDataList)
         binding.boardListView.adapter = boardRVAdapter
+
+        binding.boardListView.setOnItemClickListener { parent, view, position, id ->
+            // 첫 번째 방법 : listview에 있는 데이터 title content time 다 다른 액티비티로 전달해줘서 만들기
+//            val intent = Intent(context,BoardInsideActivity::class.java)
+//            intent.putExtra("title",boardDataList[position].title)
+//            intent.putExtra("content",boardDataList[position].content)
+//            intent.putExtra("time",boardDataList[position].time)
+//            intent.putExtra("uid",boardDataList[position].uid)
+//            startActivity(intent)
+            // 두 번째 방법 : Firebase에 있는 board에 대한 데이터의 id를 기반으로 다시 데이터를 받아오는 방법
+
+            // activity 넘기기
+            val intent = Intent(context,BoardInsideActivity::class.java)
+            intent.putExtra("key",boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
+            startActivity(intent)
+
+        }
+
+
 
         binding.writeBtn.setOnClickListener(){
             val intent = Intent(context, BoardWriteActivity::class.java)
@@ -76,6 +98,8 @@ class BoardFragment : Fragment() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                // 이전 리스트 데이터를 초기화하고 다시 불러온다.
+                // 아래의 clear가 없으면 지금까지 쓴 게시글 리스트들 불러올 때마다 중첩됨
                 boardDataList.clear()
 
                 for (dataModel in dataSnapshot.children) {
@@ -83,7 +107,12 @@ class BoardFragment : Fragment() {
                     Log.d(TAG,dataModel.toString())
                     val item = dataModel.getValue(BoardModel::class.java)
                     boardDataList.add(item!!)
+                    boardKeyList.add(dataModel.key.toString())
                 }
+
+                // 최신 게시글이 맨 위로 오게 한다 -> adapter와 동기화 전 list reverse
+                boardDataList.reverse()
+                boardKeyList.reverse()
 
                 // 동기화
                 boardRVAdapter.notifyDataSetChanged()

@@ -2,6 +2,7 @@ package com.example.blueleaf.utils
 
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 // 파이어베이스 레프런스를 담고 있는 클래스
 class FBRef {
@@ -17,6 +18,7 @@ class FBRef {
 
         val boardRef = database.getReference("board")
 
+        val storageRef = Firebase.storage.reference
     }
 
 }

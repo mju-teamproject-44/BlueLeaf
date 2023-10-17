@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".board.BoardWriteActivity">
+        tools:context=".board.BoardEditActivity">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="글쓰기 페이지"
+                        android:text="수정 페이지"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -77,14 +76,14 @@
 
 
                 <Button
-                    android:id="@+id/writeBtn"
+                    android:id="@+id/editBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/background_radius_main_color"
-                    android:text="입력"
+                    android:text="수정"
                     android:textColor="@color/white" />
             </LinearLayout>
         </ScrollView>

@@ -24,7 +24,8 @@
         android:layout_marginRight="20dp"
         android:text="content"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:maxHeight="20dp"/>
 
     <TextView
         android:id="@+id/timeArea"

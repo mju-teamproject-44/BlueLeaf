@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_radius_main_color"
+        android:fontFamily="@font/korail_round_gothic_medium"
+        android:text="수정버튼"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/removeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_radius_main_color"
+        android:fontFamily="@font/korail_round_gothic_medium"
+        android:text="삭제버튼"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>
