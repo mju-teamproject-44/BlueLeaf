@@ -137,8 +137,8 @@ class HomeFragment : Fragment() {
             //만약 사진을 선택하지 않고 나왔을 경우
             if(::uri.isInitialized){
                 imageUpload(uri)
-                binding.homeProfileImageUploadButton.visibility = Button.GONE
             }
+            binding.homeProfileImageUploadButton.visibility = Button.GONE
         }
 
 
