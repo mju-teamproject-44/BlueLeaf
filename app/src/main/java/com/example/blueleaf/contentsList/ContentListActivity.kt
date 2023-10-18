@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,26 +28,36 @@ class ContentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_content_list)
 
         val rv:RecyclerView = findViewById(R.id.rv)
-        val items = mutableListOf<ContentModel>()
+        val infoTitle = findViewById<TextView>(R.id.infoTitle)
+        val items = mutableListOf<ContentModel>() // fb 아이템 저장
         val database = Firebase.database
-        val itemKeyList = mutableListOf<String>() // 키값을 저장한다.
+        val itemKeyList = mutableListOf<String>() // fb 아이템 키값을 저장한다.
         val rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
         val category = intent.getStringExtra("category")
+        var krCategoryName = "";
         Log.d("CLA", category.toString())
 
         if(category == "category1") {
             myRef = database.getReference("contents")
+            krCategoryName = "공기 정화 식물"
         } else if(category == "category2") {
             myRef = database.getReference("contents2")
+            krCategoryName = "선인장"
         } else if(category == "category3") {
             myRef = database.getReference("contents3")
+            krCategoryName = "산세베리아"
         } else if(category == "category4") {
             myRef = database.getReference("contents4")
+            krCategoryName = "금전수"
         } else if(category == "category5") {
             myRef = database.getReference("contents5")
+            krCategoryName = "꽃"
         } else if(category == "category6") {
             myRef = database.getReference("contents6")
+            krCategoryName = "실내 정원 식물"
         }
+
+        infoTitle.text = krCategoryName
         // 데이터 읽기 (컨텐츠 리스트 읽기)
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -75,7 +86,7 @@ class ContentListActivity : AppCompatActivity() {
 
         myRef.addValueEventListener(postListener)
         rv.adapter = rvAdapter
-        rv.layoutManager = GridLayoutManager(this,2)
+        rv.layoutManager = GridLayoutManager(this,1)
 
     }
 
