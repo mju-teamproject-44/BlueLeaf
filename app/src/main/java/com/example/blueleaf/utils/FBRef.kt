@@ -13,6 +13,10 @@ class FBRef {
 
         val category1 = database.getReference("contents")
         val category2 = database.getReference("contents2")
+        val category3 = database.getReference("contents3")
+        val category4 = database.getReference("contents4")
+        val category5 = database.getReference("contents5")
+        val category6 = database.getReference("contents6")
 
         val bookmarkRef = database.getReference("bookmark_list")
 

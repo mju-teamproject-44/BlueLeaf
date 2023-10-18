@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
+import com.example.blueleaf.utils.FBAuth
+import com.example.blueleaf.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,7 +22,7 @@ import com.google.firebase.ktx.Firebase
 
 class ContentListActivity : AppCompatActivity() {
     lateinit var myRef : DatabaseReference
-    val bookmarkIdList = mutableListOf<String>()
+    val bookmarkIdList = mutableListOf<String>() // 북마크 id  list
     lateinit var rvAdapter: ContentRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,7 +34,7 @@ class ContentListActivity : AppCompatActivity() {
         val items = mutableListOf<ContentModel>() // fb 아이템 저장
         val database = Firebase.database
         val itemKeyList = mutableListOf<String>() // fb 아이템 키값을 저장한다.
-        val rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
+        rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
         val category = intent.getStringExtra("category")
         var krCategoryName = "";
         Log.d("CLA", category.toString())
@@ -58,7 +60,7 @@ class ContentListActivity : AppCompatActivity() {
         }
 
         infoTitle.text = krCategoryName
-        // 데이터 읽기 (컨텐츠 리스트 읽기)
+        // 데이터 읽기 (컨텐츠 리스트 읽기), 컨텐츠 받아오기
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // 스냅샷에 데이터가 있다!
@@ -66,12 +68,12 @@ class ContentListActivity : AppCompatActivity() {
 
                 for (dataModel in dataSnapshot.children) {
                     // 모든 원인은 비동기(동시에 일어나지 않는)속성 때문이다.
-                    // DB데이터를 끌어와 스택 PUSH 하는 과
+                    // DB데이터를 끌어와 스택 PUSH 하는 과정
                     // 비동기라서 리사이클러뷰가 이미 만들어졌을 때 아직 데이터는 나중에 불러와
                     // 그래서 이미 만들어진 리사이클러뷰에 데이터가 안들어가 있음
                     val item = dataModel.getValue(ContentModel::class.java)
                     items.add(item!!)
-                    itemKeyList.add(dataModel.key.toString())
+                    itemKeyList.add(dataModel.key.toString()) // 아이템들의 키를 받아옴. (카테고리를 클릭해야 받아 온다?)
                 }
 
                 rvAdapter.notifyDataSetChanged()
@@ -87,6 +89,35 @@ class ContentListActivity : AppCompatActivity() {
         myRef.addValueEventListener(postListener)
         rv.adapter = rvAdapter
         rv.layoutManager = GridLayoutManager(this,1)
+        // 여기에 getBookMarkData()
+        getBookmarkData()
+    }
+
+    private fun getBookmarkData(){
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                bookmarkIdList.clear()
+
+                for (dataModel in dataSnapshot.children) {
+                    bookmarkIdList.add(dataModel.key.toString())
+                }
+                Log.d("Bookmark : ", bookmarkIdList.toString())
+                rvAdapter.notifyDataSetChanged()
+
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
+
+
 
     }
 

@@ -52,9 +52,9 @@ class BookmarkRVAdapter(val context : Context,
             val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
 
             if(bookmarkIdList.contains(key)) {
-                bookmarkArea.setImageResource(R.drawable.bookmark_color)
+                bookmarkArea.setImageResource(R.drawable.light_start)
             } else {
-                bookmarkArea.setImageResource(R.drawable.bookmark_white)
+                bookmarkArea.setImageResource(R.drawable.star)
             }
 
             contentTitle.text = item.title
