@@ -35,6 +35,15 @@ class ContentRVAdapter(val context : Context,
         return items.size
     }
 
+    fun linearSearchForBookMark(key:String):Boolean {
+        for (i in bookmarkIdList){
+            if(key.equals(i)) {
+                return true
+            }
+        }
+        return false
+    }
+
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         // item은 ContentModel, key는 FB 키값
         // keyList는 컨턴츠의 key값을 담고있음. position은 인덱스, 그래서 bindItems가 받는 key는 각 컨텐츠의 key값이라고 생각하면 됨
@@ -53,16 +62,18 @@ class ContentRVAdapter(val context : Context,
             val contentTitle = itemView.findViewById<TextView>(R.id.textArea)
             val imageViewArea = itemView.findViewById<ImageView>(R.id.imageArea)
             val bookmarkArea = itemView.findViewById<ImageView>(R.id.bookmarkArea)
-
+            var isMarked:Boolean = false
             // 지금 item 키값이 bookmarkIdList에 포함?
             // 포함되어 있다면 북마크 이미지 영역의 이미지를 bookmark_color로 바꾼다.
-            if(bookmarkIdList.contains(key)) {
-                bookmarkArea.setImageResource(R.drawable.light_start)
-            }
             // 표시되어 있지 않다면 북마크 이미지 영역의 이미지를 bookmark_white로 바꾼다.
-            else {
+            
+            if(linearSearchForBookMark(key)){
+                bookmarkArea.setImageResource(R.drawable.light_start)
+            } else{
                 bookmarkArea.setImageResource(R.drawable.star)
             }
+            isMarked=false;
+
 
             // 북마크 영역의 클릭 이벤트 리 스너
             bookmarkArea.setOnClickListener {
@@ -70,12 +81,12 @@ class ContentRVAdapter(val context : Context,
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show() // 선택된 아이템의 키를 toast
 
                 // 만약 지금 클릭된 아이템의 키값이 북마크 리스트에 포함되어 있다면 그 key를 제거해라
-                if(bookmarkIdList.contains(key)) {
+                // bookmarkIdList.contains(key)
+
+                if(linearSearchForBookMark(key)) {
                     // 북마크가 있을 때 삭제
                     // bookmarkRef -> bookmark_list
-                    // 계획환 fb 구조를 명확히 따르고 있음
-
-                    // bookmarkIdList.remove(key)
+                    // 계획환 fb 구조를 명확히 따름.
                     FBRef.bookmarkRef
                         .child(FBAuth.getUid())
                         .child(key)
