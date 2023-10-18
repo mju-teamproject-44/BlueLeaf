@@ -34,23 +34,47 @@
             android:fontFamily="@font/bmdohyeon"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:gravity="center"
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="vertical"
-            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="3"
             >
 
             <ImageView
                 android:id="@+id/bookmarkArea"
                 android:layout_width="30dp"
-                android:layout_height="27dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_weight="1.5"
                 android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/recommendArea"
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/like" />
+
+            <TextView
+
+                android:text="0"
+                android:id="@+id/scoreArea"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/bmdohyeon"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="18sp"
+                >
+
+            </TextView>
 
         </LinearLayout>
 
