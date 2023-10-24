@@ -18,7 +18,17 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(dataset[position])
+
+        holder.itemView.setOnClickListener {
+            if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                val intent = Intent(holder.itemView.context, DetailPlantActivity::class.java)
+                val plantData = dataset[holder.adapterPosition]
+                intent.putExtra("plantData", plantData)
+                holder.itemView.context.startActivity(intent)
+            }
+        }
     }
+
 
     override fun getItemCount(): Int {
         return dataset.size
@@ -37,6 +47,7 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
                 Toast.makeText(itemView.context, "클릭된 아이템: ${adapterPosition}", Toast.LENGTH_SHORT).show()
                 val intent = Intent(itemView.context, DetailPlantActivity::class.java)
                 itemView.context.startActivity(intent)
+
             }
         }
         fun bind(data: Plant){

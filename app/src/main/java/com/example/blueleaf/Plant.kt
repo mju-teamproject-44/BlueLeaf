@@ -2,8 +2,9 @@ package com.example.blueleaf
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serial
+import java.io.Serializable
 
-data class Plant(
+data class Plant (
     val description: String,
     val difficulty: String,
     val humidity: String,
@@ -13,4 +14,4 @@ data class Plant(
     val sunlight: String,
     val temperature: String,
     val water: String
-)
+) : Serializable
