@@ -8,11 +8,16 @@
         tools:context=".fragments.PlantFragment">
 
         <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="STORE"
-            android:textSize="50sp"/>
+            android:textSize="50sp"/>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/layout_plant_photo_item"
+            android:id="@+id/recyclerview"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
