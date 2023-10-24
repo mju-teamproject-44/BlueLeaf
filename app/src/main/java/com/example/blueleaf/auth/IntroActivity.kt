@@ -62,7 +62,6 @@ class IntroActivity : AppCompatActivity() {
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         Toast.makeText(this,"익명 로그인 성공", Toast.LENGTH_LONG).show()
 
-
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(this,"익명 로그인 실패", Toast.LENGTH_LONG).show()

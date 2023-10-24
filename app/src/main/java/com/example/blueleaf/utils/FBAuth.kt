@@ -11,7 +11,7 @@ class FBAuth {
     companion object {
 
         private lateinit var auth: FirebaseAuth
-
+        // UID 반환
         fun getUid() : String {
 
             auth = FirebaseAuth.getInstance()

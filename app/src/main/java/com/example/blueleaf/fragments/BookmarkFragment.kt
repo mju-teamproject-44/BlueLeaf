@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener
 class BookmarkFragment : Fragment() {
     private lateinit var binding: FragmentBookmarkBinding
     private val TAG = BookmarkFragment::class.java.simpleName // 북마크 프래그먼트 참조.단순 클래스 이름
-    val bookmarkIdList = mutableListOf<String>()
+    val bookmarkIdList = mutableListOf<String>() // 북마크 id 리스트
     val items = mutableListOf<ContentModel>()
     val itemKeyList = mutableListOf<String>()
     lateinit var rvAdapter: BookmarkRVAdapter
@@ -47,7 +47,7 @@ class BookmarkFragment : Fragment() {
         val rv: RecyclerView = binding.bookmarkRV
         rv.adapter = rvAdapter
 
-        rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
         binding.homeTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
@@ -96,6 +96,10 @@ class BookmarkFragment : Fragment() {
         }
         FBRef.category1.addValueEventListener(postListener)
         FBRef.category2.addValueEventListener(postListener)
+        FBRef.category3.addValueEventListener(postListener)
+        FBRef.category4.addValueEventListener(postListener)
+        FBRef.category5.addValueEventListener(postListener)
+        FBRef.category6.addValueEventListener(postListener)
 
     }
 
@@ -107,7 +111,7 @@ class BookmarkFragment : Fragment() {
                 for (dataModel in dataSnapshot.children) {
 
                     Log.e(TAG, dataModel.toString())
-                    bookmarkIdList.add(dataModel.key.toString())
+                    bookmarkIdList.add(dataModel.key.toString()) // 가져와서 bookmarkIdList에 넣기
 
                 }
 
@@ -120,7 +124,7 @@ class BookmarkFragment : Fragment() {
                 Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
+        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener) // 각 유저 uid 아래에 있는 북마크 정보를 가져옴
 
     }
 }

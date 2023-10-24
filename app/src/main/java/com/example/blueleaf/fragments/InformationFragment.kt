@@ -24,22 +24,41 @@ class InformationFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_information, container, false)
 
-        binding.category1.setOnClickListener(){
+        binding.airPurifyingPlant.setOnClickListener(){
             val intent = Intent(context,ContentListActivity::class.java)
             intent.putExtra("category", "category1")
             startActivity(intent)
         }
-        binding.category2.setOnClickListener(){
+        binding.cactus.setOnClickListener(){
             val intent = Intent(context,ContentListActivity::class.java)
             intent.putExtra("category", "category2")
             startActivity(intent)
         }
 
-        binding.category3.setOnClickListener(){
+        binding.snakePlant.setOnClickListener(){
             val intent = Intent(context,ContentListActivity::class.java)
             intent.putExtra("category","category3")
             startActivity(intent)
         }
+
+        binding.moneyTree.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category4")
+            startActivity(intent)
+        }
+
+        binding.flower.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category5")
+            startActivity(intent)
+        }
+
+        binding.indoorVegetableGarden.setOnClickListener(){
+            val intent = Intent(context,ContentListActivity::class.java)
+            intent.putExtra("category","category6")
+            startActivity(intent)
+        }
+
         binding.homeTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_informationFragment_to_homeFragment)
         }

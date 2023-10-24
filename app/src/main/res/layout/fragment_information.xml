@@ -6,45 +6,91 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.InformationFragment"
-
         >
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            
             >
-            <LinearLayout
 
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="70dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                
+                <TextView
+                    android:layout_width="870px"
+                    android:layout_height="150px"
+                    android:text="정보"
+                    android:textColor="@color/black"
+                    android:textSize="70px"
+                    android:paddingBottom="10px"
+                    android:fontFamily="@font/bmdohyeon"
+                    >
+
+                </TextView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
-                    <ImageView
-                        android:id="@+id/category1"
-                        android:src="@drawable/main_icon_all"
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/airPurifyingPlant"
+                            android:src="@drawable/air"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:cornerRadius="20dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="공기정화식물"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
 
-                    <ImageView
-                        android:id="@+id/category2"
-                        android:src="@drawable/main_icon_cook"
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        </TextView>
+                    </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/category3"
-                        android:src="@drawable/main_icon_economy"
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/cactus"
+                            android:src="@drawable/catus"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:cornerRadius="20dp"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="선인장"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
+
+                        </TextView>
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -52,23 +98,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
-                    <ImageView
-                        android:src="@drawable/main_icon_else"
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/snakePlant"
+                            android:src="@drawable/snake"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="산세베리아"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
 
-                    <ImageView
-                        android:src="@drawable/main_icon_hobby"
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        </TextView>
+                    </LinearLayout>
 
-                    <ImageView
-                        android:src="@drawable/main_icon_interior"
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/moneyTree"
+                            android:src="@drawable/money_tree"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="금전수"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
+
+                        </TextView>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -76,22 +154,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
-                    <ImageView
-                        android:src="@drawable/main_icon_life"
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/flower"
+                            android:src="@drawable/info_flower"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="꽃"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
 
-                    <ImageView
-                        android:src="@drawable/logo"
-                        android:layout_weight="1"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        </TextView>
+                    </LinearLayout>
 
-                    <ImageView
-                        android:layout_weight="1"
+                    <LinearLayout
                         android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/indoorVegetableGarden"
+                            android:src="@drawable/indoor"
+                            android:layout_weight="1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:text="실내 정원 식물"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bmdohyeon"
+                            >
+
+                        </TextView>
+                    </LinearLayout>
+                    <!--
+
+
+
+                    -->
 
                 </LinearLayout>
             </LinearLayout>

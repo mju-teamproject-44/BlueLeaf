@@ -7,22 +7,57 @@
     tools:context=".contentsList.ContentListActivity"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:text="카테고리 영역 테스트"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2"
+        >
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/infoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informations"
+            android:textColor="#000000"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/sortButton"
+            android:layout_weight="0.5"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:text="추천순"
+            android:fontFamily="@font/bmdohyeon"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_radius"
+            android:backgroundTint="@color/MainColor"
+            android:textColor="@color/white"
+            >
+
+
+        </Button>
+
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_marginTop="80dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
