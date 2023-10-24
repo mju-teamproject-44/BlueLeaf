@@ -1,5 +1,8 @@
 package com.example.blueleaf
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serial
+
 data class Plant(
     val description: String,
     val difficulty: String,
