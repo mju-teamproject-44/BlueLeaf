@@ -8,7 +8,7 @@
       "sunlight" : "반음지",
       "humidity" : "40~70%",
       "temperature" : "21~25",
-      "difficulty" : "초보자용",
+      "difficulty" : "초보자",
       "image" : "https://www.simpol.co.kr/data/shopimages/multi/302422676/202307/01_003011000000052264.jpg?t=1691656885"
     },
     {
@@ -19,8 +19,96 @@
       "sunlight" : "양지",
       "humidity" : "40~70%",
       "temperature" : "18~25",
-      "difficulty" : "초보자용",
+      "difficulty" : "초보자",
       "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Euphorbia_Milii_flowers.jpg/300px-Euphorbia_Milii_flowers.jpg"
+    },
+    {
+      "name" : "네펜데스 알라타 (벌레잡이 통풀)",
+      "name_eng" : "Nepenthes alata",
+      "description" : "네펜데스 알라타는 포켓몬 우츠보트가 생각나는 항아리 모양의 주머니를 가진 식충식물이에요. 이 주머니는 벌레를 잡는 '포충낭'이랍니다. 포충낭의 입구에서는 달콤한 꿀냄새가 나 벌레를 유인하고, 벌레가 앉으면 미끄러져 포충낭 속에 빠져 나오지 못하게 돼요. 포충낭 속에서는 소화효소가 분비되어 갇힌 벌레를 천천히 소화해 생장에 필요한 양분으로 사용한다고 해요. 네펜데스 알라타는 촉촉한 환경을 아주 좋아해요. 흙이 바싹 마르지 않게 관리해주시고, 주변 습도를 항상 촉촉하게 해주면 초보 식집사도 건강하게 키울 수 있어요. 네펜데스 알라타는 공기 중의 유해물질을 흡착하는 능력도 뛰어나 실내 공기정화식물로도 훌륭한 역할을 해낸답니다.",
+      "water" : "평균 주 2회 이상",
+      "sunlight" : "반양지",
+      "humidity" : "70% 이상",
+      "temperature" : "12~30",
+      "difficulty" : "중급자",
+      "image" : "https://www.verdantlyfe.com/cdn/shop/products/IMG_0018-8_bf1c2c74-a714-4323-a946-d96d8396d28f.jpg?v=1664473349"
+    },
+    {
+      "name" : "퍼포리아 사라세니아",
+      "name_eng" : "Sarracenia purpurea",
+      "description" : "퍼포리아는 화려한 색감의 투구모양을 닮은 주머니가 특징인 식충식물이에요. 이 주머니는 벌레를 잡는 '포충낭'이랍니다. 포충낭의 입구에서는 달콤한 꿀냄새가 나 벌레를 유인하고, 벌레가 앉으면 미끄러져 포충낭 속에 빠져 나오지 못하게 돼요. 포충낭 속에서는 소화효소가 분비되어 갇힌 벌레를 천천히 소화해 생장에 필요한 양분으로 사용한다고 해요. 퍼포리아는 촉촉한 환경을 아주 좋아해요. 흙이 바싹 마르지 않게 관리해주시고, 주변 습도를 항상 촉촉하게 해주면 초보 식집사도 건강하게 키울 수 있어요. 빛이 잘 들어오는 곳일수록 퍼포리아의 주머니가 예쁜 자주색으로 물든답니다.",
+      "water" : "평균 주 2회 이상",
+      "sunlight" : "양지",
+      "humidity" : "70% 이상",
+      "temperature" : "13~35",
+      "difficulty" : "상급자",
+      "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9e1HJ40G0NP58etgC2DLKRES2u1DemJ5YnA&usqp=CAU"
+    },
+    {
+      "name" : "녹보수",
+      "name_eng" : "Radermachera sinica",
+      "description" : "녹보수는 반짝이는 잎이 녹색 보석 같다고 해서 붙여진 이름이에요. 때문에 개업 선물, 집들이 선물로 인기가 많은 식물이랍니다. 따뜻한 곳에서 주변 공기를 촉촉하게 관리해 주시면 초보가드너도 어렵지 않게 키울 수 있는 식물이에요. 은은한 빛을 오랫동안 받을 수 있는 곳이라면 더 건강하게 잘 키울 수 있어요. 녹보수는 목이 마르면 잎이 힘 없이 축 처져 물 줄 시기를 가늠할 수 있답니다. 하지만 자리 몸살을 잘 앓는 편이라 위치를 자주 변경하면 잎을 우수수 떨어뜨릴 수 있으니 주의해 주세요",
+      "water" : "평균 주 1~2회",
+      "sunlight" : "반양지",
+      "humidity" : "40~70%",
+      "temperature" : "18~25",
+      "difficulty" : "중급자",
+      "image" : "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1572998700290_750.jpg"
+    },
+    {
+      "name" : "삼색 달개비",
+      "name_eng" : "Tradescantia albiflora 'Nanouk'",
+      "description" : "삼색 달개비는 한 식물에서 짙은 분홍색과 초록색, 흰색을 모두 볼 수 있어요. 예쁜 색감 덕분에 꾸준하게 인기있는 식물이에요. 삼색 달개비는 잎 주변에 공기가 잘 통하게 하여 과습에 주의해 주신다면 초보 가드너도 잘 키울 수 있어요. 늘어지는 수형으로 자라는 삼색 달개비는 성장 속도가 매우 빨라 키우는 재미가 있는 식물이랍니다. 식물체에는 독성이 있으니 반려동물이나 어린아이가 섭취하지 않도록 주의가 필요합니다.",
+      "water" : "평균 주 1~2회",
+      "sunlight" : "반양지",
+      "humidity" : "40~70%",
+      "temperature" : "15~25",
+      "difficulty" : "중급자",
+      "image" : ""
+    },
+    {
+      "name" : "알로카시아 멜로",
+      "name_eng" : "Alocasia rugosa 'Melo'",
+      "description" : "알로카시아 멜로는 까끌까끌한 가죽 질감의 잎과 선명한 잎맥이 매력적인 식물이에요. 알로카시아 멜로는 은은한 빛이 드는 따뜻한 곳에서 주변 습도를 촉촉하게 유지해준다면 초보 식집사도 건강하게 키울 수 있어요. 과습에 예민한 식물이기 때문에 흙이 절반정도 말랐을 때 물을 주면 더 건강하게 잘 키울 수 있어요. 식물체 내에는 독성이 있어 어린아이나 반려동물이 있는 집에서는 주의가 필요합니다.",
+      "water" : "평균 주 1~2회",
+      "sunlight" : "반음지",
+      "humidity" : "70%",
+      "temperature" : "15~27",
+      "difficulty" : "초급자",
+      "image" : "https://www.cjgmarket.co.kr/data/shop/20211124/b534abb7ccb89b54e996c458383d4832.jpg"
+    },
+    {
+      "name" : "파리지옥",
+      "name_eng" : "Dionaea muscipula",
+      "description" : "파리지옥은 이빨이 난 몬스터의 입을 닮은 잎을 가지고 있는 식충식물이에요. 잎의 안쪽에는 달콤한 꿀냄새가 나 벌레를 유인하고, 벌레가 잎에 앉으면 예민한 신경이 반응해 잎을 왕! 하고 다물어 버린답니다. 닫힌 잎에서는 소화물질이 나와 벌레를 천천히 소화해 생장에 필요한 양분으로 사용한다고 해요. 소화는 4일~10일 정도 걸리고, 소화가 다 되고나면 잎이 다시 벌어져요. 파리지옥은 밝은 빛이 가장 오래 머무는 곳에서 흙이 바싹 마르지 않게 관리해주시면 초보 식집사도 건강하게 키울 수 있답니다. 움직이는 잎이 신기하다고 장난치든 잎을 건드리지 않도록 주의해 주세요. 잎을 여닫는 데 많은 에너지가 소모되어 잎이 쉽게 시들 수 있어요.",
+      "water" : "평균 주 2회 이상",
+      "sunlight" : "양지",
+      "humidity" : "70% 이상",
+      "temperature" : "20~25",
+      "difficulty" : "상급자",
+      "image" : "https://www.simpol.co.kr/data/shopimages/multi/302422138/202010/03_003010000000028263.jpg"
+    },
+    {
+      "name" : "용비 선인장",
+      "name_eng" : "Myrtillocactus geometrizans 'Fukurokuryuzinboku'",
+      "description" : "용비 선인장은 청록색의 몸통에 특이한 생김새로 많은 사랑을 받고 있는 선인장이랍니다. 울퉁불퉁 도깨비 방망이를 닮아 '도깨비 방망이 선인장', 촛농이 흘러내린 것처럼 생겨 '촛불 선인장'이라고도 불려요. 용비 선인장은 따뜻한 햇살을 사랑하는 식물이에요. 강렬한 빛이 드는 따뜻한 곳에서 키워주시면 초보 식집사도 쉽게 키울 수 있답니다. 용비 선인장을 곧게 키우고 싶다면 화분을 주기적으로 돌려서 골고루 빛을 받을 수 있도록 해주세요.",
+      "water" : "평균 월 1회 이하",
+      "sunlight" : "양지",
+      "humidity" : "40% 이하",
+      "temperature" : "15~30",
+      "difficulty" : "초급자",
+      "image" : "https://webp2.xplant.co.kr/data/item/15137/1513749449_l1"
+    },
+    {
+      "name" : "춘봉철화",
+      "name_eng" : "Euphorbia lactea ‘Cristata’",
+      "description" : "춘봉철화는 밝은 빛을 좋아하는 다육식물이예요. 빛이 잘 드는 곳이라면 별도의 관리가 없어도 잘 자라 초보 식집사님들께 추천드리는 식물이랍니다. 다육식물답게 물을 많이 필요로 하지 않고, 습도관리도 까다롭지 않아요. '춘봉'은 '봄날의 꽃봉오리'라는 뜻을, '철화'는 '변이'라는 뜻을 가지고 있어요. 화려한 머리부분은 산호를 닮아 '산호초'라고도 불리운답니다. 한 해 한 해 나이가 들어갈수록 머리가 특이한 모양으로 자라나 키우는 재미를 더해줄 거예요. 춘봉철화를 자르거나 상처를 내게 되면 하얀 진액이 나오는데, 이 진액에는 독성이 있어 알러지 반응을 일으킬 수 있기 때문에 다루실 때 항상 주의가 필요한 식물입니다.",
+      "water" : "평균 월 1회 이하",
+      "sunlight" : "양지",
+      "humidity" : "40% 이하",
+      "temperature" : "15~30",
+      "difficulty" : "초급자",
+      "image" : "https://mblogthumb-phinf.pstatic.net/MjAxNzA3MDRfMTQ0/MDAxNDk5MTU2NjY2ODgy.lLzeRR_WDPDcBVtvM2xFPSeIWoSkg9_6hWexa3EiQNQg.XeO0GSHK4EFOVr2OdNhVLH8qeHza0CNKoCojxYipyZgg.JPEG.oed678/DSC03261.JPG?type=w800"
     }
   ]
 }
