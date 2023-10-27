@@ -1,5 +1,6 @@
 package com.example.blueleaf.utils
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -26,6 +27,7 @@ class FBAuth {
 
             return dateFormat
         }
+
 
     }
 

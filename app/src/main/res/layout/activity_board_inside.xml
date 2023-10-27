@@ -57,14 +57,14 @@
             android:background="@color/black" />
 
         <TextView
-            android:id="@+id/uidArea"
+            android:id="@+id/usernameArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:gravity="right"
-            android:text="uid영역" />
+            android:text="username영역" />
 
         <TextView
             android:id="@+id/timeArea"

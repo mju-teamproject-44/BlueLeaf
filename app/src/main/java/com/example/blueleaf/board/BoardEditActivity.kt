@@ -24,10 +24,11 @@ import java.io.ByteArrayOutputStream
 
 class BoardEditActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityBoardEditBinding
+    private lateinit var binding: ActivityBoardEditBinding
     private val TAG = BoardEditActivity::class.java.simpleName
-    private lateinit var key:String
-    private lateinit var writerUid:String
+    private lateinit var key: String
+    private lateinit var writerUid: String
+    private lateinit var writerUsername : String
     private var isImageUpload = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +44,25 @@ class BoardEditActivity : AppCompatActivity() {
             startActivityForResult(gallery, 100)
             isImageUpload = true
         }
-        binding.editBtn.setOnClickListener{
+        binding.editBtn.setOnClickListener {
             editBoardData(key)
         }
     }
 
-    private fun editBoardData(key:String){
+    private fun editBoardData(key: String) {
         FBRef.boardRef
             .child(key)
             .setValue(
-                BoardModel(binding.titleArea.text.toString(),
-                binding.contentArea.text.toString(),
-                writerUid,
-                FBAuth.getTime())
+                BoardModel(
+                    binding.titleArea.text.toString(),
+                    binding.contentArea.text.toString(),
+                    writerUid,
+                    writerUsername,
+                    FBAuth.getTime()
+                )
             )
 
-        if(isImageUpload == true){
+        if (isImageUpload == true) {
             imageUpload(key)
         }
 
@@ -69,6 +73,7 @@ class BoardEditActivity : AppCompatActivity() {
 //        intent.putExtra("key",key.toString()) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
 //        startActivity(intent)
     }
+
     private fun getBoardData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -76,6 +81,7 @@ class BoardEditActivity : AppCompatActivity() {
                 binding.titleArea.setText(dataModel?.title)
                 binding.contentArea.setText(dataModel?.content)
                 writerUid = dataModel!!.uid
+                writerUsername = dataModel!!.username
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -104,12 +110,13 @@ class BoardEditActivity : AppCompatActivity() {
             }
         })
     }
-    private fun imageUpload(key:String){
+
+    private fun imageUpload(key: String) {
         // Get the data from an ImageView as bytes
 //        val storage = Firebase.storage
 //        val storageRef = storage.reference
 
-        val mountainsRef = FBRef.storageRef.child(key+".png")
+        val mountainsRef = FBRef.storageRef.child(key + ".png")
 
         val imageView = binding.imageArea
         imageView.isDrawingCacheEnabled = true
@@ -127,9 +134,10 @@ class BoardEditActivity : AppCompatActivity() {
             // ...
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode== RESULT_OK&&requestCode==100){
+        if (resultCode == RESULT_OK && requestCode == 100) {
             binding.imageArea.setImageURI(data?.data)
         }
     }

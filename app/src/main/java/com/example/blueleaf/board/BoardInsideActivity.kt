@@ -99,7 +99,7 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.titleArea.text = dataModel!!.title
                     binding.contentArea.text = dataModel!!.content
                     binding.timeArea.text = dataModel!!.time
-                    binding.uidArea.text = dataModel!!.uid
+                    binding.usernameArea.text = dataModel!!.username
 
                     val myUid = FBAuth.getUid()
                     val writerUid = dataModel.uid

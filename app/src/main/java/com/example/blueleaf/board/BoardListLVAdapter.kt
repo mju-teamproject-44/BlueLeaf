@@ -51,9 +51,13 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
         val time = cvView?.findViewById<TextView>(R.id.timeArea)
         time!!.text = boardList[position].time
 
-        // 사용자의 uid 연결
-        val uid = cvView?.findViewById<TextView>(R.id.uidArea)
-        uid!!.text = boardList[position].uid
+//        // 사용자의 uid 연결
+//        val uid = cvView?.findViewById<TextView>(R.id.uidArea)
+//        uid!!.text = boardList[position].uid
+
+        // 사용자의 username 연결
+        val username = cvView?.findViewById<TextView>(R.id.usernameArea)
+        username!!.text = boardList[position].username
 
 
         if (boardList[position].uid.equals(FBAuth.getUid())) {
