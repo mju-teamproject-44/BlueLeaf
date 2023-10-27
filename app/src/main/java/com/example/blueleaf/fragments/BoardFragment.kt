@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
@@ -16,6 +17,7 @@ import com.example.blueleaf.board.BoardModel
 import com.example.blueleaf.board.BoardWriteActivity
 import com.example.blueleaf.contentsList.ContentModel
 import com.example.blueleaf.databinding.FragmentBoardBinding
+import com.example.blueleaf.setting.SettingActivity
 import com.example.blueleaf.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -87,6 +89,11 @@ class BoardFragment : Fragment() {
 
         binding.plantTab.setOnClickListener(){
             it.findNavController().navigate(R.id.action_boardFragment_to_plantFragment)
+        }
+
+        binding.settingBtn.setOnClickListener{
+            val intent = Intent(context,SettingActivity::class.java)
+            startActivity(intent)
         }
 
         getFBBoardData()

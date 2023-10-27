@@ -9,10 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ActivityBoardInsideBinding
+import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot
@@ -98,6 +100,18 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.contentArea.text = dataModel!!.content
                     binding.timeArea.text = dataModel!!.time
                     binding.uidArea.text = dataModel!!.uid
+
+                    val myUid = FBAuth.getUid()
+                    val writerUid = dataModel.uid
+
+                    if(myUid.equals(writerUid)){
+                        Toast.makeText(baseContext,"글쓴이 O",Toast.LENGTH_LONG).show()
+                        binding.boardSettingIcon.isVisible = true
+                    } else{
+
+                    }
+
+
                 } catch (e: Exception) {
                     Log.d(TAG, "삭제 완료")
                 }
