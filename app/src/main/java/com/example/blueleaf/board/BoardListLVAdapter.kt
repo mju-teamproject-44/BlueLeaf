@@ -33,8 +33,7 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var cvView = convertView
 //        if(cvView==null){
-        cvView =
-            LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
+        cvView = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
 //        }
 
         val itemLinearLayoutView = cvView?.findViewById<LinearLayout>(R.id.itemView)

@@ -23,6 +23,8 @@ class FBRef {
         val boardRef = database.getReference("board")
 
         val storageRef = Firebase.storage.reference
+
+        val commentRef = database.getReference("comment")
     }
 
 }
