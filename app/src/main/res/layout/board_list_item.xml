@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
     android:id="@+id/itemView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/titleArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
+        android:fontFamily="@font/korail_round_gothic_medium"
         android:text="title"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -21,12 +22,15 @@
         android:id="@+id/contentArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:fontFamily="@font/korail_round_gothic_medium"
+        android:maxHeight="20dp"
         android:text="content"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        android:maxHeight="20dp"/>
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/timeArea"
@@ -34,16 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/korail_round_gothic_light"
         android:text="time"
         android:textColor="#999999"
         android:textSize="10sp" />
 
     <TextView
         android:id="@+id/usernameArea"
+        android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/korail_round_gothic_light"
         android:text="username"
         android:textColor="#999999"
         android:textSize="10sp" />
