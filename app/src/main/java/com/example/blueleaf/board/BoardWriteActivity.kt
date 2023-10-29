@@ -15,6 +15,7 @@ import com.example.blueleaf.databinding.ActivityBoardWriteBinding
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.example.blueleaf.utils.FBRef.Companion.storageRef
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -26,16 +27,31 @@ class BoardWriteActivity : AppCompatActivity() {
     private val TAG = BoardWriteActivity::class.java.simpleName
 
     private var isImageUpload = false
+
+
+    val database = Firebase.database.reference
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_write)
+
+        var username = ""
+
+        // username 연결
+        database.child("users").child(FBAuth.getUid()).child("userName").get().addOnSuccessListener {
+            username = it.value.toString()
+            Log.i("firebase", "Got value ${it.value}")
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
 
         binding.writeBtn.setOnClickListener {
             val title = binding.titleArea.text.toString()
             val content = binding.contentArea.text.toString()
             val uid = FBAuth.getUid()
             val time = FBAuth.getTime()
+
+
 
             Log.d(TAG, title)
             Log.d(TAG, content)
@@ -47,10 +63,11 @@ class BoardWriteActivity : AppCompatActivity() {
 
 
             val key = FBRef.boardRef.push().key.toString()
+            val image = key
 
             FBRef.boardRef
                 .child(key)
-                .setValue(BoardModel(title, content, uid, time))
+                .setValue(BoardModel(image,title, content, uid, username, time))
 
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
@@ -75,7 +92,7 @@ class BoardWriteActivity : AppCompatActivity() {
 //        val storage = Firebase.storage
 //        val storageRef = storage.reference
 
-        val mountainsRef = storageRef.child(key+".png")
+        val mountainsRef = storageRef.child("board").child(key+".png")
 
         val imageView = binding.imageArea
         imageView.isDrawingCacheEnabled = true

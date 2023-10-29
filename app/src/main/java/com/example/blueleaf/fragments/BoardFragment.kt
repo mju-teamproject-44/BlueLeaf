@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 import com.example.blueleaf.board.BoardInsideActivity
 import com.example.blueleaf.board.BoardListLVAdapter
@@ -16,6 +19,7 @@ import com.example.blueleaf.board.BoardModel
 import com.example.blueleaf.board.BoardWriteActivity
 import com.example.blueleaf.contentsList.ContentModel
 import com.example.blueleaf.databinding.FragmentBoardBinding
+import com.example.blueleaf.setting.SettingActivity
 import com.example.blueleaf.utils.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -89,6 +93,11 @@ class BoardFragment : Fragment() {
             it.findNavController().navigate(R.id.action_boardFragment_to_plantFragment)
         }
 
+        binding.settingBtn.setOnClickListener{
+            val intent = Intent(context,SettingActivity::class.java)
+            startActivity(intent)
+        }
+
         getFBBoardData()
 
         return binding.root
@@ -128,5 +137,6 @@ class BoardFragment : Fragment() {
 
         FBRef.boardRef.addValueEventListener(postListener)
     }
+
 
 }
