@@ -206,7 +206,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
     private fun getImageData(key: String) {
         // Reference to an image file in Cloud Storage
-        val storageReference = FBRef.storageRef.child(key + ".png")
+        val storageReference = FBRef.storageRef.child("board").child(key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = binding.getImageArea

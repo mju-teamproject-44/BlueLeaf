@@ -52,6 +52,7 @@ class BoardWriteActivity : AppCompatActivity() {
             val time = FBAuth.getTime()
 
 
+
             Log.d(TAG, title)
             Log.d(TAG, content)
 
@@ -62,10 +63,11 @@ class BoardWriteActivity : AppCompatActivity() {
 
 
             val key = FBRef.boardRef.push().key.toString()
+            val image = key
 
             FBRef.boardRef
                 .child(key)
-                .setValue(BoardModel(title, content, uid, username, time))
+                .setValue(BoardModel(image,title, content, uid, username, time))
 
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
@@ -90,7 +92,7 @@ class BoardWriteActivity : AppCompatActivity() {
 //        val storage = Firebase.storage
 //        val storageRef = storage.reference
 
-        val mountainsRef = storageRef.child(key+".png")
+        val mountainsRef = storageRef.child("board").child(key+".png")
 
         val imageView = binding.imageArea
         imageView.isDrawingCacheEnabled = true

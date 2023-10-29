@@ -6,17 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 import com.example.blueleaf.utils.FBAuth
+import com.example.blueleaf.utils.FBRef
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.core.Context
 
 
 class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter() {
 
 
     private val TAG = BoardInsideActivity::class.java.simpleName
+
 
     override fun getCount(): Int {
         return boardList.size
@@ -36,7 +44,29 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
         cvView = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
 //        }
 
-        val itemLinearLayoutView = cvView?.findViewById<LinearLayout>(R.id.itemView)
+        val itemView = cvView?.findViewById<LinearLayout>(R.id.itemView)
+
+//        // 사용자가 추가한 img 연결
+//        val image = cvView?.findViewById<ImageView>(R.id.imageArea)
+//        image!!.setImageURI(boardList[position].image)
+
+        // Reference to an image file in Cloud Storage
+        val storageReference = FBRef.storageRef.child("board").child(boardList[position].image + ".png")
+
+        // ImageView in your Activity
+        val imageViewFromFB = cvView?.findViewById<ImageView>(R.id.imageArea)
+
+        storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                if (imageViewFromFB != null) {
+                    Glide.with(cvView)
+                        .load(task.result)
+                        .into(imageViewFromFB)
+                }
+            } else {
+                    imageViewFromFB!!.isVisible = false
+            }
+        })
 
         // 사용자가 입력한 title 연결
         val title = cvView?.findViewById<TextView>(R.id.titleArea)
@@ -60,10 +90,11 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 
 
         if (boardList[position].uid.equals(FBAuth.getUid())) {
-            itemLinearLayoutView?.setBackgroundColor(Color.parseColor("#D0ECE1"))
+            itemView?.setBackgroundColor(Color.parseColor("#D0ECE1"))
         }
 
 
         return cvView!!
     }
+
 }

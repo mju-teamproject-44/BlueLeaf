@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 import com.example.blueleaf.board.BoardInsideActivity
 import com.example.blueleaf.board.BoardListLVAdapter
@@ -135,5 +137,6 @@ class BoardFragment : Fragment() {
 
         FBRef.boardRef.addValueEventListener(postListener)
     }
+
 
 }
