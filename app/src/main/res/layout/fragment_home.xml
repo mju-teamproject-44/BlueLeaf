@@ -137,6 +137,223 @@
                     android:layout_height="15dp">
                 </TextView>
 
+                <ImageView
+                    android:id="@+id/homeMyPlantIconImageView"
+
+                    android:src="@drawable/home_vertical_line"
+
+                    android:layout_below="@+id/homeEmailTextView"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+                <TextView
+                    android:text="나의 식물"
+                    android:fontFamily="@font/korail_round_gothic_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+
+                    android:layout_toRightOf="@id/homeMyPlantIconImageView"
+                    android:layout_alignBottom="@id/homeMyPlantIconImageView"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <ImageView
+                    android:id="@+id/homeMyPlantTextLineImageView"
+
+                    android:src="@drawable/home_bottom_bar"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeMyPlantIconImageView"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/homeRectangleImageView"
+
+                    android:src="@drawable/home_rectangle"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeMyPlantTextLineImageView"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="350dp"
+                    android:layout_height="99dp">
+                </ImageView>
+
+                <LinearLayout
+                    android:layout_alignTop="@id/homeRectangleImageView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="350dp"
+                    android:layout_height="99dp">
+                    <ImageView
+                        android:src="@drawable/home_plant_add_button"
+
+                        android:visibility="visible"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+
+                        android:layout_width="116dp"
+                        android:layout_height="match_parent">
+                    </ImageView>
+                    <ImageView
+                        android:src="@drawable/home_vertical_long_line"
+
+                        android:layout_gravity="center"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </ImageView>
+                    <ImageView
+                        android:src="@drawable/home_plant_add_button"
+
+                        android:visibility="invisible"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+
+                        android:layout_width="116dp"
+                        android:layout_height="match_parent">
+                    </ImageView>
+                    <ImageView
+                        android:src="@drawable/home_vertical_long_line"
+
+                        android:layout_gravity="center"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </ImageView>
+                    <ImageView
+                        android:src="@drawable/home_plant_add_button"
+
+                        android:visibility="invisible"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:scaleType="center"
+
+                        android:layout_width="116dp"
+                        android:layout_height="match_parent">
+                    </ImageView>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/homeMyPlantContentLineImageView"
+
+                    android:src="@drawable/home_bottom_bar"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeRectangleImageView"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/homeMyBoardIconImageView"
+
+                    android:src="@drawable/home_vertical_line"
+
+                    android:layout_below="@+id/homeMyPlantContentLineImageView"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+                <TextView
+                    android:text="나의 게시글"
+                    android:fontFamily="@font/korail_round_gothic_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+
+                    android:layout_toRightOf="@id/homeMyBoardIconImageView"
+                    android:layout_alignBottom="@id/homeMyBoardIconImageView"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <ImageView
+                    android:src="@drawable/home_chevron_left"
+
+                    android:layout_below="@id/homeMyPlantContentLineImageView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="7dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+                <ImageView
+                    android:id="@+id/homeMyBoardTextLineImageView"
+
+                    android:src="@drawable/home_bottom_bar"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeMyBoardIconImageView"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/homeMyCommentIconImageView"
+
+                    android:src="@drawable/home_vertical_line"
+
+                    android:layout_below="@+id/homeMyBoardTextLineImageView"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+                <TextView
+                    android:text="나의 댓글"
+                    android:fontFamily="@font/korail_round_gothic_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+
+                    android:layout_toRightOf="@id/homeMyCommentIconImageView"
+                    android:layout_alignBottom="@id/homeMyCommentIconImageView"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <ImageView
+                    android:src="@drawable/home_chevron_left"
+
+                    android:layout_below="@id/homeMyBoardTextLineImageView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="7dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+                <ImageView
+                    android:id="@+id/homeMyCommentTextLineImageView"
+
+                    android:src="@drawable/home_bottom_bar"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/homeMyCommentIconImageView"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+
             </RelativeLayout>
 
 
