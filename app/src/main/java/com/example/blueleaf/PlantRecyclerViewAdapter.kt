@@ -33,6 +33,14 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
     override fun getItemCount(): Int {
         return dataset.size
     }
+    private var originalDataset: List<Plant> = emptyList()
+
+    fun updateData(newData: List<Plant>) {
+        originalDataset = newData
+        notifyDataSetChanged()
+    }
+
+
 
 
     class ViewHolder(private val binding: LayoutPlantPhotoItemBinding) : RecyclerView.ViewHolder(binding.root),  View.OnClickListener{
@@ -61,4 +69,5 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
             }
         }
     }
+
 }
