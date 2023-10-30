@@ -29,12 +29,12 @@ import com.google.firebase.database.ValueEventListener
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 // pr test
 class BoardFragment : Fragment() {
-    private lateinit var binding:FragmentBoardBinding
+    private lateinit var binding: FragmentBoardBinding
 
     private val boardDataList = mutableListOf<BoardModel>()
     private val boardKeyList = mutableListOf<String>()
 
-    private lateinit var boardRVAdapter : BoardListLVAdapter
+    private lateinit var boardRVAdapter: BoardListLVAdapter
 
     private val TAG = BoardFragment::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class BoardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_board,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board, container, false)
 
 
         boardRVAdapter = BoardListLVAdapter(boardDataList)
@@ -64,38 +64,33 @@ class BoardFragment : Fragment() {
             // 두 번째 방법 : Firebase에 있는 board에 대한 데이터의 id를 기반으로 다시 데이터를 받아오는 방법
 
             // activity 넘기기
-            val intent = Intent(context,BoardInsideActivity::class.java)
-            intent.putExtra("key",boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
+            val intent = Intent(context, BoardInsideActivity::class.java)
+            intent.putExtra("key", boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
             startActivity(intent)
 
         }
 
 
 
-        binding.writeBtn.setOnClickListener(){
+        binding.writeBtn.setOnClickListener() {
             val intent = Intent(context, BoardWriteActivity::class.java)
             startActivity(intent)
         }
 
-        binding.homeTab.setOnClickListener(){
+        binding.homeTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_boardFragment_to_homeFragment)
         }
 
-        binding.informationTab.setOnClickListener(){
+        binding.informationTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_boardFragment_to_informationFragment)
         }
 
-        binding.bookmarkTab.setOnClickListener(){
+        binding.bookmarkTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_boardFragment_to_bookmarkFragment)
         }
 
-        binding.plantTab.setOnClickListener(){
+        binding.plantTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_boardFragment_to_plantFragment)
-        }
-
-        binding.settingBtn.setOnClickListener{
-            val intent = Intent(context,SettingActivity::class.java)
-            startActivity(intent)
         }
 
         getFBBoardData()
@@ -103,7 +98,7 @@ class BoardFragment : Fragment() {
         return binding.root
     }
 
-    private fun getFBBoardData(){
+    private fun getFBBoardData() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
@@ -113,7 +108,7 @@ class BoardFragment : Fragment() {
 
                 for (dataModel in dataSnapshot.children) {
 
-                    Log.d(TAG,dataModel.toString())
+                    Log.d(TAG, dataModel.toString())
                     val item = dataModel.getValue(BoardModel::class.java)
                     boardDataList.add(item!!)
                     boardKeyList.add(dataModel.key.toString())
@@ -126,7 +121,7 @@ class BoardFragment : Fragment() {
                 // 동기화
                 boardRVAdapter.notifyDataSetChanged()
 
-                Log.d(TAG,boardDataList.toString())
+                Log.d(TAG, boardDataList.toString())
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

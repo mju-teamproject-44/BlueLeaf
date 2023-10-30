@@ -11,7 +11,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/background_radius_main_color"
         android:fontFamily="@font/korail_round_gothic_medium"
-        android:text="수정버튼"
+        android:text="수정"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -22,7 +22,7 @@
         android:layout_margin="20dp"
         android:background="@drawable/background_radius_main_color"
         android:fontFamily="@font/korail_round_gothic_medium"
-        android:text="삭제버튼"
+        android:text="삭제"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
