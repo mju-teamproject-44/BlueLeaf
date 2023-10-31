@@ -32,6 +32,7 @@ class PlantFragment : Fragment() {
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,26 +71,52 @@ class PlantFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("PlantFragment", "Query textChange: $query")
                 // 검색 버튼을 눌렀을 때 수행할 동작을 구현
-                if (query != null) {
-                    Log.d("PlantFragment", "Query submitted: $query")
-                    filterList(query)
+                if (query != null && query.isNotEmpty()) {
+                    val dataToDisplay = getSecondJsonData("plant.json")?.plants?.get(1) // 2번째 인덱스 데이터 가져오기
+                    adapter.updateData(dataToDisplay?.let { listOf(it) } ?: emptyList())
+                } else {
+                    adapter.updateData(emptyList())
                 }
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("PlantFragment", "Query textChange: $newText")
                 // 검색어가 변경될 때 수행할 동작을 구현
-                if (newText != null) {
-                    Log.d("PlantFragment", "Query textChange: $newText")
-                    filterList(newText)
+                if (newText != null && newText.isNotEmpty()) {
+                    val dataToDisplay = getSecondJsonData("plant.json")?.plants?.get(1) // 2번째 인덱스 데이터 가져오기
+                    adapter.updateData(dataToDisplay?.let { listOf(it) } ?: emptyList())
+                } else {
+                    adapter.updateData(emptyList())
                 }
                 return true
             }
         })
 
+
+
         return binding.root
     }
+    // 두 번째 JSON 파일을 로드하는 함수
+    private fun getSecondJsonData(filename: String): plantList? {
+        val assetManager = resources.assets
+        var result: plantList? = null
+        try {
+            val inputStream = assetManager.open(filename)
+            val reader = inputStream.bufferedReader()
+            val gson = Gson()
+
+            result = gson.fromJson(reader, plantList::class.java)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return result
+    }
+
+
+
     private fun filterList(charText: String) {
         val normalizedCharText = charText.toLowerCase(Locale.KOREAN)
 

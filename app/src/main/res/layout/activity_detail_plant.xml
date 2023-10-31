@@ -1,100 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DetailPlantActivity">
+
     <ImageView
         android:id="@+id/Detailphotoimage"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="230dp"
+        android:background="@color/black"
         android:src="@drawable/baseline_image_24"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/DetailkoreanName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="식물이름"
-        app:layout_constraintTop_toBottomOf="@id/Detailphotoimage"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="5dp"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/DetailEngName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="영어이름"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DetailkoreanName"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="소개"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DetailEngName"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/Detaildescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="소개말"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/feature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="특징"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Detaildescription"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/water"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="물주기"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/feature"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/sun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일조량"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/water"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/humid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="습도"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sun"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:id="@+id/difficult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="난이도"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/humid"
-        android:layout_margin="5dp"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/DetailkoreanName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/korail_round_gothic_bold"
+                android:gravity="center"
+                android:text="식물이름"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/DetailEngName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="영어이름"
+                android:textColor="#634444"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/korail_round_gothic_medium"
+                android:text="소개"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Detaildescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:fontFamily="@font/korail_round_gothic_light"
+                android:layout_margin="5dp"
+                android:text="소개말" />
+
+            <TextView
+                android:id="@+id/feature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/korail_round_gothic_medium"
+                android:gravity="center"
+                android:text="특징"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:rowCount="2">
+
+
+            <TextView
+                android:id="@+id/water"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="물주기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/feature" />
+
+            <TextView
+                android:id="@+id/sun"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="일조량"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/water" />
+
+            <TextView
+                android:id="@+id/humid"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="습도"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sun" />
+
+            <TextView
+                android:id="@+id/difficult"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+
+                android:text="난이도"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/humid" />
+        </GridLayout>
+    </LinearLayout>
+</LinearLayout>
