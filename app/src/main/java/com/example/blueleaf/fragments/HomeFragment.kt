@@ -18,7 +18,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.example.blueleaf.MainActivity
 import com.example.blueleaf.R
+import com.example.blueleaf.SplashActivity
 import com.example.blueleaf.databinding.FragmentHomeBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -33,8 +35,6 @@ class HomeFragment : Fragment() {
     //Database Reference
     private lateinit var database : DatabaseReference
     private lateinit var uri: Uri
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
