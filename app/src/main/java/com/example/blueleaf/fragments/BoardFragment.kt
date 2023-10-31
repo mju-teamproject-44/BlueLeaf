@@ -115,6 +115,7 @@ class BoardFragment : Fragment() {
                 }
 
                 // 최신 게시글이 맨 위로 오게 한다 -> adapter와 동기화 전 list reverse
+                // 최신 게시글이 맨 위로 오게 한다
                 boardDataList.reverse()
                 boardKeyList.reverse()
 

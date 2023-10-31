@@ -59,7 +59,6 @@ class PlantFragment : Fragment() {
         binding.recyclerview.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = PlantRecyclerViewAdapter(testdata?.plants ?: emptyList())
-           // addItemDecoration(GridSpacingItemDecoration(2, 30, true))
         }
         //val testdata = getJsonData("plant.json")
         testdata?.plants?.forEach { plant ->
