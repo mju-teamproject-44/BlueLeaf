@@ -104,18 +104,18 @@ class ContentRVAdapter(val context : Context,
 
             }
 
-            // 북마크 영역의 클릭 이벤트 리 스너
+            // 북마크 영역의 클릭 이벤트 리스너
             bookmarkArea.setOnClickListener {
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show() // 선택된 아이템의 키를 toast
-
-                // 만약 지금 클릭된 아이템의 키값이 북마크 리스트에 포함되어 있다면 그 key를 제거해라
-                // bookmarkIdList.contains(key)
+                /*
+                log
+                만약 지금 클릭된 아이템의 키값이 북마크 리스트에 포함되어 있다면 그 key를 제거해라
+                bookmarkIdList.contains(key)
+                */
 
                 if(linearSearchForBookMark(key,bookmarkIdList)) {
                     // 북마크가 있을 때 삭제
-                    // bookmarkRef -> bookmark_list
-                    // 계획환 fb 구조를 명확히 따름.
                     FBRef.bookmarkRef
                         .child(FBAuth.getUid())
                         .child(key)

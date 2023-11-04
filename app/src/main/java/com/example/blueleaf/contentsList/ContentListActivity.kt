@@ -68,9 +68,9 @@ class ContentListActivity : AppCompatActivity() {
         val rv:RecyclerView = findViewById(R.id.rv)
         val infoTitle = findViewById<TextView>(R.id.infoTitle)
         val sortButton = findViewById<Button>(R.id.sortButton)
-        val items = mutableListOf<ContentModel>() // fb 아이템 저장
         val database = Firebase.database
-        val itemKeyList = mutableListOf<String>() // fb 아이템 키값을 저장한다.
+        val items = mutableListOf<ContentModel>()
+        val itemKeyList = mutableListOf<String>()
         // rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
         val category = intent.getStringExtra("category")
         var krCategoryName = "";
