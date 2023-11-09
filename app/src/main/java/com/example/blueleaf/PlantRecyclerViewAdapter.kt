@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.blueleaf.databinding.LayoutPlantPhotoItemBinding
 
-class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.Adapter<PlantRecyclerViewAdapter.ViewHolder>(){
+class PlantRecyclerViewAdapter(private var dataset: List<Plant>) :RecyclerView.Adapter<PlantRecyclerViewAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutPlantPhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -33,6 +33,14 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
     override fun getItemCount(): Int {
         return dataset.size
     }
+    private var originalDataset: List<Plant> = emptyList()
+
+    fun updateData(newData: List<Plant>) {
+        dataset = newData
+        notifyDataSetChanged()
+    }
+
+
 
 
     class ViewHolder(private val binding: LayoutPlantPhotoItemBinding) : RecyclerView.ViewHolder(binding.root),  View.OnClickListener{
@@ -61,4 +69,5 @@ class PlantRecyclerViewAdapter(private val dataset: List<Plant>) :RecyclerView.A
             }
         }
     }
+
 }

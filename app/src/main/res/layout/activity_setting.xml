@@ -4,21 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/logout_background_plant"
+    android:backgroundTint="#E8323131"
+    android:backgroundTintMode="multiply"
     tools:context=".setting.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/korail_round_gothic_bold"
+            android:text="로그아웃"
+            android:textColor="#DFD3A8"
+            android:textSize="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/korail_round_gothic_light"
+            android:text="하시겠습니까?"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_radius_main_color"
+        android:background="@drawable/background_radius_stroke_gold_color"
+        android:backgroundTint="#A9FFFFFF"
+        android:fontFamily="@font/korail_round_gothic_bold"
+        android:letterSpacing="0.1"
+        android:padding="20sp"
         android:text="로그아웃"
-        android:textColor="@color/white"
+        android:textColor="#322E22"
         android:textSize="25sp"
-        android:padding="15sp"
-        android:fontFamily="@font/korail_round_gothic_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.664" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

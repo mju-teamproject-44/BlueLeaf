@@ -22,6 +22,7 @@ import com.example.blueleaf.MainActivity
 import com.example.blueleaf.R
 import com.example.blueleaf.SplashActivity
 import com.example.blueleaf.databinding.FragmentHomeBinding
+import com.example.blueleaf.setting.SettingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -141,7 +142,11 @@ class HomeFragment : Fragment() {
             binding.homeProfileImageUploadButton.visibility = Button.GONE
         }
 
-
+        // logout
+        binding.settingBtn.setOnClickListener{
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
 
         //Navigate
         binding.homeTab.setOnClickListener(){
