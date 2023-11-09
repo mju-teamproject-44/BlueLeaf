@@ -2,6 +2,7 @@ package com.example.blueleaf.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.blueleaf.R
+import com.example.blueleaf.contentsList.BookmarkListActivity
 import com.example.blueleaf.contentsList.ContentListActivity
 import com.example.blueleaf.databinding.FragmentInformationBinding
 
@@ -24,7 +26,14 @@ class InformationFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_information, container, false)
 
+        binding.bookmarkBtn.setOnClickListener(){
+            Log.d("hi",":gi")
+            val intent = Intent(context,BookmarkListActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.airPurifyingPlant.setOnClickListener(){
+            Log.d("1","1")
             val intent = Intent(context,ContentListActivity::class.java)
             intent.putExtra("category", "category1")
             startActivity(intent)

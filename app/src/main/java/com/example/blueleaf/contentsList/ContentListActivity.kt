@@ -23,7 +23,7 @@ import com.google.firebase.ktx.Firebase
 
 class ContentListActivity : AppCompatActivity() {
     lateinit var myRef : DatabaseReference
-    val bookmarkIdList = mutableListOf<String>() // 북마크 id  list
+    val bookmarkIdList = mutableListOf<String>()
     lateinit var rvAdapter: ContentRVAdapter
 
     fun quickSort(arr: MutableList<ContentModel>, left: Int = 0, right: Int = arr.size - 1) {

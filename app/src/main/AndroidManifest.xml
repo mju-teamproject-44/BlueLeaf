@@ -37,6 +37,9 @@
             android:name=".contentsList.ContentListActivity"
             android:exported="false" />
         <activity
+            android:name=".contentsList.BookmarkListActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.JoinActivity"
             android:exported="false" />
         <activity
