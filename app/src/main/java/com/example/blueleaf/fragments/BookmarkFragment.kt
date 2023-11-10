@@ -42,15 +42,12 @@ class BookmarkFragment : Fragment() {
         userList = mutableListOf()
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("users", "Call")
+                userList.clear() // 같은 거 계속 찍히는 거 방지 코드. 후에 문제 되면 삭제
                 for (dataModel in snapshot.children) {
-                    Log.d("users", dataModel.toString())
                     var item = dataModel.getValue(UserModel::class.java)
-                    Log.d("users", item.toString())
                     userList.add(item!!)
                 }
 
-                Log.d("users", userList.toString())
                 adapter = UserAdapter(requireContext(), userList)
                 binding.userRecyclerView.adapter = adapter
                 val layoutManager = LinearLayoutManager(context)
