@@ -71,7 +71,6 @@ class ContentListActivity : AppCompatActivity() {
         val items = mutableListOf<ContentModel>() // fb 아이템 저장
         val database = Firebase.database
         val itemKeyList = mutableListOf<String>() // fb 아이템 키값을 저장한다.
-        // rvAdapter = ContentRVAdapter(baseContext, items, itemKeyList, bookmarkIdList)
         val category = intent.getStringExtra("category")
         var krCategoryName = "";
 
