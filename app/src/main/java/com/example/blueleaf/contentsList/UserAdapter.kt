@@ -1,6 +1,7 @@
 package com.example.blueleaf.contentsList
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
+import com.example.blueleaf.chat.ChatActivity
 
 
-class UserAdapter(private val userList: MutableList<UserModel>):
+class UserAdapter(val context: Context, private val userList: MutableList<UserModel>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -28,6 +30,15 @@ class UserAdapter(private val userList: MutableList<UserModel>):
         Log.d("hola", "3")
         val currentUser = userList[position]
         holder.nameText.text = currentUser.userName
+
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context,ChatActivity::class.java)
+
+            intent.putExtra("name", currentUser.userName)
+            intent.putExtra("uId", currentUser.uid)
+
+            context.startActivity(intent)
+        }
     }
 
     class UserViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {

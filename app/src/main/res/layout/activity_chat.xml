@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- tools:context = ".ChatActivity"-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/input_layout"
+            android:layout_alignParentTop="true">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <!--입력창-->
+            <EditText
+                android:id="@+id/msgEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="85"
+                android:background="@drawable/background_radius_main_color"
+                android:hint="메시지를 입력하세요"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:paddingStart="10dp"
+                />
+            <!--전송버튼-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/send_btn"
+                android:layout_width="30dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="15"
+                android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+                android:text="전송"
+                android:textColor="@color/MainColor"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

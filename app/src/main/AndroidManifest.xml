@@ -49,6 +49,9 @@
             android:name=".auth.IntroActivity"
             android:exported="false" />
         <activity
+            android:name=".chat.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

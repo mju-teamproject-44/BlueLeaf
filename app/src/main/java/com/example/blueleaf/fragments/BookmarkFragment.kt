@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.core.Context
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -50,7 +51,7 @@ class BookmarkFragment : Fragment() {
                 }
 
                 Log.d("users", userList.toString())
-                adapter = UserAdapter(userList)
+                adapter = UserAdapter(requireContext(), userList)
                 binding.userRecyclerView.adapter = adapter
                 val layoutManager = LinearLayoutManager(context)
                 binding.userRecyclerView.layoutManager = layoutManager
