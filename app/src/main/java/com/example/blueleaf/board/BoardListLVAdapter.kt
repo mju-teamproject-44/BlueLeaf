@@ -23,8 +23,6 @@ import com.google.firebase.database.core.Context
 class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter() {
 
 
-    private val TAG = BoardInsideActivity::class.java.simpleName
-
 
     override fun getCount(): Int {
         return boardList.size

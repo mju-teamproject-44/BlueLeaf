@@ -3,22 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/boardListView"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/korail_round_gothic_medium"
+            android:text="모두를 위한 식물"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/writeBtn"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/writeBtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/write_button" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginRight="23dp"
-            android:layout_marginBottom="63dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="20dp" />
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/viewPager2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabIndicatorColor="@color/MainColor"
+            app:tabTextAppearance="@style/tabText"
+            app:tabMode="fixed" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -97,34 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/bottom_plant" />
-
-
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/writeBtn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="84dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/write_button" />
-
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:fontFamily="@font/korail_round_gothic_medium"
-            android:text="모두를 위한 식물"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.196"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -80,6 +80,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation ("com.google.code.gson:gson:2.8.5")
-
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
 }
