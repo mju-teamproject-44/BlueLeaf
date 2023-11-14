@@ -42,6 +42,31 @@
                 android:orientation="vertical"
                 android:paddingTop="40dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:fontFamily="@font/korail_round_gothic_medium"
+                        android:text="게시판 선택"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:background="@drawable/background_radius_gray"
+                        android:id="@+id/boardSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="25dp"
+                        android:theme="@style/spinnerText"/>
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
