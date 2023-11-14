@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="영어이름"
-                android:textColor="#634444"
+                android:textColor="#A77C6F"
                 android:textStyle="italic" />
 
             <TextView

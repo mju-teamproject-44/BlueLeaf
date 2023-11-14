@@ -10,7 +10,7 @@ class FBRef {
     companion object {
 
         private val database = Firebase.database
-
+        val users = database.getReference("users")
         val category1 = database.getReference("contents")
         val category2 = database.getReference("contents2")
         val category3 = database.getReference("contents3")
@@ -20,7 +20,11 @@ class FBRef {
 
         val bookmarkRef = database.getReference("bookmark_list")
 
+        // borad 관련 주소
         val boardRef = database.getReference("board")
+        val boardInfoRef = database.getReference("board_information")
+        val boardShowRef = database.getReference("board_show")
+        val boardTransRef = database.getReference("board_transaction")
 
         val storageRef = Firebase.storage.reference
 

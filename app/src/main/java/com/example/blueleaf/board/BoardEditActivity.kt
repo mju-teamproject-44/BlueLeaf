@@ -17,6 +17,7 @@ import com.example.blueleaf.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -27,6 +28,8 @@ class BoardEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardEditBinding
     private val TAG = BoardEditActivity::class.java.simpleName
     private lateinit var key: String
+    private lateinit var boardCategory:String
+    private lateinit var boardCategoryRef:DatabaseReference
     private lateinit var writerUid: String
     private lateinit var writerUsername : String
     private var isImageUpload = false
@@ -36,6 +39,20 @@ class BoardEditActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_edit)
 
         key = intent.getStringExtra("key").toString()
+
+        // 게시판 유형도 전달받는다
+        boardCategory = intent.getStringExtra("boardCategory").toString()
+        when(boardCategory){
+            "정보 게시판"->{
+                boardCategoryRef = FBRef.boardInfoRef
+            }
+            "식물 자랑 게시판"->{
+                boardCategoryRef = FBRef.boardShowRef
+            }
+            "거래 게시판"->{
+                boardCategoryRef = FBRef.boardTransRef
+            }
+        }
 
         getBoardData(key)
         getImageData(key)
@@ -50,10 +67,11 @@ class BoardEditActivity : AppCompatActivity() {
     }
 
     private fun editBoardData(key: String) {
-        FBRef.boardRef
+        boardCategoryRef
             .child(key)
             .setValue(
                 BoardModel(
+                    key,
                     binding.titleArea.text.toString(),
                     binding.contentArea.text.toString(),
                     writerUid,
@@ -90,12 +108,12 @@ class BoardEditActivity : AppCompatActivity() {
             }
         }
 
-        FBRef.boardRef.child(key).addValueEventListener(postListener)
+        boardCategoryRef.child(key).addValueEventListener(postListener)
     }
 
     private fun getImageData(key: String) {
         // Reference to an image file in Cloud Storage
-        val storageReference = FBRef.storageRef.child(key + ".png")
+        val storageReference = FBRef.storageRef.child("board").child(key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = binding.imageArea
