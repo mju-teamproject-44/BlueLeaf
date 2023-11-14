@@ -18,16 +18,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.example.blueleaf.MainActivity
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.blueleaf.R
-import com.example.blueleaf.SplashActivity
+import com.example.blueleaf.contentsList.UserModel
 import com.example.blueleaf.databinding.FragmentHomeBinding
 import com.example.blueleaf.setting.SettingActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class HomeFragment : Fragment() {
@@ -46,65 +55,36 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         //* Display & Editing UserName (Jinhyun)
-        // #1. Variables
         database = Firebase.database.reference
         val userUID = Firebase.auth.currentUser?.uid
-        var userName: String = "잎파랑이 사용자"
-        var userEmail: String = "temporary@email.com"
+        val userRef = database.child("users").child(userUID!!)
 
-        // #2. Function
-        fun setUserName(newName: String){
-            binding.homeUsernameTextView.text = newName
-            binding.homeUsernameEditText.hint = newName
+        val userDataListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var userM : UserModel = UserModel("Temporary", "Temporary")
 
-        }
-        fun setEditMode(isEditing: Boolean){
-            if(isEditing){
-                binding.homeUsernameTextView.visibility = TextView.INVISIBLE
-                binding.homeEditImageView.visibility = ImageView.GONE
-                binding.homeUsernameEditText.visibility = TextView.VISIBLE
-                binding.homeSaveImageView.visibility = ImageView.VISIBLE
+                userM = snapshot.getValue<UserModel>()!!
+                val userName_ = userM.userName.toString()
+                val userEmail_ = userM.userEmail.toString()
+                setUserData(userName_, userEmail_)
+                Log.d("userDataListener, name", userName_)
+                Log.d("UserDataListener, email", userEmail_)
             }
-            else{
-                binding.homeUsernameTextView.visibility = TextView.VISIBLE
-                binding.homeEditImageView.visibility = ImageView.VISIBLE
-                binding.homeUsernameEditText.visibility = TextView.GONE
-                binding.homeSaveImageView.visibility = ImageView.GONE
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
             }
         }
+        userRef.addValueEventListener(userDataListener)
 
        try {
            // #3. Details - Display UserName & Email
            if (userUID == null) {
                throw Exception("userUID is null")
            }
-           //유저명 가져오기
-           database.child("users").child(userUID!!).child("userName").get()
-               .addOnSuccessListener {
-                   userName = it.value.toString()
-                   setUserName(userName)
-                   Log.d("Success_userName", "userName = $userName")
-
-               }.addOnFailureListener {
-                   setUserName(userName)
-                   Log.e("Fail_userName", "Failed to get user name.")
-                   throw Exception("userName not found.")
-               }
-           //이메일 가져오기
-           database.child("users").child(userUID!!).child("userEmail").get()
-               .addOnSuccessListener {
-                   userEmail = it.value.toString()
-                   binding.homeEmailTextView.text = userEmail
-                   Log.d("Success_userEmail", "userEmail = $userEmail")
-
-               }.addOnFailureListener {
-                   binding.homeEmailTextView.text = userEmail
-                   Log.e("Fail_userEmail", "Failed to get user email.")
-                   throw Exception("userEmail not found.")
-               }
 
            //프로필 이미지 다운로드 후 업데이트
-           imageDownload()
+           imageDownload_preload()
 
            // #4. Details - Editing UserName
            binding.homeEditImageView.setOnClickListener {
@@ -112,8 +92,7 @@ class HomeFragment : Fragment() {
                binding.homeSaveImageView.setOnClickListener {
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
-                   setUserName(newUserName)
-
+                   setUserData(newUserName)
                    //Edit Database
                    database.child("users").child(userUID!!).child("userName").setValue(newUserName)
 
@@ -127,7 +106,6 @@ class HomeFragment : Fragment() {
 
 
         //* Profile image (Jinhyun)
-
         binding.homeProfileImageView.setOnClickListener{
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             registerForActivityResult.launch(intent)
@@ -213,6 +191,37 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun imageDownload_preload() {
+        val storage = Firebase.storage
+        val userUID = Firebase.auth.currentUser?.uid
+        val storageRef = storage.getReference("profileImage").child(userUID!!)
+
+        // storage에서 가져올 파일명 선언
+        val fileName = "profileImage"
+        val mountainsRef = storageRef.child("${fileName}.png")
+        val downloadTask = mountainsRef.downloadUrl
+        downloadTask.addOnSuccessListener { uri -> // 파일 다운로드 성공
+            // Glide
+            // #1. preload
+            Glide.with(this)
+                .load(uri)
+                .preload()
+            // #2. 기본 호출
+            Glide.with(this).load(uri).into(binding.homeProfileImageView)
+
+            // #3. 캐시에 저장된 이미지 있을 때만
+            Glide.with(this).load(uri).onlyRetrieveFromCache(true).into(binding.homeProfileImageView)
+
+            // #4. 디스크 캐시 전략
+            Glide.with(this).load(uri).diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.homeProfileImageView)
+
+        }.addOnFailureListener {
+            // 파일 다운로드 실패
+        }
+    }
+
+
+
     private val registerForActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
@@ -224,6 +233,31 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+    //Functions
+    private fun setUserData(newName: String, newEmail: String){
+        binding.homeUsernameTextView.text = newName
+        binding.homeUsernameEditText.hint = newName
+        binding.homeEmailTextView.text = newEmail
+    }
+    private fun setUserData(newName: String){
+        binding.homeUsernameTextView.text = newName
+        binding.homeUsernameEditText.hint = newName
+    }
+    private fun setEditMode(isEditing: Boolean){
+        if(isEditing){
+            binding.homeUsernameTextView.visibility = TextView.INVISIBLE
+            binding.homeEditImageView.visibility = ImageView.GONE
+            binding.homeUsernameEditText.visibility = TextView.VISIBLE
+            binding.homeSaveImageView.visibility = ImageView.VISIBLE
+        }
+        else{
+            binding.homeUsernameTextView.visibility = TextView.VISIBLE
+            binding.homeEditImageView.visibility = ImageView.VISIBLE
+            binding.homeUsernameEditText.visibility = TextView.GONE
+            binding.homeSaveImageView.visibility = ImageView.GONE
+        }
+    }
 
 }
 
