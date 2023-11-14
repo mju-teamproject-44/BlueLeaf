@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ActivityChatBinding
+import com.example.blueleaf.utils.FBAuth
+import com.example.blueleaf.utils.FBRef
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,32 +29,31 @@ class ChatActivity:AppCompatActivity() {
     //lateinit var messageAdapter:MessageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("messi", "1")
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 넘어온 데이터 변수에 담기
+        receiverName = intent.getStringExtra("name").toString()
+        receiverUid = intent.getStringExtra("uId").toString()
+
         //초기화
-        Log.d("messi", "2")
 
         messageList = ArrayList() // lateinit이기에 꼭 초기화해줘야 됨
-        val messageAdapter:MessageAdapter = MessageAdapter(this,messageList)
+        val messageAdapter:MessageAdapter = MessageAdapter(this,messageList,receiverName)
 
         //RecyclerView
-        Log.d("messi", "3")
 
         binding.chatRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.chatRecyclerView.adapter = messageAdapter
 
 
         // 넘어온 데이터 변수에 담기
-        Log.d("messi", "4")
-        receiverName = intent.getStringExtra("name").toString()
-        receiverUid = intent.getStringExtra("uId").toString()
+        // receiverName = intent.getStringExtra("name").toString()
+        // receiverUid = intent.getStringExtra("uId").toString()
 
-        Log.d("messi", "5")
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().reference
 
-        Log.d("messi", "6")
         // 접속자 id
         val senderUid = mAuth.currentUser?.uid
 
@@ -61,11 +62,13 @@ class ChatActivity:AppCompatActivity() {
         // 받는 사람의 방
             receiverRoom = senderUid + receiverUid
 
-        // 액션바에 상대방 이름 보여주기
-        supportActionBar?.title = receiverName
+        //상대방 이름 보여주기
+        //supportActionBar?.title = receiverName
+        binding.chatUserName.setText(receiverName)
 
         // 메시지 전송 버튼 이벤트
         Log.d("messi", "7")
+
 
         binding.sendBtn.setOnClickListener{
             val message = binding.msgEdit.text.toString()
@@ -98,11 +101,7 @@ class ChatActivity:AppCompatActivity() {
                         val msg = postSnapshot.getValue(Message::class.java)
                         messageList.add(msg!!)
                     }
-                    /*
-                    messageAdapter = MessageAdapter(this, messageList)
-                    binding.chatRecyclerView.layoutManager = LinearLayoutManager(this)
-                    binding.chatRecyclerView.adapter = messageAdapter
-                    */
+
 
                     Log.d("messi", messageList.toString())
                     // 호출되면 화면에 메시지 내용을 보여준다.
