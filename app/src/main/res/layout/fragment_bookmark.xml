@@ -3,29 +3,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.BookmarkFragment">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="660dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout">
-                
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="650dp"
-                    android:id="@+id/user_recyclerView"
-                    tools:listitem="@layout/user_layout"
-                    />
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toTopOf="@+id/user_recyclerView"
+                android:gravity="center"
+                android:text="Chats"
+                android:textSize="40dp"
+                android:fontFamily="@font/bmdohyeon"
+                android:textColor="@color/black"
+                >
 
-            </LinearLayout>
+            </TextView>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/user_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="610dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                tools:listitem="@layout/user_layout">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
             <LinearLayout

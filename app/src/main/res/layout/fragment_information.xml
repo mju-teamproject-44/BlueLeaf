@@ -24,6 +24,7 @@
                     android:layout_width="870px"
                     android:layout_height="150px"
                     android:orientation="horizontal"
+                    android:weightSum="2"
                     >
                     <TextView
                         android:layout_width="400px"
@@ -33,17 +34,20 @@
                         android:textSize="70px"
                         android:paddingBottom="10px"
                         android:fontFamily="@font/bmdohyeon"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
                         >
                     </TextView>
 
                     <Button
                         android:id="@+id/bookmarkBtn"
                         android:gravity="center"
-                        android:layout_width="300px"
-                        android:layout_height="130px"
+                        android:layout_width="200px"
+                        android:layout_height="120px"
                         android:text="북마크"
                         android:fontFamily="@font/bmdohyeon"
-                        android:textSize="60px"
+                        android:textSize="70px"
+                        android:layout_weight="1"
                         >
                     </Button>
                 </LinearLayout>

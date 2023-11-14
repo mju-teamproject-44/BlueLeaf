@@ -93,9 +93,19 @@ class JoinActivity : AppCompatActivity() {
                             // * 유저 데이터(사용자 명 및 이메일)을 Firebase에 저장 (Jinhyun)
                             database = Firebase.database.reference
                             val userUID = Firebase.auth.currentUser?.uid
-
+                            // username을 이메일 아이디에서 따옴.
                             if (userUID != null) {
-                                val userData = UserModel(userUID,email, email)
+                                var name = ""
+                                for (i in email) {
+                                    if (i.equals('@')){
+                                        break
+                                    }
+                                    else {
+                                        name += i
+                                    }
+                                }
+                                //val userData = UserModel(userUID,email, name)
+                                val userData = UserModel(userUID, name, email)
                                 database.child("users").child(userUID!!).setValue(userData)
                             } else {
                                 Toast.makeText(this, "uid fail", Toast.LENGTH_LONG).show()
