@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.blueleaf.R
@@ -25,9 +28,11 @@ class BoardWriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardWriteBinding
 
     private val TAG = BoardWriteActivity::class.java.simpleName
-
+    private lateinit var key: String
+    private lateinit var image: String
     private var isImageUpload = false
 
+    private lateinit var selectedBoard: String
 
     val database = Firebase.database.reference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +43,38 @@ class BoardWriteActivity : AppCompatActivity() {
         var username = ""
 
         // username 연결
-        database.child("users").child(FBAuth.getUid()).child("userName").get().addOnSuccessListener {
-            username = it.value.toString()
-            Log.i("firebase", "Got value ${it.value}")
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+        database.child("users").child(FBAuth.getUid()).child("userName").get()
+            .addOnSuccessListener {
+                username = it.value.toString()
+                Log.i("firebase", "Got value ${it.value}")
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
+
+        // 게시판 선택 spinner 관련
+        var spinnerData = resources.getStringArray(R.array.boards)
+        var spinnerAdapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, spinnerData)
+        binding.boardSpinner.adapter = spinnerAdapter
+
+        // spinner 리스너
+        binding.boardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedBoard = parent?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
+        // write
         binding.writeBtn.setOnClickListener {
             val title = binding.titleArea.text.toString()
             val content = binding.contentArea.text.toString()
@@ -61,17 +91,34 @@ class BoardWriteActivity : AppCompatActivity() {
             // 이미지 이름에 대한 정보를 모르기
             // 이미지 이름을 문서의 key값으로 해줘서 이미지에 대한 정보를 찾기 쉽게 해놓음
 
-
-            val key = FBRef.boardRef.push().key.toString()
-            val image = key
-
-            FBRef.boardRef
-                .child(key)
-                .setValue(BoardModel(image,title, content, uid, username, time))
+            // key값 설정
+            when (selectedBoard) {
+                "정보 게시판" -> {
+                    key = FBRef.boardInfoRef.push().key.toString()
+                    image = key
+                    FBRef.boardInfoRef
+                        .child(key)
+                        .setValue(BoardModel(image,title,content,uid,username,time))
+                }
+                "식물 자랑 게시판" -> {
+                    key = FBRef.boardShowRef.push().key.toString()
+                    image = key
+                    FBRef.boardShowRef
+                        .child(key)
+                        .setValue(BoardModel(image,title,content,uid,username,time))
+                }
+                "거래 게시판" -> {
+                    key = FBRef.boardTransRef.push().key.toString()
+                    image = key
+                    FBRef.boardTransRef
+                        .child(key)
+                        .setValue(BoardModel(image,title,content,uid,username,time))
+                }
+            }
 
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 
-            if(isImageUpload == true){
+            if (isImageUpload == true) {
                 imageUpload(key)
             }
             finish()
@@ -87,12 +134,12 @@ class BoardWriteActivity : AppCompatActivity() {
 
     }
 
-    private fun imageUpload(key:String){
+    private fun imageUpload(key: String) {
         // Get the data from an ImageView as bytes
 //        val storage = Firebase.storage
 //        val storageRef = storage.reference
 
-        val mountainsRef = storageRef.child("board").child(key+".png")
+        val mountainsRef = storageRef.child("board").child(key + ".png")
 
         val imageView = binding.imageArea
         imageView.isDrawingCacheEnabled = true
@@ -113,7 +160,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode== RESULT_OK&&requestCode==100){
+        if (resultCode == RESULT_OK && requestCode == 100) {
             binding.imageArea.setImageURI(data?.data)
         }
     }

@@ -20,7 +20,11 @@ class FBRef {
 
         val bookmarkRef = database.getReference("bookmark_list")
 
+        // borad 관련 주소
         val boardRef = database.getReference("board")
+        val boardInfoRef = database.getReference("board_information")
+        val boardShowRef = database.getReference("board_show")
+        val boardTransRef = database.getReference("board_transaction")
 
         val storageRef = Firebase.storage.reference
 
