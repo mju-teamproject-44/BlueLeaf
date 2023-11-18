@@ -46,8 +46,7 @@ class BookmarkFragment : Fragment() {
                 userList.clear() // 같은 거 계속 찍히는 거 방지 코드. 후에 문제 되면 삭제
                 for (dataModel in snapshot.children) {
                     var item = dataModel.getValue(UserModel::class.java)
-                    // 비회원 사용자는 채팅 하지 못하게 함.
-                    // 자기 자신과도 채팅 못하게 함
+                    // 비회원 사용자 채팅, 자기 자신과 채팅은 하지 못하게 함.
                     if(item?.uid.equals("비회원 사용자") || item?.uid.equals(FBAuth.getUid())) {
                         continue
                     }
@@ -57,7 +56,6 @@ class BookmarkFragment : Fragment() {
                 adapter = UserAdapter(requireContext(), userList)
                 binding.userRecyclerView.adapter = adapter
                 val layoutManager = LinearLayoutManager(context)
-                // binding.userRecyclerView.layoutManager = layoutManager
                 binding.userRecyclerView.layoutManager = GridLayoutManager(context,2)
             }
 

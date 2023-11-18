@@ -52,6 +52,9 @@
             android:name=".chat.ChatActivity"
             android:exported="false" />
         <activity
+            android:name=".chat.Anony_dialog"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
