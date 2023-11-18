@@ -13,21 +13,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
+            <LinearLayout
+                app:layout_constraintBottom_toTopOf="@+id/user_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                app:layout_constraintBottom_toTopOf="@+id/user_recyclerView"
-                android:gravity="center"
-                android:text="Chats"
-                android:textSize="40dp"
-                android:fontFamily="@font/bmdohyeon"
-                android:textColor="@color/black"
+                android:weightSum="9"
                 >
 
-<<<<<<< Updated upstream
-            </TextView>
-=======
                 <TextView
                     android:layout_weight="1"
                     android:layout_width="140dp"
@@ -78,7 +70,6 @@
 
             </LinearLayout>
 
->>>>>>> Stashed changes
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/user_recyclerView"
