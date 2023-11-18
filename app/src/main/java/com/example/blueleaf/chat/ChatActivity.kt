@@ -36,21 +36,15 @@ class ChatActivity:AppCompatActivity() {
         receiverName = intent.getStringExtra("name").toString()
         receiverUid = intent.getStringExtra("uId").toString()
 
-        //초기화
-
+        // 메시지 리스트 초기화, Adapter 초기화
         messageList = ArrayList() // lateinit이기에 꼭 초기화해줘야 됨
         val messageAdapter:MessageAdapter = MessageAdapter(this,messageList,receiverName)
 
-        //RecyclerView
-
+        // 레이아웃 메니저 설정, 어뎁터 연결
         binding.chatRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.chatRecyclerView.adapter = messageAdapter
 
-
-        // 넘어온 데이터 변수에 담기
-        // receiverName = intent.getStringExtra("name").toString()
-        // receiverUid = intent.getStringExtra("uId").toString()
-
+        // FB 인스턴스
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().reference
 
@@ -62,14 +56,11 @@ class ChatActivity:AppCompatActivity() {
         // 받는 사람의 방
             receiverRoom = senderUid + receiverUid
 
-        //상대방 이름 보여주기
-        //supportActionBar?.title = receiverName
+        // 상대방 이름을 채팅방 상단에
         binding.chatUserName.setText(receiverName)
 
-        // 메시지 전송 버튼 이벤트
-        Log.d("messi", "7")
 
-
+        // 메시지 전송 이벤트
         binding.sendBtn.setOnClickListener{
             val message = binding.msgEdit.text.toString()
             val messsageObj = Message(message,senderUid.toString())
@@ -81,12 +72,10 @@ class ChatActivity:AppCompatActivity() {
                         .setValue(messsageObj)
                 }
 
-            // 전송 시 메시지 칸 클리어
+            // 전송 시 메시지 칸 초기화
             binding.msgEdit.setText("")
 
         }
-
-        Log.d("messi", "8")
 
         //메시지 가져오기
         mDbRef.child("chats").child(senderRoom).child("messages")
@@ -104,7 +93,6 @@ class ChatActivity:AppCompatActivity() {
 
 
                     Log.d("messi", messageList.toString())
-                    // 호출되면 화면에 메시지 내용을 보여준다.
                     messageAdapter.notifyDataSetChanged()
                     Log.d("msgsNotify", "end")
 

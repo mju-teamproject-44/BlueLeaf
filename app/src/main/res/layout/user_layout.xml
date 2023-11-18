@@ -14,7 +14,7 @@
         android:layout_height="140dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/background_radius_main_color"
+        android:background="@drawable/rounded_gradient_bg_chat_user"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="30sp"
