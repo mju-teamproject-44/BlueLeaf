@@ -37,21 +37,23 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
 
 
         // 각 게시판 노드에 대해 데이터 가져오기
-        getFBBoardData(FBRef.boardInfoRef, this)
-        getFBBoardData(FBRef.boardShowRef, this)
-        getFBBoardData(FBRef.boardTransRef, this)
-
+//        getFBBoardData(FBRef.boardInfoRef, this)
+//        getFBBoardData(FBRef.boardShowRef, this)
+//        getFBBoardData(FBRef.boardTransRef, this)
+        getFBBoardData(FBRef.boardRef,this)
 
         //searchBoardData(boardDataList)
         //initSearchView()
 
         binding.boardListView.setOnItemClickListener { parent, view, position, id ->
+            Log.d(TAG, "setONItemClickListener안입니다 -> \n$boardDataList")
             // 두 번째 방법 : Firebase에 있는 board에 대한 데이터의 id를 기반으로 다시 데이터를 받아오는 방법
             // activity 넘기기
             val intent = Intent(this, BoardInsideActivity::class.java)
             intent.putExtra("key", boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
             // 문제 있는 부분
-            intent.putExtra("boardCategory", "정보 게시판")
+//            Log.d(TAG, "intent로 넘겨주기 전 boardDataList[position].boardType 상태 -> ${boardDataList[position].boardType}")
+//            intent.putExtra("boardCategory", boardDataList[position].boardType)
             startActivity(intent)
 
         }
@@ -77,21 +79,22 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
         boardKeyList: MutableList<String>
     ) {
         // ui 업데이트 또는 추가 작업 수행
-        Log.d(TAG, "boardDataList의 상태(getFBBoardData로 담은 후) $boardDataList")
+        Log.d(TAG, "boardDataList의 상태(getFBBoardData로 담은 후) \n$boardDataList")
         // 기존 게시글 데이터 전체를 저장한다
         tempBoardDataList = boardDataList.map { it.copy() }
-        Log.d(TAG, "tempBoardDataList의 상태(getFBBoardData로 담은 후) $tempBoardDataList")
+        Log.d(TAG, "tempBoardDataList의 상태(getFBBoardData로 담은 후) \n$tempBoardDataList")
     }
 
     private fun searchBoardData(text: String) {
         Log.d(TAG, "searchBoardData 입니다 *$text*")
-        Log.d(TAG, "boardDataList의 상태 $boardDataList")
-        Log.d(TAG, "tempBoardDataList의 상태 $tempBoardDataList")
+        Log.d(TAG, "boardDataList의 상태 \n$boardDataList")
+        Log.d(TAG, "tempBoardDataList의 상태 \n$tempBoardDataList")
 
         // 탐색 결과로 나온 게시글을 담기 위해 기존 게시글 데이터 초기화
         boardDataList.clear()
-        Log.d(TAG, "boardDataList의 상태(clear후) $boardDataList")
-        Log.d(TAG, "tempBoardDataList의 상태(clear나온 후) $tempBoardDataList")
+        boardKeyList.clear()
+        Log.d(TAG, "boardDataList의 상태(clear후) \n$boardDataList")
+        Log.d(TAG, "tempBoardDataList의 상태(clear나온 후) \n$tempBoardDataList")
 
         // 문자 입력 X -> 모든 데이터를 보여준다
         if (text.isEmpty()) {
@@ -106,11 +109,12 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
                 if (searchBoardTitle(i, text)) {
                     Log.d(TAG, "i의 상태 ->$i")
                     boardDataList.add(i)
-                    Log.d(TAG, "boardDataList의 상태 $boardDataList")
+                    boardKeyList.add(i.key)
+                    Log.d(TAG, "boardDataList의 상태 \n$boardDataList")
                 }
             }
         }
-        Log.d(TAG, "[갱신 전] boardDataList의 상태 $boardDataList")
+        Log.d(TAG, "[갱신 전] boardDataList의 상태 \n$boardDataList")
 
         binding.searchResult.setText("${boardDataList.count()}개의 게시글이 검색되었습니다.")
         // 리스트 adapter 갱신
@@ -142,7 +146,7 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
                     boardKeyList.add(dataModel.key.toString())
                 }
 
-                Log.d(TAG, "boardDataList의 상태(GETFBBOARDDATA) $boardDataList")
+                Log.d(TAG, "boardDataList의 상태(GETFBBOARDDATA) \n$boardDataList")
 
                 // 최신 게시글이 맨 위로 오게 한다 -> adapter와 동기화 전 list reverse
                 // 최신 게시글이 맨 위로 오게 한다

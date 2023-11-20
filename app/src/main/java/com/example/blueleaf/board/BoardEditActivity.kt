@@ -28,10 +28,11 @@ class BoardEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardEditBinding
     private val TAG = BoardEditActivity::class.java.simpleName
     private lateinit var key: String
-    private lateinit var boardCategory:String
-    private lateinit var boardCategoryRef:DatabaseReference
+//    private lateinit var boardCategory: String
+//    private lateinit var boardCategoryRef: DatabaseReference
     private lateinit var writerUid: String
-    private lateinit var writerUsername : String
+    private lateinit var writerUsername: String
+    private lateinit var boardType: String
     private var isImageUpload = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,18 +42,20 @@ class BoardEditActivity : AppCompatActivity() {
         key = intent.getStringExtra("key").toString()
 
         // 게시판 유형도 전달받는다
-        boardCategory = intent.getStringExtra("boardCategory").toString()
-        when(boardCategory){
-            "정보 게시판"->{
-                boardCategoryRef = FBRef.boardInfoRef
-            }
-            "식물 자랑 게시판"->{
-                boardCategoryRef = FBRef.boardShowRef
-            }
-            "거래 게시판"->{
-                boardCategoryRef = FBRef.boardTransRef
-            }
-        }
+//        boardCategory = intent.getStringExtra("boardCategory").toString()
+//        when (boardCategory) {
+//            "정보 게시판" -> {
+//                boardCategoryRef = FBRef.boardInfoRef
+//            }
+//
+//            "식물 자랑 게시판" -> {
+//                boardCategoryRef = FBRef.boardShowRef
+//            }
+//
+//            "거래 게시판" -> {
+//                boardCategoryRef = FBRef.boardTransRef
+//            }
+//        }
 
         getBoardData(key)
         getImageData(key)
@@ -67,7 +70,7 @@ class BoardEditActivity : AppCompatActivity() {
     }
 
     private fun editBoardData(key: String) {
-        boardCategoryRef
+        FBRef.boardRef
             .child(key)
             .setValue(
                 BoardModel(
@@ -76,8 +79,9 @@ class BoardEditActivity : AppCompatActivity() {
                     binding.contentArea.text.toString(),
                     writerUid,
                     writerUsername,
-                    FBAuth.getTime()
-                )
+                    FBAuth.getTime(),
+                    boardType
+                    )
             )
 
         if (isImageUpload == true) {
@@ -100,6 +104,7 @@ class BoardEditActivity : AppCompatActivity() {
                 binding.contentArea.setText(dataModel?.content)
                 writerUid = dataModel!!.uid
                 writerUsername = dataModel!!.username
+                boardType = dataModel.boardType
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -108,7 +113,7 @@ class BoardEditActivity : AppCompatActivity() {
             }
         }
 
-        boardCategoryRef.child(key).addValueEventListener(postListener)
+        FBRef.boardRef.child(key).addValueEventListener(postListener)
     }
 
     private fun getImageData(key: String) {

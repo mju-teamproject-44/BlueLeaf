@@ -49,7 +49,7 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 //        image!!.setImageURI(boardList[position].image)
 
         // Reference to an image file in Cloud Storage
-        val storageReference = FBRef.storageRef.child("board").child(boardList[position].image + ".png")
+        val storageReference = FBRef.storageRef.child("board").child(boardList[position].key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = cvView?.findViewById<ImageView>(R.id.imageArea)

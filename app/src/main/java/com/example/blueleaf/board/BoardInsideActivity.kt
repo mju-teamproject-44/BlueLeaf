@@ -34,8 +34,8 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardInsideBinding
 
     private lateinit var key: String
-    private lateinit var boardCategory:String
-    private lateinit var boardCategoryRef: DatabaseReference
+//    private lateinit var boardCategory:String
+//    private lateinit var boardCategoryRef: DatabaseReference
 
     private val commentDataList = mutableListOf<CommentModel>()
     private lateinit var commentAdapter: CommentLVAdapter
@@ -86,19 +86,20 @@ class BoardInsideActivity : AppCompatActivity() {
         // 두 번째 방법으로 게시판 내용 전달 받기(key값 하나만 전달받음)
         key = intent.getStringExtra("key").toString()
 
-        // 게시판 유형도 전달받는다
-        boardCategory = intent.getStringExtra("boardCategory").toString()
-        when(boardCategory){
-            "정보 게시판"->{
-                boardCategoryRef = FBRef.boardInfoRef
-            }
-            "식물 자랑 게시판"->{
-                boardCategoryRef = FBRef.boardShowRef
-            }
-            "거래 게시판"->{
-                boardCategoryRef = FBRef.boardTransRef
-            }
-        }
+//        // 게시판 유형도 전달받는다
+//        boardCategory = intent.getStringExtra("boardCategory").toString()
+//
+//        when(boardCategory){
+//            "정보 게시판"->{
+//                boardCategoryRef = FBRef.boardInfoRef
+//            }
+//            "식물 자랑 게시판"->{
+//                boardCategoryRef = FBRef.boardShowRef
+//            }
+//            "거래 게시판"->{
+//                boardCategoryRef = FBRef.boardTransRef
+//            }
+//        }
 
         getBoardData(key)
         getImageData(key)
@@ -174,11 +175,11 @@ class BoardInsideActivity : AppCompatActivity() {
             Toast.makeText(this, "editBtnClick", Toast.LENGTH_LONG).show()
             val intent = Intent(this, BoardEditActivity::class.java)
             intent.putExtra("key", key)
-            intent.putExtra("boardCategory",boardCategory)
+//            intent.putExtra("boardCategory",boardCategory)
             startActivity(intent)
         }
         alertDialog.findViewById<Button>(R.id.removeBtn)?.setOnClickListener {
-            boardCategoryRef.child(key).removeValue() //
+            FBRef.boardRef.child(key).removeValue() //
             Toast.makeText(this, "삭제 완료", Toast.LENGTH_LONG).show()
             finish()
         }
@@ -198,6 +199,7 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.contentArea.text = dataModel!!.content
                     binding.timeArea.text = dataModel!!.time
                     binding.usernameArea.text = dataModel!!.username
+                    binding.boardTypeArea.text = dataModel!!.boardType
 
                     val myUid = FBAuth.getUid()
                     val writerUid = dataModel.uid
@@ -224,7 +226,7 @@ class BoardInsideActivity : AppCompatActivity() {
         }
 
 
-        boardCategoryRef.child(key).addValueEventListener(postListener)
+        FBRef.boardRef.child(key).addValueEventListener(postListener)
     }
 
     private fun getImageData(key: String) {
