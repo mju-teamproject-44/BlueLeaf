@@ -19,9 +19,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.blueleaf.MainActivity
 import com.example.blueleaf.R
 import com.example.blueleaf.contentsList.UserModel
 import com.example.blueleaf.databinding.FragmentHomeBinding
+import com.example.blueleaf.plantManage.PlantManageActivity
 import com.example.blueleaf.setting.SettingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -103,6 +105,14 @@ class HomeFragment : Fragment() {
            Toast.makeText(context, "사용자 정보를 불러오는데 실패했습니다.", Toast.LENGTH_LONG).show()
            Log.e("Error", e.message.toString())
        }
+
+        //임시
+        binding.homePlantFirstAddButton.setOnClickListener{
+            activity?.let{
+                val plantManageIntent = Intent(context, PlantManageActivity::class.java)
+                startActivity(plantManageIntent)
+            }
+        }
 
 
         //* Profile image (Jinhyun)
