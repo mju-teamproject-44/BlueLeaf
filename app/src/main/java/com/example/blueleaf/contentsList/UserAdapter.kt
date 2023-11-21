@@ -1,32 +1,31 @@
 package com.example.blueleaf.contentsList
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.LinearGradient
-import android.os.health.UidHealthStats
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
 import com.example.blueleaf.chat.Anony_dialog
 import com.example.blueleaf.chat.ChatActivity
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
-import com.google.firebase.database.ktx.snapshots
-import com.google.firebase.database.ktx.values
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class UserAdapter(val context: Context, private val userList: MutableList<UserModel>):
+class UserAdapter(val context: Context, private var userList: MutableList<UserModel>):
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
+    fun setFilteredList(userList: MutableList<UserModel>){
+        this.userList = userList
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.user_layout,parent,false)
         Log.d("hola", "1")

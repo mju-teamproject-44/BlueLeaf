@@ -4,71 +4,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.BookmarkFragment">
+        tools:context=".fragments.BookmarkFragment"
+        android:orientation="vertical"
+        >
 
+        <androidx.appcompat.widget.SearchView
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/user_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            app:iconifiedByDefault="false"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                app:layout_constraintBottom_toTopOf="@+id/user_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:weightSum="9"
-                >
-
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="140dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/bmdohyeon"
-                    android:gravity="center"
-                    android:text="Chats"
-                    android:textColor="@color/black"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/serach_user"
-                    android:layout_weight="2"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/rounded_corner_user"
-                    android:hint="Enter Uesr"
-                    android:textColorHint="@color/white"
-                    android:textAlignment="center"
-                    android:layout_marginVertical="8dp"
-                    />
-
-                <LinearLayout
-                    android:layout_weight="5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    >
-
-                    <ImageView
-                        android:id="@+id/serach_image"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="35dp"
-                        android:layout_height = "wrap_content"
-                        android:src="@drawable/search"
-                        android:layout_marginRight="20dp"
-                        />
-                    <ImageView
-                        android:id="@+id/refresh_image"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/refresh"
-                        />
-
-                </LinearLayout>
-
-
-
-
-            </LinearLayout>
+            android:layout_height="662dp">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -77,7 +34,6 @@
                 android:layout_height="610dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 tools:listitem="@layout/user_layout">
-
             </androidx.recyclerview.widget.RecyclerView>
 
 
@@ -163,5 +119,5 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </LinearLayout>
 </layout>
