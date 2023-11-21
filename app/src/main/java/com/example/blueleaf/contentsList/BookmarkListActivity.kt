@@ -1,23 +1,11 @@
 package com.example.blueleaf.contentsList
 
-import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DatabaseReference
 import com.example.blueleaf.R
-import com.example.blueleaf.databinding.ActivityBoardEditBinding
-import com.example.blueleaf.databinding.ActivityBookmarkListBinding
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.google.firebase.database.DataSnapshot
@@ -30,6 +18,7 @@ class BookmarkListActivity: AppCompatActivity() {
     val items = mutableListOf<ContentModel>()
     val itemKeyList = mutableListOf<String>()
     lateinit var rvAdapter: BookmarkRVAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
