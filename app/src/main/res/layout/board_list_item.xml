@@ -8,8 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="6dp">
+        android:layout_margin="6dp"
+        app:cardCornerRadius="30dp">
 
         <LinearLayout
             android:id="@+id/itemView"
@@ -20,8 +20,9 @@
             <ImageView
                 android:id="@+id/imageArea"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent" />
+                android:layout_height="150dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/titleArea"
@@ -61,18 +62,29 @@
                 android:textColor="#999999"
                 android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/usernameArea"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="20dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/korail_round_gothic_light"
                 android:gravity="right"
-                android:text="username"
-                android:textColor="#999999"
-                android:textSize="10sp" />
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:src="@color/black"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:id="@+id/usernameArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/korail_round_gothic_light"
+                    android:gravity="center"
+                    android:text="username"
+                    android:textColor="#999999"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

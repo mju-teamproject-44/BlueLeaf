@@ -29,9 +29,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
     private val TAG = BoardWriteActivity::class.java.simpleName
     private lateinit var key: String
-    private lateinit var image: String
     private var isImageUpload = false
-
     private lateinit var selectedBoard: String
 
     val database = Firebase.database.reference
@@ -92,29 +90,33 @@ class BoardWriteActivity : AppCompatActivity() {
             // 이미지 이름을 문서의 key값으로 해줘서 이미지에 대한 정보를 찾기 쉽게 해놓음
 
             // key값 설정
-            when (selectedBoard) {
-                "정보 게시판" -> {
-                    key = FBRef.boardInfoRef.push().key.toString()
-                    image = key
-                    FBRef.boardInfoRef
-                        .child(key)
-                        .setValue(BoardModel(image,title,content,uid,username,time))
-                }
-                "식물 자랑 게시판" -> {
-                    key = FBRef.boardShowRef.push().key.toString()
-                    image = key
-                    FBRef.boardShowRef
-                        .child(key)
-                        .setValue(BoardModel(image,title,content,uid,username,time))
-                }
-                "거래 게시판" -> {
-                    key = FBRef.boardTransRef.push().key.toString()
-                    image = key
-                    FBRef.boardTransRef
-                        .child(key)
-                        .setValue(BoardModel(image,title,content,uid,username,time))
-                }
-            }
+            key = FBRef.boardRef.push().key.toString()
+            FBRef.boardRef
+                .child(key)
+                .setValue(BoardModel(key,title,content,uid,username,time,selectedBoard))
+//            when (selectedBoard) {
+//                "정보 게시판" -> {
+//                    key = FBRef.boardInfoRef.push().key.toString()
+//                    image = key
+//                    FBRef.boardInfoRef
+//                        .child(key)
+//                        .setValue(BoardModel(image,title,content,uid,username,time, selectedBoard))
+//                }
+//                "식물 자랑 게시판" -> {
+//                    key = FBRef.boardShowRef.push().key.toString()
+//                    image = key
+//                    FBRef.boardShowRef
+//                        .child(key)
+//                        .setValue(BoardModel(image,title,content,uid,username,time,selectedBoard))
+//                }
+//                "거래 게시판" -> {
+//                    key = FBRef.boardTransRef.push().key.toString()
+//                    image = key
+//                    FBRef.boardTransRef
+//                        .child(key)
+//                        .setValue(BoardModel(image,title,content,uid,username,time,selectedBoard))
+//                }
+//            }
 
             Toast.makeText(this, "게시글 입력 완료", Toast.LENGTH_LONG).show()
 

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.BlueLeaf"
         tools:targetApi="31">
         <activity
+            android:name=".board.BoardSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".plantManage.PlantManageActivity"
             android:exported="false" />
         <activity

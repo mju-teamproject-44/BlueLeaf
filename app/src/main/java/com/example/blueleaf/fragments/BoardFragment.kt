@@ -16,6 +16,7 @@ import com.example.blueleaf.board.BoardInformationFragment
 import com.example.blueleaf.board.BoardInsideActivity
 import com.example.blueleaf.board.BoardListLVAdapter
 import com.example.blueleaf.board.BoardModel
+import com.example.blueleaf.board.BoardSearchActivity
 import com.example.blueleaf.board.BoardShowFragment
 import com.example.blueleaf.board.BoardTransFragment
 import com.example.blueleaf.board.BoardWriteActivity
@@ -54,6 +55,10 @@ class BoardFragment : Fragment() {
 
         initViewPager()
 
+        binding.searchBtn.setOnClickListener(){
+            val intent = Intent(context, BoardSearchActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.writeBtn.setOnClickListener() {
             val intent = Intent(context, BoardWriteActivity::class.java)
