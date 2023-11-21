@@ -1,13 +1,12 @@
 package com.example.blueleaf.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,30 +15,29 @@ import com.example.blueleaf.contentsList.UserAdapter
 import com.example.blueleaf.contentsList.UserModel
 import com.example.blueleaf.databinding.FragmentBookmarkBinding
 import com.example.blueleaf.utils.FBAuth
-import com.example.blueleaf.utils.FBRef
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.core.Context
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.tasks.await
+import java.util.Locale
 
 
 class BookmarkFragment : Fragment() {
 
     lateinit var binding: FragmentBookmarkBinding
     lateinit var adapter: UserAdapter
+    lateinit var userList: MutableList<UserModel>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentBookmarkBinding.inflate(layoutInflater)
         val database = Firebase.database
         val myRef = database.getReference("users")
-        var userList: MutableList<UserModel>
+        // var userList: MutableList<UserModel>
+
+
         userList = mutableListOf()
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -72,6 +70,23 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
+
+        binding.userSearchView.clearFocus()
+        binding.userSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                filterList(newText.toString())
+                return true
+            }
+
+        })
+
+
         binding.homeTab.setOnClickListener() {
             it.findNavController().navigate(R.id.action_bookmarkFragment_to_homeFragment)
         }
@@ -89,6 +104,23 @@ class BookmarkFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun filterList(query : String){
+        if(query != null) {
+            val filteredList = mutableListOf<UserModel>()
+            for (i in userList) {
+                if (i.userName?.lowercase(Locale.ROOT)!!.contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()){
+                //Toast.makeText(this,"wef","wef")
+            } else{
+                adapter.setFilteredList(filteredList)
+            }
+        }
     }
 
 
