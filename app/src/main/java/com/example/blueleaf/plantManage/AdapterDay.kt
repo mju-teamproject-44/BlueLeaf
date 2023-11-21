@@ -3,6 +3,7 @@ package com.example.blueleaf.plantManage
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
@@ -22,6 +23,11 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>): RecyclerVi
     override fun onBindViewHolder(holder: DayView, position: Int) {
         holder.binding.itemDayLayout.setOnClickListener{
             Toast.makeText(holder.itemView.context, "${dayList[position]}", Toast.LENGTH_SHORT).show()
+            if(holder.binding.itemDayIconWater.visibility == ImageView.GONE){
+                holder.binding.itemDayIconWater.visibility = ImageView.VISIBLE
+            } else {
+                holder.binding.itemDayIconWater.visibility = ImageView.GONE
+            }
         }
         holder.binding.itemDayText.text = dayList[position].date.toString()
 

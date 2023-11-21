@@ -18,6 +18,7 @@
         android:textSize="16sp"
         android:fontFamily="@font/korail_round_gothic_medium"
 
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -25,6 +26,21 @@
         android:layout_height="wrap_content">
     </TextView>
 
+    <ImageView
+        android:id="@+id/item_day_icon_water"
+
+        android:src="@drawable/manage_icon_water"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toBottomOf="@id/item_day_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_marginTop="15dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
 <!--    <ImageView-->
 <!--        android:src="@drawable/home_chevron_left"-->
 

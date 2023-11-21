@@ -19,11 +19,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.blueleaf.MainActivity
+import com.example.blueleaf.Plant
 import com.example.blueleaf.R
 import com.example.blueleaf.contentsList.UserModel
 import com.example.blueleaf.databinding.FragmentHomeBinding
+import com.example.blueleaf.plantManage.NoPlantManageActivity
 import com.example.blueleaf.plantManage.PlantManageActivity
+import com.example.blueleaf.plantManage.PlantModel
 import com.example.blueleaf.setting.SettingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -34,11 +36,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class HomeFragment : Fragment() {
@@ -47,6 +44,11 @@ class HomeFragment : Fragment() {
     //Database Reference
     private lateinit var database : DatabaseReference
     private lateinit var uri: Uri
+
+    //Plant Manage
+    private val plantDataList = mutableListOf<PlantModel>()
+    private val plantKeyList = mutableListOf<String>()
+    private var plantsize: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,7 @@ class HomeFragment : Fragment() {
         database = Firebase.database.reference
         val userUID = Firebase.auth.currentUser?.uid
         val userRef = database.child("users").child(userUID!!)
+        val plantManageRef = database.child("plantManage").child(userUID!!)
 
         val userDataListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -79,6 +82,34 @@ class HomeFragment : Fragment() {
         }
         userRef.addValueEventListener(userDataListener)
 
+        plantManageRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (data in snapshot.children){
+                    Log.d("PlantModel", data.toString())
+                    val plantItem = data.getValue(PlantModel::class.java)
+                    plantDataList.add(plantItem!!)
+                    plantKeyList.add(data.key.toString())
+                    plantsize++
+                }
+
+                for (i: Int in 0..<plantsize){
+                    when(i){
+                        0 -> {
+                            binding.homePlantFirstAddButton.visibility = ImageView.GONE
+                            binding.homePlantFirstTextView.visibility = ImageView.VISIBLE
+                            binding.homePlantFirstTextView.text = plantDataList[i].name
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+
+
+
        try {
            // #3. Details - Display UserName & Email
            if (userUID == null) {
@@ -91,13 +122,21 @@ class HomeFragment : Fragment() {
            // #4. Details - Editing UserName
            binding.homeEditImageView.setOnClickListener {
                setEditMode(true)
+               binding.homeUsernameEditText.setOnEditorActionListener{v, actionId, event ->
+                   //Edit Local
+                   val newUserName: String = binding.homeUsernameEditText.text.toString()
+                   setUserData(newUserName)
+                   //Edit Database
+                   database.child("users").child(userUID!!).child("userName").setValue(newUserName)
+                   setEditMode(false)
+                   false
+               }
                binding.homeSaveImageView.setOnClickListener {
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
                    setUserData(newUserName)
                    //Edit Database
                    database.child("users").child(userUID!!).child("userName").setValue(newUserName)
-
                    setEditMode(false)
                }
            }
@@ -109,7 +148,16 @@ class HomeFragment : Fragment() {
         //임시
         binding.homePlantFirstAddButton.setOnClickListener{
             activity?.let{
+                val noPlantManageIntent = Intent(context, NoPlantManageActivity::class.java)
+            startActivity(noPlantManageIntent)
+            //startActivity(plantManageIntent)
+            }
+        }
+
+        binding.homePlantFirstTextView.setOnClickListener{
+            activity?.let{
                 val plantManageIntent = Intent(context, PlantManageActivity::class.java)
+                plantManageIntent.putExtra("key", plantKeyList[0])
                 startActivity(plantManageIntent)
             }
         }
