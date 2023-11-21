@@ -16,6 +16,12 @@
         android:theme="@style/Theme.BlueLeaf"
         tools:targetApi="31">
         <activity
+            android:name=".plantManage.PlantManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plantManage.NoPlantManageActivity"
+            android:exported="false" />
+        <activity
             android:name=".setting.SettingActivity"
             android:exported="false" />
         <activity
@@ -50,6 +56,9 @@
             android:exported="false" />
         <activity
             android:name=".chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.Anony_dialog"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

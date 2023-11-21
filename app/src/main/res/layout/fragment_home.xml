@@ -193,6 +193,8 @@
                     android:layout_width="350dp"
                     android:layout_height="99dp">
                     <ImageView
+                        android:id="@+id/homePlantFirstAddButton"
+
                         android:src="@drawable/home_plant_add_button"
 
                         android:visibility="visible"
@@ -203,6 +205,20 @@
                         android:layout_width="116dp"
                         android:layout_height="match_parent">
                     </ImageView>
+                    <TextView
+                        android:id="@+id/homePlantFirstTextView"
+
+                        android:text="식물"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/korail_round_gothic_medium"
+
+                        android:gravity=""
+                        android:visibility="gone"
+
+                        android:layout_width="116dp"
+                        android:layout_height="match_parent">
+                    </TextView>
                     <ImageView
                         android:src="@drawable/home_vertical_long_line"
 
