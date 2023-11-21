@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blueleaf.databinding.ActivityPlantManageBinding
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -33,7 +34,6 @@ class PlantManageActivity : AppCompatActivity() {
 
         key = intent.getStringExtra("key").toString()
         database = Firebase.database.reference
-        val db = Firebase.database
         val userUID = Firebase.auth.currentUser?.uid
         val plantRef = database.child("plantManage").child(userUID!!).child(key)
         Log.d("key", key)
@@ -66,6 +66,15 @@ class PlantManageActivity : AppCompatActivity() {
 
         //좌 상단 뒤로가기 버튼
         binding.plantManageBackImageView.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        //임시로 식물 삭제 설정(수정 예정)
+        binding.plantManageMorePlantImageView.setOnClickListener{
+            plantRef.removeValue()
+            Toast.makeText(this, "식물 삭제 완료", Toast.LENGTH_SHORT).show()
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
