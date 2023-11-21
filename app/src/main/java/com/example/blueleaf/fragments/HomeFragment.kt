@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
     //Plant Manage
     private val plantDataList = mutableListOf<PlantModel>()
     private val plantKeyList = mutableListOf<String>()
-    private var plantsize: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,15 +88,29 @@ class HomeFragment : Fragment() {
                     val plantItem = data.getValue(PlantModel::class.java)
                     plantDataList.add(plantItem!!)
                     plantKeyList.add(data.key.toString())
-                    plantsize++
                 }
 
-                for (i: Int in 0..<plantsize){
+                for (i: Int in 0..2){
+                    if(i >= plantKeyList.size)
+                        break
+
                     when(i){
                         0 -> {
                             binding.homePlantFirstAddButton.visibility = ImageView.GONE
-                            binding.homePlantFirstTextView.visibility = ImageView.VISIBLE
+                            binding.homePlantFirstTextView.visibility = TextView.VISIBLE
                             binding.homePlantFirstTextView.text = plantDataList[i].name
+                            binding.homePlantSecondAddButton.visibility = ImageView.VISIBLE
+                        }
+                        1 -> {
+                            binding.homePlantSecondAddButton.visibility = ImageView.GONE
+                            binding.homePlantSecondTextView.visibility = TextView.VISIBLE
+                            binding.homePlantSecondTextView.text = plantDataList[i].name
+                            binding.homePlantThirdAddButton.visibility = ImageView.VISIBLE
+                        }
+                        2 -> {
+                            binding.homePlantThirdAddButton.visibility = ImageView.GONE
+                            binding.homePlantThirdTextView.visibility = TextView.VISIBLE
+                            binding.homePlantThirdTextView.text = plantDataList[i].name
                         }
                     }
                 }
@@ -145,23 +158,44 @@ class HomeFragment : Fragment() {
            Log.e("Error", e.message.toString())
        }
 
-        //임시
-        binding.homePlantFirstAddButton.setOnClickListener{
+        binding.homePlantFirst.setOnClickListener{
             activity?.let{
-                val noPlantManageIntent = Intent(context, NoPlantManageActivity::class.java)
-            startActivity(noPlantManageIntent)
-            //startActivity(plantManageIntent)
+                var intent: Intent
+                if(plantKeyList.size < 1){
+                    intent = Intent(context, NoPlantManageActivity::class.java)
+                } else{
+                    intent = Intent(context, PlantManageActivity::class.java)
+                    intent.putExtra("key", plantKeyList[0])
+                }
+                startActivity(intent)
             }
         }
 
-        binding.homePlantFirstTextView.setOnClickListener{
+        binding.homePlantSecond.setOnClickListener{
             activity?.let{
-                val plantManageIntent = Intent(context, PlantManageActivity::class.java)
-                plantManageIntent.putExtra("key", plantKeyList[0])
-                startActivity(plantManageIntent)
+                var intent: Intent
+                if(plantKeyList.size < 2){
+                    intent = Intent(context, NoPlantManageActivity::class.java)
+                } else{
+                    intent = Intent(context, PlantManageActivity::class.java)
+                    intent.putExtra("key", plantKeyList[1])
+                }
+                startActivity(intent)
             }
         }
 
+        binding.homePlantThird.setOnClickListener{
+            activity?.let{
+                var intent: Intent
+                if(plantKeyList.size < 3){
+                    intent = Intent(context, NoPlantManageActivity::class.java)
+                } else{
+                    intent = Intent(context, PlantManageActivity::class.java)
+                    intent.putExtra("key", plantKeyList[2])
+                }
+                startActivity(intent)
+            }
+        }
 
         //* Profile image (Jinhyun)
         binding.homeProfileImageView.setOnClickListener{
