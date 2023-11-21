@@ -29,6 +29,108 @@
 
         </androidx.appcompat.widget.SearchView>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <TextView
+                android:id="@+id/difficultyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="11dp"
+                android:stateListAnimator="@null"
+                android:text="난이도"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/temperatureButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="11dp"
+                android:stateListAnimator="@null"
+                android:text="온도"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/humidityButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="11dp"
+                android:stateListAnimator="@null"
+                android:text="습도"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/seasonButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="11dp"
+                android:stateListAnimator="@null"
+                android:text="계절"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/nameButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="7dp"
+                android:stateListAnimator="@null"
+                android:src="@drawable/baseline_cached_24"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -125,7 +227,9 @@
 
             </LinearLayout>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
 </layout>
