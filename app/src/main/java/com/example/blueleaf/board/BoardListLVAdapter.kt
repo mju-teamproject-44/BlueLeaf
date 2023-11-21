@@ -84,7 +84,7 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
         time!!.text = boardList[position].time
 
         // 사용자의 프로필 이미지 연결
-        val userUID = Firebase.auth.currentUser?.uid
+        val userUID = boardList[position].uid
         val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
         val profileImage = cvView.findViewById<CircleImageView>(R.id.profileImage)
         storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->

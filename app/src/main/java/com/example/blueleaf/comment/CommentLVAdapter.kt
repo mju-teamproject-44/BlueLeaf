@@ -52,7 +52,8 @@ class CommentLVAdapter(val commentList: MutableList<CommentModel>): BaseAdapter(
         time!!.text = commentList[position].commentCreatedTime
 
         // 사용자의 프로필 이미지 연결
-        val userUID = Firebase.auth.currentUser?.uid
+//        val userUID = Firebase.auth.currentUser?.uid
+        val userUID = commentList[position].commentWriterUID
         val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
         val profileImage = cvView?.findViewById<CircleImageView>(R.id.profileImage)
         storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->

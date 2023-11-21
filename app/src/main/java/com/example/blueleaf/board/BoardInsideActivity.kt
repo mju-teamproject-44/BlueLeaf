@@ -36,6 +36,7 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardInsideBinding
 
     private lateinit var key: String
+    private lateinit var writerUid: String
 //    private lateinit var boardCategory:String
 //    private lateinit var boardCategoryRef: DatabaseReference
 
@@ -105,7 +106,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         getBoardData(key)
         getImageData(key)
-        getProfileImage()
+//        getProfileImage()
 
 
         commentAdapter = CommentLVAdapter(commentDataList)
@@ -120,7 +121,7 @@ class BoardInsideActivity : AppCompatActivity() {
     }
 
 
-    fun getCommentData(key:String) {
+    fun getCommentData(key: String) {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
@@ -157,7 +158,8 @@ class BoardInsideActivity : AppCompatActivity() {
                 CommentModel(
                     binding.commentArea.text.toString(),
                     commentWriter,
-                    FBAuth.getTime()
+                    FBAuth.getTime(),
+                    FBAuth.getUid()
                 )
 
             )
@@ -204,8 +206,8 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.boardTypeArea.text = dataModel!!.boardType
 
                     val myUid = FBAuth.getUid()
-                    val writerUid = dataModel.uid
-
+                    writerUid = dataModel.uid
+                    getProfileImage(writerUid)
                     if (myUid.equals(writerUid)) {
                         Toast.makeText(baseContext, "글쓴이 O", Toast.LENGTH_LONG).show()
                         binding.boardSettingIcon.isVisible = true
@@ -249,9 +251,10 @@ class BoardInsideActivity : AppCompatActivity() {
         })
     }
 
-    private fun getProfileImage(){
+    private fun getProfileImage(writerUid:String) {
         val userUID = Firebase.auth.currentUser?.uid
-        val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
+        val storageProfileRef =
+            FBRef.storageRef.child("profileImage").child(writerUid).child("profileImage.png")
         val profileImage = binding.profileImage
         storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
