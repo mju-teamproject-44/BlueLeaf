@@ -19,6 +19,7 @@ import com.example.blueleaf.databinding.ActivityBoardInsideBinding
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -26,6 +27,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import de.hdodenhof.circleimageview.CircleImageView
 
 class BoardInsideActivity : AppCompatActivity() {
 
@@ -103,7 +105,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         getBoardData(key)
         getImageData(key)
-
+        getProfileImage()
 
 
         commentAdapter = CommentLVAdapter(commentDataList)
@@ -243,6 +245,23 @@ class BoardInsideActivity : AppCompatActivity() {
                     .into(imageViewFromFB)
             } else {
                 binding.getImageArea.isVisible = false
+            }
+        })
+    }
+
+    private fun getProfileImage(){
+        val userUID = Firebase.auth.currentUser?.uid
+        val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
+        val profileImage = binding.profileImage
+        storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                if (profileImage != null) {
+                    Glide.with(this)
+                        .load(task.result)
+                        .into(profileImage)
+                }
+            } else {
+                profileImage!!.isVisible = false
             }
         })
     }

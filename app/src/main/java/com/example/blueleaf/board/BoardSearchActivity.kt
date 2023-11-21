@@ -37,13 +37,7 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
 
 
         // 각 게시판 노드에 대해 데이터 가져오기
-//        getFBBoardData(FBRef.boardInfoRef, this)
-//        getFBBoardData(FBRef.boardShowRef, this)
-//        getFBBoardData(FBRef.boardTransRef, this)
         getFBBoardData(FBRef.boardRef,this)
-
-        //searchBoardData(boardDataList)
-        //initSearchView()
 
         binding.boardListView.setOnItemClickListener { parent, view, position, id ->
             Log.d(TAG, "setONItemClickListener안입니다 -> \n$boardDataList")
@@ -51,18 +45,14 @@ class BoardSearchActivity : AppCompatActivity(), BoardDataCallback {
             // activity 넘기기
             val intent = Intent(this, BoardInsideActivity::class.java)
             intent.putExtra("key", boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
-            // 문제 있는 부분
-//            Log.d(TAG, "intent로 넘겨주기 전 boardDataList[position].boardType 상태 -> ${boardDataList[position].boardType}")
-//            intent.putExtra("boardCategory", boardDataList[position].boardType)
             startActivity(intent)
 
         }
 
         //searchView 관련
-        binding.boardSearchView.isSubmitButtonEnabled = true
         binding.boardSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-//                searchBoardData(query)
+                searchBoardData(query)
                 return false
             }
 

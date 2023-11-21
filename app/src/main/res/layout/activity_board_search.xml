@@ -9,31 +9,27 @@
         android:orientation="vertical"
         tools:context=".board.BoardSearchActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_marginTop="20dp"
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_margin="20dp"
+            android:id="@+id/boardSearchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/boardSearchView"
-                app:queryHint="검색어를 입력하시오"
-                app:queryBackground="@drawable/background_radius_gray"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@drawable/background_radius_gray"
+            app:queryHint="검색어를 입력하시오" />
 
 
         <TextView
-            android:layout_margin="20dp"
             android:id="@+id/searchResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/korail_round_gothic_medium"
             android:gravity="center"
             android:text="게시글 전체 목록"
-            android:textSize="20dp"
             android:textColor="@color/black"
-            android:fontFamily="@font/korail_round_gothic_medium"/>
+            android:textSize="20dp" />
 
         <ListView
             android:id="@+id/boardListView"
