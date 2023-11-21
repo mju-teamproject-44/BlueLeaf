@@ -192,17 +192,41 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="350dp"
                     android:layout_height="99dp">
-                    <ImageView
-                        android:src="@drawable/home_plant_add_button"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homePlantFirst"
+                        android:layout_width="115dp"
+                        android:layout_height="99dp">
 
-                        android:visibility="visible"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:scaleType="center"
+                        <ImageView
+                            android:id="@+id/homePlantFirstAddButton"
 
-                        android:layout_width="116dp"
-                        android:layout_height="match_parent">
-                    </ImageView>
+                            android:src="@drawable/home_plant_add_button"
+
+                            android:visibility="visible"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:scaleType="center"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                        <TextView
+                            android:id="@+id/homePlantFirstTextView"
+
+                            android:text="식물 이름"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/korail_round_gothic_medium"
+                            android:visibility="gone"
+
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <ImageView
                         android:src="@drawable/home_vertical_long_line"
 
@@ -211,17 +235,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </ImageView>
-                    <ImageView
-                        android:src="@drawable/home_plant_add_button"
 
-                        android:visibility="invisible"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:scaleType="center"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homePlantSecond"
+                        android:layout_width="115dp"
+                        android:layout_height="99dp">
 
-                        android:layout_width="116dp"
-                        android:layout_height="match_parent">
-                    </ImageView>
+                        <ImageView
+                            android:id="@+id/homePlantSecondAddButton"
+
+                            android:src="@drawable/home_plant_add_button"
+
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:scaleType="center"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                        <TextView
+                            android:id="@+id/homePlantSecondTextView"
+
+                            android:text="식물 이름"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/korail_round_gothic_medium"
+                            android:visibility="gone"
+
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <ImageView
                         android:src="@drawable/home_vertical_long_line"
 
@@ -230,17 +279,43 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </ImageView>
-                    <ImageView
-                        android:src="@drawable/home_plant_add_button"
 
-                        android:visibility="invisible"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:scaleType="center"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homePlantThird"
+                        android:layout_width="115dp"
+                        android:layout_height="99dp">
 
-                        android:layout_width="116dp"
-                        android:layout_height="match_parent">
-                    </ImageView>
+                        <ImageView
+                            android:id="@+id/homePlantThirdAddButton"
+
+                            android:src="@drawable/home_plant_add_button"
+
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:scaleType="center"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                        <TextView
+                            android:id="@+id/homePlantThirdTextView"
+
+                            android:text="식물 이름"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/korail_round_gothic_medium"
+                            android:visibility="gone"
+
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                 </LinearLayout>
 
                 <ImageView

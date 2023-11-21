@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".plantManage.NoPlantManageActivity">
+
+    <ImageView
+        android:id="@+id/noPlantManageBackImageView"
+
+        android:src="@drawable/manage_left"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="41dp"
+
+        android:layout_width="24dp"
+        android:layout_height="24dp">
+    </ImageView>
+
+    <TextView
+        android:text="식물을 추가해보세요"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/korail_round_gothic_medium"
+
+        android:gravity="center"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="63dp"
+
+        android:layout_width="161dp"
+        android:layout_height="19dp">
+    </TextView>
+
+    <ImageView
+        android:src="@drawable/manage_icon_1"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginTop="272dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
+
+    <TextView
+        android:text="아직 등록된 식물이 없습니다"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/korail_round_gothic_medium"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="427dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+    
+    <TextView
+        android:text="새로운 식물을 추가하여\n편리하게 식물을 관리해 보세요!"
+        android:textSize="16sp"
+        android:textColor="#6E6E6E"
+        android:fontFamily="@font/korail_round_gothic_light"
+
+        android:gravity="center"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="468dp"
+
+        android:layout_width="231dp"
+        android:layout_height="34dp">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/noPlantManageAddPlantImageView"
+
+        android:src="@drawable/manage_rectangle"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_marginTop="585.5dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
+    
+    <TextView
+        android:text="첫 식물 추가하기"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/korail_round_gothic_bold"
+
+        app:layout_constraintTop_toTopOf="@id/noPlantManageAddPlantImageView"
+        app:layout_constraintBottom_toBottomOf="@id/noPlantManageAddPlantImageView"
+        app:layout_constraintLeft_toLeftOf="@id/noPlantManageAddPlantImageView"
+        app:layout_constraintRight_toRightOf="@id/noPlantManageAddPlantImageView"
+
+        android:gravity="center"
+
+        android:layout_width="151dp"
+        android:layout_height="21dp">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

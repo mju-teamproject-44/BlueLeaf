@@ -15,7 +15,6 @@ class DetailPlantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPlantBinding.inflate(layoutInflater) // 뷰 바인딩 초기화
         setContentView(binding.root) // 뷰 바인딩을 활용하여 레이아웃 설정
-        //setContentView(R.layout.activity_detail_plant)
         val testdata = getJsonData("plant.json")
 
         val plantData = intent.getSerializableExtra("plantData") as Plant
