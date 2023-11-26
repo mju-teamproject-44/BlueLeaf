@@ -1,5 +1,6 @@
 package com.example.blueleaf.fragments
 
+import WaterDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -108,9 +109,11 @@ class PlantFragment : Fragment() {
             updateButtonStyle(binding.humidityButton)
         }
 
-        binding.seasonButton.setOnClickListener {
-            sortBySeason()
-            updateButtonStyle(binding.seasonButton)
+        binding.waterButton.setOnClickListener {
+            //sortByWater()
+            val waterDialog = WaterDialog(requireContext(), binding.root)
+            waterDialog.show()
+            updateButtonStyle(binding.waterButton)
         }
 
         binding.nameButton.setOnClickListener {
@@ -146,7 +149,7 @@ class PlantFragment : Fragment() {
         // 습도에 따라 리사이클러뷰 정렬 로직 추가
     }
 
-    private fun sortBySeason() {
+    private fun sortByWater() {
         // 계절에 따라 리사이클러뷰 정렬 로직 추가
     }
 
@@ -163,7 +166,7 @@ class PlantFragment : Fragment() {
             binding.difficultyButton,
             binding.temperatureButton,
             binding.humidityButton,
-            binding.seasonButton
+            binding.waterButton
         )
 
         // nameButton이 클릭되었을 경우
@@ -173,8 +176,7 @@ class PlantFragment : Fragment() {
                 button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             }
 
-            // 마지막으로 클릭된 버튼 초기화
-            lastClickedButton = null
+
         } else {
             // 이전에 클릭된 버튼을 초기 상태로 되돌림
             lastClickedButton?.let {
@@ -185,11 +187,12 @@ class PlantFragment : Fragment() {
             // 클릭된 버튼의 스타일 변경
             clickedButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.button_background_after)
             clickedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-
-            // 마지막으로 클릭된 버튼 업데이트
-            lastClickedButton = clickedButton
         }
+
+        // 마지막으로 클릭된 버튼 업데이트
+        lastClickedButton = clickedButton
     }
+
 
     private fun filterList(charText: String?) {
         Log.d("PlantFragment", "filterList: charText=$charText")
