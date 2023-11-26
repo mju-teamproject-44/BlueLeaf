@@ -20,6 +20,8 @@ class WaterDialog(context: Context, private val parentView: View) : Dialog(conte
         parentView.setBackgroundColor(Color.parseColor("#6b6e6c"))
         parentView.alpha = 0.4f
 
+        setCanceledOnTouchOutside(false)
+
         // 다이얼로그의 배경을 투명하게 설정
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setDimAmount(0f)
