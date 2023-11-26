@@ -344,6 +344,7 @@
                     android:layout_height="wrap_content">
                 </ImageView>
                 <TextView
+                    android:id="@+id/myBoardPosts"
                     android:text="나의 게시글"
                     android:fontFamily="@font/korail_round_gothic_medium"
                     android:textSize="15sp"

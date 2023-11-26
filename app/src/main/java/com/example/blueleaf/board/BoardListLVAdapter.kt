@@ -15,10 +15,15 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.blueleaf.R
+import com.example.blueleaf.comment.CommentModel
+import com.example.blueleaf.fragments.BoardFragment
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.core.Context
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -26,8 +31,9 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 
 class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter() {
+    private val TAG = BoardFragment::class.java.simpleName
 
-
+    var countComment: Long = 9999
 
     override fun getCount(): Int {
         return boardList.size
@@ -44,7 +50,8 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var cvView = convertView
 //        if(cvView==null){
-        cvView = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
+        cvView =
+            LayoutInflater.from(parent?.context).inflate(R.layout.board_list_item, parent, false)
 //        }
 
         val itemView = cvView?.findViewById<LinearLayout>(R.id.itemView)
@@ -54,7 +61,8 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 //        image!!.setImageURI(boardList[position].image)
 
         // Reference to an image file in Cloud Storage
-        val storageReference = FBRef.storageRef.child("board").child(boardList[position].key + ".png")
+        val storageReference =
+            FBRef.storageRef.child("board").child(boardList[position].key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = cvView?.findViewById<ImageView>(R.id.imageArea)
@@ -67,7 +75,7 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
                         .into(imageViewFromFB)
                 }
             } else {
-                    imageViewFromFB!!.isVisible = false
+                imageViewFromFB!!.isVisible = false
             }
         })
 
@@ -83,9 +91,27 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
         val time = cvView?.findViewById<TextView>(R.id.timeArea)
         time!!.text = boardList[position].time
 
+        // 댓글 갯수 연결
+        var commentCount = cvView?.findViewById<TextView>(R.id.commentCountArea)
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                commentCount!!.text = dataSnapshot.child(boardList[position].key).childrenCount.toString()
+                Log.d(TAG,"key:${boardList[position].key} 의 comment 갯수 -> $commentCount")
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        FBRef.commentRef.addValueEventListener(postListener)
+        commentCount!!.text = countComment.toString()
+
         // 사용자의 프로필 이미지 연결
         val userUID = boardList[position].uid
-        val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
+        val storageProfileRef =
+            FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
         val profileImage = cvView.findViewById<CircleImageView>(R.id.profileImage)
         storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -115,4 +141,20 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 
         return cvView!!
     }
+
+//    private fun countComment(key: String) {
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                val item = dataSnapshot.child(key).childrenCount
+//                Log.d(TAG,"key:$key 의 comment 갯수 -> $item")
+//                commentCount = item
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//            }
+//        }
+//        FBRef.commentRef.addValueEventListener(postListener)
+//    }
 }

@@ -126,7 +126,7 @@ class BoardInsideActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 commentDataList.clear()
-
+                binding.commentCount.text = dataSnapshot.childrenCount.toString()
                 for (dataModel in dataSnapshot.children) {
                     val item = dataModel.getValue(CommentModel::class.java)
                     commentDataList.add(item!!)
