@@ -1,26 +1,30 @@
 package com.example.blueleaf.fragments
 
+//import android.widget.SearchView
+
 import WaterDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
-//import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.blueleaf.Plant
 import com.example.blueleaf.PlantRecyclerViewAdapter
-import com.example.blueleaf.R
 import com.example.blueleaf.databinding.FragmentPlantBinding
+import com.example.blueleaf.dialog.DifficultDialog
+import com.example.blueleaf.dialog.HumidDialog
+import com.example.blueleaf.dialog.TemperDialog
 import com.example.blueleaf.plantList
-import com.example.blueleaf.utils.GridSpacingItemDecoration
 import com.google.gson.Gson
 import java.io.IOException
 import java.text.Normalizer
@@ -41,30 +45,28 @@ class PlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_plant, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.example.blueleaf.R.layout.fragment_plant, container, false)
 
         binding.homeTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_plantFragment_to_homeFragment)
+            it.findNavController().navigate(com.example.blueleaf.R.id.action_plantFragment_to_homeFragment)
         }
 
         binding.informationTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_plantFragment_to_informationFragment)
+            it.findNavController().navigate(com.example.blueleaf.R.id.action_plantFragment_to_informationFragment)
         }
 
         binding.boardTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_plantFragment_to_boardFragment)
+            it.findNavController().navigate(com.example.blueleaf.R.id.action_plantFragment_to_boardFragment)
         }
 
         binding.bookmarkTab.setOnClickListener() {
-            it.findNavController().navigate(R.id.action_plantFragment_to_bookmarkFragment)
+            it.findNavController().navigate(com.example.blueleaf.R.id.action_plantFragment_to_bookmarkFragment)
         }
         originalDataset = getJsonData("plant.json")?.plants ?: emptyList()
 
         val testdata = getJsonData("plant.json")
         binding.recyclerview.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            //adapter = PlantRecyclerViewAdapter(originalDataset, this)
-            // addItemDecoration(GridSpacingItemDecoration(2, 30, true))
             adapter = this@PlantFragment.adapter
             this@PlantFragment.adapter.updateData(originalDataset)  // 이 부분을 apply 블록 내로 옮깁니다.
 
@@ -95,23 +97,33 @@ class PlantFragment : Fragment() {
         })
 
         binding.difficultyButton.setOnClickListener {
-            sortByDifficulty()
+            val difficultDialog = DifficultDialog(requireContext(), binding.root){ selectedValue ->
+                sortByDifficulty(selectedValue)
+            }
+            difficultDialog.show()
             updateButtonStyle(binding.difficultyButton)
         }
 
         binding.temperatureButton.setOnClickListener {
-            sortByTemperature()
+            val temperDialog = TemperDialog(requireContext(), binding.root){selectedLeft, selectedRight ->
+                sortByTemperature(selectedLeft, selectedRight)
+            }
+            temperDialog.show()
             updateButtonStyle(binding.temperatureButton)
         }
 
         binding.humidityButton.setOnClickListener {
-            sortByHumidity()
+            val humidDialog = HumidDialog(requireContext(), binding.root){ selectedValue ->
+                sortByHumidity(selectedValue)
+            }
+            humidDialog.show()
             updateButtonStyle(binding.humidityButton)
         }
 
         binding.waterButton.setOnClickListener {
-            //sortByWater()
-            val waterDialog = WaterDialog(requireContext(), binding.root)
+            val waterDialog = WaterDialog(requireContext(), binding.root) { selectedValue ->
+                sortByWater(selectedValue)
+            }
             waterDialog.show()
             updateButtonStyle(binding.waterButton)
         }
@@ -120,37 +132,68 @@ class PlantFragment : Fragment() {
             sortByName()
             //updateButtonStyle(binding.nameButton)
         }
+        val view: View = LayoutInflater.from(context).inflate(com.example.blueleaf.R.layout.fragment_plant, null)
+
+        val scrollToTopButton: ImageButton = binding.scrollToTopButton
+        val nestedScrollView: NestedScrollView = binding.nestedScrollView
+
+        scrollToTopButton.setOnClickListener { nestedScrollView.scrollTo(0, 0) }
 
 
 
         return binding.root
     }
 
-    private fun sortByDifficulty() {
+    private fun sortByDifficulty(difficulty: String) {
         // 난이도에 따라 리사이클러뷰 정렬 로직 추가
         Log.d("PlantFragment", "Original dataset before sorting: ${originalDataset.map { it.name }}")
 
-        originalDataset = originalDataset.sortedByDescending {
+        /**originalDataset = originalDataset.sortedByDescending {
             val difficultyValue = it.difficulty.toIntOrNull() ?: Int.MIN_VALUE
             Log.d("PlantFragment", "Plant ${it.name}, Difficulty: $difficultyValue")
             difficultyValue
         }
 
         Log.d("PlantFragment", "Sorted dataset by difficulty: ${originalDataset.map { it.name }}")
-        adapter.updateData(originalDataset)
+        adapter.updateData(originalDataset)**/
+        val filteredDataset = originalDataset.filter { plant ->
+            plant.difficulty == difficulty
+        }
+
+        adapter.updateData(filteredDataset)
     }
 
 
-    private fun sortByTemperature() {
+    private fun sortByTemperature(left:Int, right:Int) {
         // 온도에 따라 리사이클러뷰 정렬 로직 추가
+        val filteredDataset = originalDataset.filter { plant ->
+            val temperMin = plant.temper_min.toIntOrNull() ?: Int.MIN_VALUE
+            val temperMax = plant.temper_max.toIntOrNull() ?: Int.MAX_VALUE
+            temperMin >= left && temperMax <= right
+        }
+
+        adapter.updateData(filteredDataset)
     }
 
-    private fun sortByHumidity() {
+    private fun sortByHumidity(humid:String) {
         // 습도에 따라 리사이클러뷰 정렬 로직 추가
+        val filteredDataset = originalDataset.filter { plant ->
+            plant.dialog_humid == humid
+        }
+
+        adapter.updateData(filteredDataset)
     }
 
-    private fun sortByWater() {
-        // 계절에 따라 리사이클러뷰 정렬 로직 추가
+    private fun sortByWater(value: Int) {
+        Log.d("PlantFragment", "Original dataset before filtering: ${originalDataset.map { it.name }}")
+
+        val filteredDataset = originalDataset.filter { plant ->
+            val dialogWaterValue = plant.dialog_water.toIntOrNull() ?: -1
+            dialogWaterValue == value
+        }
+
+        Log.d("PlantFragment", "Filtered dataset by water: ${filteredDataset.map { it.name }}")
+        adapter.updateData(filteredDataset)
     }
 
     private fun sortByName() {
@@ -172,21 +215,21 @@ class PlantFragment : Fragment() {
         // nameButton이 클릭되었을 경우
         if (clickedButton == binding.nameButton) {
             allButtons.forEach { button ->
-                button.background = ContextCompat.getDrawable(requireContext(), R.drawable.button_background)
-                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                button.background = ContextCompat.getDrawable(requireContext(), com.example.blueleaf.R.drawable.button_background)
+                button.setTextColor(ContextCompat.getColor(requireContext(), com.example.blueleaf.R.color.white))
             }
 
 
         } else {
             // 이전에 클릭된 버튼을 초기 상태로 되돌림
             lastClickedButton?.let {
-                it.background = ContextCompat.getDrawable(requireContext(), R.drawable.button_background)
-                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                it.background = ContextCompat.getDrawable(requireContext(), com.example.blueleaf.R.drawable.button_background)
+                it.setTextColor(ContextCompat.getColor(requireContext(), com.example.blueleaf.R.color.white))
             }
 
             // 클릭된 버튼의 스타일 변경
-            clickedButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.button_background_after)
-            clickedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            clickedButton.background = ContextCompat.getDrawable(requireContext(), com.example.blueleaf.R.drawable.button_background_after)
+            clickedButton.setTextColor(ContextCompat.getColor(requireContext(), com.example.blueleaf.R.color.black))
         }
 
         // 마지막으로 클릭된 버튼 업데이트

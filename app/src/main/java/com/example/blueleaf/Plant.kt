@@ -13,5 +13,9 @@ data class Plant (
     val name_eng: String,
     val sunlight: String,
     val temperature: String,
-    val water: String
+    val water: String,
+    val dialog_water: String,
+    val dialog_humid: String,
+    val temper_min: String,
+    val temper_max: String
 ) : Serializable
