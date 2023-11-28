@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -16,6 +17,7 @@ import android.widget.ListAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blueleaf.databinding.ActivityPlantManageBinding
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -142,7 +144,6 @@ class PlantManageActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         //임시로 식물 삭제 설정(수정 예정)
         binding.plantManageMorePlantImageView.setOnClickListener{

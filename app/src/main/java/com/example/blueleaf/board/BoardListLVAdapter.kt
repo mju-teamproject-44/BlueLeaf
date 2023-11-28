@@ -13,11 +13,16 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.blueleaf.R
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.core.Context
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter() {
@@ -49,7 +54,7 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 //        image!!.setImageURI(boardList[position].image)
 
         // Reference to an image file in Cloud Storage
-        val storageReference = FBRef.storageRef.child("board").child(boardList[position].image + ".png")
+        val storageReference = FBRef.storageRef.child("board").child(boardList[position].key + ".png")
 
         // ImageView in your Activity
         val imageViewFromFB = cvView?.findViewById<ImageView>(R.id.imageArea)
@@ -78,6 +83,22 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
         val time = cvView?.findViewById<TextView>(R.id.timeArea)
         time!!.text = boardList[position].time
 
+        // 사용자의 프로필 이미지 연결
+        val userUID = Firebase.auth.currentUser?.uid
+        val storageProfileRef = FBRef.storageRef.child("profileImage").child(userUID!!).child("profileImage.png")
+        val profileImage = cvView.findViewById<CircleImageView>(R.id.profileImage)
+        storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                if (profileImage != null) {
+                    Glide.with(cvView)
+                        .load(task.result)
+                        .into(profileImage)
+                }
+            } else {
+                profileImage!!.isVisible = false
+            }
+        })
+
 //        // 사용자의 uid 연결
 //        val uid = cvView?.findViewById<TextView>(R.id.uidArea)
 //        uid!!.text = boardList[position].uid
@@ -94,5 +115,4 @@ class BoardListLVAdapter(val boardList: MutableList<BoardModel>) : BaseAdapter()
 
         return cvView!!
     }
-
 }

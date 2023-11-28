@@ -1,131 +1,262 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
-        android:orientation="vertical"
-        tools:context=".fragments.PlantFragment">
+        android:background="@drawable/gradient_background">
 
-        <!-- TODO: Update blank fragment layout -->
-
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:background="#00FFFFFF"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:textColor="@color/white"
-            app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerview"
-            app:queryHint="Search Here">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linearLayout">
 
-        </androidx.appcompat.widget.SearchView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context=".fragments.PlantFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- TODO: Update blank fragment layout -->
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:queryBackground="@drawable/background_searchview"
+                    app:closeIcon="@drawable/outline_cancel_24"
+                    app:searchIcon="@drawable/chevron_left"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColor="@color/white"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerview" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="40dp"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <TextView
+                        android:id="@+id/difficultyButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:stateListAnimator="@null"
+                        android:text="난이도"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/temperatureButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:stateListAnimator="@null"
+                        android:text="온도"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/humidityButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:stateListAnimator="@null"
+                        android:text="습도"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/waterButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:stateListAnimator="@null"
+                        android:text="물주기"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+
+                    <ImageView
+                        android:id="@+id/nameButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:padding="7dp"
+                        android:stateListAnimator="@null"
+                        android:src="@drawable/baseline_cached_24"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.512"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:listitem="@layout/layout_plant_photo_item" />
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/lasttab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="3dp"
+            android:layout_above="@id/linearLayout">
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="63dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.512"
-                tools:layout_editor_absoluteX="0dp"
-                tools:listitem="@layout/layout_plant_photo_item" />
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/MainColor" />
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:weightSum="5"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/homeTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_home" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/informationTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_information" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/MainColor" />
 
-                <ImageView
-                    android:id="@+id/boardTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_board" />
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/bookmarkTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_bookmark" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:layout_alignParentBottom="true">
 
-                <ImageView
-                    android:id="@+id/plantTab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/bottom_plant" />
+            <ImageView
+                android:id="@+id/homeTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/bottom_home" />
+
+            <ImageView
+                android:id="@+id/informationTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/bottom_information" />
+
+            <ImageView
+                android:id="@+id/boardTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/bottom_board" />
+
+            <ImageView
+                android:id="@+id/bookmarkTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/bottom_bookmark" />
+
+            <ImageView
+                android:id="@+id/plantTab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/bottom_plant" />
 
 
-            </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/scrollToTopButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="70dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:layout_above="@id/lasttab"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_circle_up_24"
+            android:contentDescription="Scroll To Top" />
+
+    </RelativeLayout>
+
 </layout>

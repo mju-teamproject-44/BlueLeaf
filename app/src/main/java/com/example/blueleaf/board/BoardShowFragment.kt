@@ -55,7 +55,7 @@ class BoardShowFragment : Fragment() {
             // activity 넘기기
             val intent = Intent(context, BoardInsideActivity::class.java)
             intent.putExtra("key", boardKeyList[position]) // 첫 번째 방법과 다르게 key값 하나만 전달해준다
-            intent.putExtra("boardCategory","식물 자랑 게시판")
+//            intent.putExtra("boardCategory","식물 자랑 게시판")
             startActivity(intent)
 
         }
@@ -80,8 +80,10 @@ class BoardShowFragment : Fragment() {
 
                     Log.d(TAG, dataModel.toString())
                     val item = dataModel.getValue(BoardModel::class.java)
-                    boardDataList.add(item!!)
-                    boardKeyList.add(dataModel.key.toString())
+                    if(item?.boardType == "식물 자랑 게시판"){
+                        boardDataList.add(item!!)
+                        boardKeyList.add(dataModel.key.toString())
+                    }
                 }
 
                 // 최신 게시글이 맨 위로 오게 한다 -> adapter와 동기화 전 list reverse
@@ -101,7 +103,7 @@ class BoardShowFragment : Fragment() {
             }
         }
 
-        FBRef.boardShowRef.addValueEventListener(postListener)
+        FBRef.boardRef.addValueEventListener(postListener)
     }
 
 }
