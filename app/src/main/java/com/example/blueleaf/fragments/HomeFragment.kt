@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,6 +32,7 @@ import com.example.blueleaf.databinding.FragmentHomeBinding
 import com.example.blueleaf.plantManage.NoPlantManageActivity
 import com.example.blueleaf.plantManage.PlantManageActivity
 import com.example.blueleaf.plantManage.PlantModel
+import com.example.blueleaf.plantManage.TodoModel
 import com.example.blueleaf.setting.SettingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -42,7 +44,9 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.Calendar
 
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
@@ -50,12 +54,16 @@ class HomeFragment : Fragment() {
     //Database Reference
     private lateinit var database : DatabaseReference
     private lateinit var uri: Uri
-    private lateinit var plantRef: DatabaseReference
-    private lateinit var key: String
+
+    private lateinit var todoRef: DatabaseReference
+    private val plantTodoDataList = mutableListOf<TodoModel>()
+//    private val plantTodoDataList = mutableListOf<MutableList<TodoModel>>()
 
     //Plant Manage
     private val plantDataList = mutableListOf<PlantModel>()
     private val plantKeyList = mutableListOf<String>()
+
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,11 +73,13 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        //* Display & Editing UserName (Jinhyun)
+        //Firebase Settings
         database = Firebase.database.reference
         val userUID = Firebase.auth.currentUser?.uid
         val userRef = database.child("users").child(userUID!!)
         val plantManageRef = database.child("plantManage").child(userUID!!)
+        val plantTodoRef = database.child("plantManage_todo").child(userUID!!)
+
 
         val userDataListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -97,6 +107,146 @@ class HomeFragment : Fragment() {
                     plantDataList.add(plantItem!!)
                     plantKeyList.add(data.key.toString())
                 }
+
+                for(i in 0..<plantKeyList.size){
+                    plantTodoRef.child(plantKeyList[i]).get().addOnSuccessListener {
+                        val tempTodoKeyList = mutableListOf<String>()
+                        val tempTodoDataList = mutableListOf<TodoModel>()
+
+                        for(data in it.children){
+                            tempTodoKeyList.add(data.key.toString())
+                        }
+
+                        for(j in 0..<tempTodoKeyList.size){
+                            plantTodoRef.child(plantKeyList[i]).child(tempTodoKeyList[j]).get().addOnSuccessListener {
+                                val todoItem : TodoModel? = it.getValue(TodoModel::class.java)
+                                tempTodoDataList.add(todoItem!!)
+                                Log.d("test2", tempTodoDataList.toString())
+
+
+                                tempTodoDataList.sortBy {
+                                    dateFormat.parse(it.target_date).time
+                                }
+
+                                Log.d("size", tempTodoDataList.size.toString())
+                                if(tempTodoDataList.size != 0) {
+                                    val today = Calendar.getInstance()
+                                    val selectDate = dateFormat.parse(tempTodoDataList[0].target_date)
+                                    var calcDate =
+                                        (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000)
+                                    var calcDate_s = "D-$calcDate"
+
+                                    var todoType: Int = tempTodoDataList[0].todo_code
+                                    Log.d("test", todoType.toString())
+
+
+
+
+                                    when (i) {
+                                        0 -> {
+                                            binding.homePlantFirstLinear.visibility = LinearLayout.VISIBLE
+                                            binding.ddayfirst.text = calcDate_s
+                                            when (todoType) {
+                                                0 -> {
+                                                    //Water
+                                                    binding.firstLinearIconWater.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                1 -> {
+                                                    //Plant
+                                                    binding.firstLinearIconPlant.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                2 -> {
+                                                    //Fe
+                                                    binding.firstLinearIconFe.visibility = ImageView.VISIBLE
+                                                }
+
+                                                3 -> {
+                                                    //Sun
+                                                    binding.firstLinearIconSun.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+                                            }
+                                        }
+
+                                        1 -> {
+                                            binding.homePlantSecondLinear.visibility = LinearLayout.VISIBLE
+                                            binding.ddaysecond.text = calcDate_s
+                                            when (todoType) {
+                                                0 -> {
+                                                    //Water
+                                                    binding.secondLinearIconWater.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                1 -> {
+                                                    //Plant
+                                                    binding.secondLinearIconPlant.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                2 -> {
+                                                    //Fe
+                                                    binding.secondLinearIconFe.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                3 -> {
+                                                    //Sun
+                                                    binding.secondLinearIconSun.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+                                            }
+                                        }
+
+                                        2 -> {
+                                            binding.homePlantThirdLinear.visibility = LinearLayout.VISIBLE
+                                            binding.ddaythird.text = calcDate_s
+                                            when (todoType) {
+                                                0 -> {
+                                                    //Water
+                                                    binding.thirdLinearIconWater.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                1 -> {
+                                                    //Plant
+                                                    binding.thirdLinearIconPlant.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+
+                                                2 -> {
+                                                    //Fe
+                                                    binding.thirdLinearIconFe.visibility = ImageView.VISIBLE
+                                                }
+
+                                                3 -> {
+                                                    //Sun
+                                                    binding.thirdLinearIconSun.visibility =
+                                                        ImageView.VISIBLE
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    }.addOnFailureListener {
+                        //
+                    }
+                }
+
 
                 for (i: Int in 0..2){
                     if(i >= plantKeyList.size)
@@ -128,8 +278,6 @@ class HomeFragment : Fragment() {
             }
 
         })
-
-
 
        try {
            // #3. Details - Display UserName & Email
