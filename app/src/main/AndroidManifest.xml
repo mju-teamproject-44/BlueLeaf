@@ -19,6 +19,9 @@
             android:name=".board.MyBoardPostsActivity"
             android:exported="false" />
         <activity
+            android:name=".plantManage.TodoAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".board.BoardSearchActivity"
             android:exported="false" />
         <activity

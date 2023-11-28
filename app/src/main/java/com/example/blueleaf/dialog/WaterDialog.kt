@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.blueleaf.R
 
-class WaterDialog(context: Context, private val parentView: View) : Dialog(context) {
+class WaterDialog(context: Context, private val parentView: View, private val onFilterByWater: (Int) -> Unit
+) : Dialog(context) {
     private lateinit var closeButton: Button
+    private lateinit var seekBar: SeekBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +35,15 @@ class WaterDialog(context: Context, private val parentView: View) : Dialog(conte
         val mainColor = ContextCompat.getColor(context, R.color.MainColor)
 
         closeButton = view.findViewById(R.id.closeBtn)
+        seekBar = view.findViewById(R.id.wateringSeekBar)
+
         closeButton.setOnClickListener {
             dismiss()
             parentView.alpha = 1f
-            parentView.setBackgroundColor(mainColor)
-
+            parentView.background = ColorDrawable(mainColor)
+            val selectedValue = seekBar.progress
+            onFilterByWater(selectedValue)
         }
+
     }
 }

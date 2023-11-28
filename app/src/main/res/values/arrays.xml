@@ -5,4 +5,11 @@
         <item>식물 자랑 게시판</item>
         <item>거래 게시판</item>
     </string-array>
+    
+    <string-array name="todo">
+        <item>물 주기</item>
+        <item>분갈이 주기</item>
+        <item>비료 주기</item>
+        <item>햇빛 주기</item>
+    </string-array>
 </resources>

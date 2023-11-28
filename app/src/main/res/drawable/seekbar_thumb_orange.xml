@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 원모양의 seekbar thumb -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false"  >
+    <!-- 배경 색상 -->
+    <solid
+        android:color="#FF9F45"/>
+
+    <!-- 크기 -->
+    <size
+        android:width="3dp"
+        android:height="3dp"/>
+</shape>

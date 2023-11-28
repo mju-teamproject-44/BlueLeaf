@@ -24,7 +24,7 @@ class NoPlantManageActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var key: String
-
+    private lateinit var plantRef: DatabaseReference
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class NoPlantManageActivity : AppCompatActivity() {
         //Firebase
         database = Firebase.database.reference
         val userUID = Firebase.auth.currentUser?.uid
-        val plantRef = database.child("plantManage").child(userUID!!)
+        plantRef = database.child("plantManage").child(userUID!!)
 
 
         //좌상단 뒤로가기 버튼
@@ -50,30 +50,40 @@ class NoPlantManageActivity : AppCompatActivity() {
         //식물 추가 버튼
         binding.noPlantManageAddPlantImageView.setOnClickListener {
             //다이얼 로그를 띄운다.
-            val builder = AlertDialog.Builder(this)
-            val dialogView = layoutInflater.inflate(R.layout.manage_plant_add_dialog, null)
-
-            val dialogText = dialogView.findViewById<EditText>(R.id.plantAddDialogEditText)
-
-            builder.setView(dialogView)
-                .setPositiveButton("확인"){ dialogInterface, i ->
-                    val plantName = dialogText.text.toString()
-
-                    Log.d("SuccessAddPlant", dialogText.text.toString())
-                    key = plantRef.push().key.toString()
-
-                    plantRef.child(key)
-                        .setValue(PlantModel(plantName, LocalDate.now().toString()))
-
-                    val intent = Intent(this, PlantManageActivity::class.java)
-                    intent.putExtra("key", key)
-                    Log.d("Dialog Finish", key)
-                    startActivity(intent)
-                }
-                .setNegativeButton("취소") { dialogInterface, i ->
-                    Log.d("CancelAddPlant", "Canceled")
-                }
-                .show()
+            addPlantDialog()
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addPlantDialog(){
+        val userUID = Firebase.auth.currentUser?.uid
+        plantRef = database.child("plantManage").child(userUID!!)
+
+        //다이얼 로그를 띄운다.
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.manage_plant_add_dialog, null)
+
+        val dialogText = dialogView.findViewById<EditText>(R.id.plantAddDialogEditText)
+
+        builder.setView(dialogView)
+            .setPositiveButton("확인"){ dialogInterface, i ->
+                val plantName = dialogText.text.toString()
+
+                Log.d("SuccessAddPlant", dialogText.text.toString())
+                key = plantRef.push().key.toString()
+
+                plantRef.child(key)
+                    .setValue(PlantModel(plantName, LocalDate.now().toString()))
+
+                val intent = Intent(this, PlantManageActivity::class.java)
+                intent.putExtra("key", key)
+                Log.d("Dialog Finish", key)
+                startActivity(intent)
+            }
+            .setNegativeButton("취소") { dialogInterface, i ->
+                Log.d("CancelAddPlant", "Canceled")
+            }
+            .show()
+    }
+
 }

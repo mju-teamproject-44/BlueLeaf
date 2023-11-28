@@ -2,6 +2,7 @@ package com.example.blueleaf.fragments
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -10,10 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -38,6 +42,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.lang.Exception
+import java.time.LocalDate
 
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
@@ -45,6 +50,8 @@ class HomeFragment : Fragment() {
     //Database Reference
     private lateinit var database : DatabaseReference
     private lateinit var uri: Uri
+    private lateinit var plantRef: DatabaseReference
+    private lateinit var key: String
 
     //Plant Manage
     private val plantDataList = mutableListOf<PlantModel>()
@@ -357,6 +364,41 @@ class HomeFragment : Fragment() {
             binding.homeSaveImageView.visibility = ImageView.GONE
         }
     }
+
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun addPlantDialog(){
+//        val userUID = Firebase.auth.currentUser?.uid
+//        plantRef = database.child("plantManage").child(userUID!!)
+//
+//        //다이얼 로그를 띄운다.
+//        val builder = AlertDialog.Builder(this)
+//        val dialogView = layoutInflater.inflate(R.layout.manage_plant_add_dialog, null)
+//
+//        val dialogText = dialogView.findViewById<EditText>(R.id.plantAddDialogEditText)
+//
+//        builder.setView(dialogView)
+//            .setPositiveButton("확인"){ dialogInterface, i ->
+//                val plantName = dialogText.text.toString()
+//
+//                Log.d("SuccessAddPlant", dialogText.text.toString())
+//                key = plantRef.push().key.toString()
+//
+//                plantRef.child(key)
+//                    .setValue(PlantModel(plantName, LocalDate.now().toString()))
+//
+//                activity?.let{
+//                val intent = Intent(context, PlantManageActivity::class.java)
+//                intent.putExtra("key", key)
+//                Log.d("Dialog Finish", key)
+//                startActivity(intent)
+//            }
+//
+//            }
+//            .setNegativeButton("취소") { dialogInterface, i ->
+//                Log.d("CancelAddPlant", "Canceled")
+//            }
+//            .show()
+//    }
 
 }
 
