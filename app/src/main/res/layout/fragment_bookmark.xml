@@ -25,13 +25,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="662dp">
+            android:layout_height="match_parent">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/user_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="610dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 tools:listitem="@layout/user_layout">
             </androidx.recyclerview.widget.RecyclerView>
