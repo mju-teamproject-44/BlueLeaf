@@ -149,9 +149,9 @@ class PlantFragment : Fragment() {
         Log.d("PlantFragment", "Original dataset before sorting: ${originalDataset.map { it.name }}")
 
         /**originalDataset = originalDataset.sortedByDescending {
-            val difficultyValue = it.difficulty.toIntOrNull() ?: Int.MIN_VALUE
-            Log.d("PlantFragment", "Plant ${it.name}, Difficulty: $difficultyValue")
-            difficultyValue
+        val difficultyValue = it.difficulty.toIntOrNull() ?: Int.MIN_VALUE
+        Log.d("PlantFragment", "Plant ${it.name}, Difficulty: $difficultyValue")
+        difficultyValue
         }
 
         Log.d("PlantFragment", "Sorted dataset by difficulty: ${originalDataset.map { it.name }}")

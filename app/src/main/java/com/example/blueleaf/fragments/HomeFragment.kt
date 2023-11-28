@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.blueleaf.Plant
 import com.example.blueleaf.R
+import com.example.blueleaf.board.MyBoardPostsActivity
 import com.example.blueleaf.contentsList.UserModel
 import com.example.blueleaf.databinding.FragmentHomeBinding
 import com.example.blueleaf.plantManage.NoPlantManageActivity
@@ -217,6 +218,12 @@ class HomeFragment : Fragment() {
                 imageUpload(uri)
             }
             binding.homeProfileImageUploadButton.visibility = Button.GONE
+        }
+
+        // 나의 게시글 페이지로 이동
+        binding.myBoardPosts.setOnClickListener{
+            val intent = Intent(context, MyBoardPostsActivity::class.java)
+            startActivity(intent)
         }
 
         // logout
