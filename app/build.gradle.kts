@@ -41,6 +41,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -84,6 +85,11 @@ dependencies {
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    //RangeSeekbar
+    implementation ("com.github.Jay-Goo:RangeSeekBar:v3.0.0")
+
+
 
 
 }

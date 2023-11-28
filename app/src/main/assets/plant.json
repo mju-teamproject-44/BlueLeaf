@@ -8,8 +8,12 @@
       "sunlight" : "반음지",
       "humidity" : "40~70%",
       "temperature" : "21~25",
-      "difficulty" : "1",
-      "image" : "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/5878841282/B.jpg?273000000"
+      "difficulty" : "초급자",
+      "image" : "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/5878841282/B.jpg?273000000",
+      "dialog_water" : "8",
+      "dialog_humid" : "2",
+      "temper_min" : "21",
+      "temper_max" : "25"
     },
     {
       "name" : "꽃기린",
@@ -19,8 +23,12 @@
       "sunlight" : "양지",
       "humidity" : "40~70%",
       "temperature" : "18~25",
-      "difficulty" : "2",
-      "image" : "https://contents.lotteon.com/itemimage/_v194033/LO/18/85/38/40/33/_1/88/53/84/03/4/LO1885384033_1885384034_1.jpg/dims/resizef/720X720"
+      "difficulty" : "초급자",
+      "image" : "https://contents.lotteon.com/itemimage/_v194033/LO/18/85/38/40/33/_1/88/53/84/03/4/LO1885384033_1885384034_1.jpg/dims/resizef/720X720",
+      "dialog_water" : "1",
+      "dialog_humid" : "2",
+      "temper_min" : "18",
+      "temper_max" : "25"
     },
     {
       "name" : "네펜데스 알라타 (벌레잡이 통풀)",
@@ -30,8 +38,12 @@
       "sunlight" : "반양지",
       "humidity" : "70% 이상",
       "temperature" : "12~30",
-      "difficulty" : "4",
-      "image" : "https://www.verdantlyfe.com/cdn/shop/products/IMG_0018-8_bf1c2c74-a714-4323-a946-d96d8396d28f.jpg?v=1664473349"
+      "difficulty" : "중급자",
+      "image" : "https://www.verdantlyfe.com/cdn/shop/products/IMG_0018-8_bf1c2c74-a714-4323-a946-d96d8396d28f.jpg?v=1664473349",
+      "dialog_water" : "9",
+      "dialog_humid" : "3",
+      "temper_min" : "12",
+      "temper_max" : "30"
     },
     {
       "name" : "퍼포리아\n사라세니아",
@@ -41,8 +53,12 @@
       "sunlight" : "양지",
       "humidity" : "70% 이상",
       "temperature" : "13~35",
-      "difficulty" : "9",
-      "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9e1HJ40G0NP58etgC2DLKRES2u1DemJ5YnA&usqp=CAU"
+      "difficulty" : "상급자",
+      "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9e1HJ40G0NP58etgC2DLKRES2u1DemJ5YnA&usqp=CAU",
+      "dialog_water" : "9",
+      "dialog_humid" : "3",
+      "temper_min" : "13",
+      "temper_max" : "35"
     },
     {
       "name" : "녹보수",
@@ -52,8 +68,12 @@
       "sunlight" : "반양지",
       "humidity" : "40~70%",
       "temperature" : "18~25",
-      "difficulty" : "4",
-      "image" : "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1572998700290_750.jpg"
+      "difficulty" : "중급자",
+      "image" : "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1572998700290_750.jpg",
+      "dialog_water" : "8",
+      "dialog_humid" : "2",
+      "temper_min" : "18",
+      "temper_max" : "25"
     },
     {
       "name" : "삼색 달개비",
@@ -63,8 +83,12 @@
       "sunlight" : "반양지",
       "humidity" : "40~70%",
       "temperature" : "15~25",
-      "difficulty" : "6",
-      "image" : ""
+      "difficulty" : "중급자",
+      "image" : "",
+      "dialog_water" : "8",
+      "dialog_humid" : "2",
+      "temper_min" : "15",
+      "temper_max" : "25"
     },
     {
       "name" : "알로카시아 멜로",
@@ -74,8 +98,12 @@
       "sunlight" : "반음지",
       "humidity" : "70%",
       "temperature" : "15~27",
-      "difficulty" : "1",
-      "image" : "https://www.cjgmarket.co.kr/data/shop/20211124/b534abb7ccb89b54e996c458383d4832.jpg"
+      "difficulty" : "초급자",
+      "image" : "https://www.cjgmarket.co.kr/data/shop/20211124/b534abb7ccb89b54e996c458383d4832.jpg",
+      "dialog_water" : "8",
+      "dialog_humid" : "3",
+      "temper_min" : "15",
+      "temper_max" : "27"
     },
     {
       "name" : "파리지옥",
@@ -85,8 +113,12 @@
       "sunlight" : "양지",
       "humidity" : "70% 이상",
       "temperature" : "20~25",
-      "difficulty" : "8",
-      "image" : "https://www.simpol.co.kr/data/shopimages/multi/302422138/202010/03_003010000000028263.jpg"
+      "difficulty" : "상급자",
+      "image" : "https://www.simpol.co.kr/data/shopimages/multi/302422138/202010/03_003010000000028263.jpg",
+      "dialog_water" : "9",
+      "dialog_humid" : "3",
+      "temper_min" : "20",
+      "temper_max" : "25"
     },
     {
       "name" : "용비 선인장",
@@ -96,8 +128,12 @@
       "sunlight" : "양지",
       "humidity" : "40% 이하",
       "temperature" : "15~30",
-      "difficulty" : "2",
-      "image" : "https://webp2.xplant.co.kr/data/item/15137/1513749449_l1"
+      "difficulty" : "초급자",
+      "image" : "https://webp2.xplant.co.kr/data/item/15137/1513749449_l1",
+      "dialog_water" : "1",
+      "dialog_humid" : "1",
+      "temper_min" : "15",
+      "temper_max" : "30"
     },
     {
       "name" : "춘봉철화",
@@ -107,8 +143,12 @@
       "sunlight" : "양지",
       "humidity" : "40% 이하",
       "temperature" : "15~30",
-      "difficulty" : "1",
-      "image" : "https://mblogthumb-phinf.pstatic.net/MjAxNzA3MDRfMTQ0/MDAxNDk5MTU2NjY2ODgy.lLzeRR_WDPDcBVtvM2xFPSeIWoSkg9_6hWexa3EiQNQg.XeO0GSHK4EFOVr2OdNhVLH8qeHza0CNKoCojxYipyZgg.JPEG.oed678/DSC03261.JPG?type=w800"
+      "difficulty" : "초급자",
+      "image" : "https://mblogthumb-phinf.pstatic.net/MjAxNzA3MDRfMTQ0/MDAxNDk5MTU2NjY2ODgy.lLzeRR_WDPDcBVtvM2xFPSeIWoSkg9_6hWexa3EiQNQg.XeO0GSHK4EFOVr2OdNhVLH8qeHza0CNKoCojxYipyZgg.JPEG.oed678/DSC03261.JPG?type=w800",
+      "dialog_water" : "1",
+      "dialog_humid" : "1",
+      "temper_min" : "15",
+      "temper_max" : "30"
     },
     {
       "name" : "몬스테라 카스테니안",
@@ -118,8 +158,12 @@
       "sunlight" : "반음지",
       "humidity" : "40~70%",
       "temperature" : "16~30",
-      "difficulty" : "5",
-      "image" : "https://botanical.house/wp-content/uploads/2019/11/%EC%B9%B4%EC%8A%A4%ED%85%8C%EB%8B%88%EC%95%88.jpg"
+      "difficulty" : "중급자",
+      "image" : "https://botanical.house/wp-content/uploads/2019/11/%EC%B9%B4%EC%8A%A4%ED%85%8C%EB%8B%88%EC%95%88.jpg",
+      "dialog_water" : "8",
+      "dialog_humid" : "2",
+      "temper_min" : "15",
+      "temper_max" : "30"
     }
   ]
 }
