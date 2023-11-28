@@ -2,17 +2,33 @@ package com.example.blueleaf.plantManage
 
 import android.icu.util.Calendar
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ManageListItemMonthBinding
 import java.util.Date
 
-class AdapterMonth:RecyclerView.Adapter<AdapterMonth.MonthView>() {
+class AdapterMonth(val key: String, val todoList: MutableList<TodoModel>):RecyclerView.Adapter<AdapterMonth.MonthView>() {
 
     val center = Int.MAX_VALUE/2
     private var calendar = Calendar.getInstance()
+
+    //
+    interface OnItemClickListener{
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener){
+        this.itemClickListener = onItemClickListener
+    }
+
+    private lateinit var itemClickListener : OnItemClickListener
+
+
 
     inner class MonthView(val binding: ManageListItemMonthBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -41,7 +57,8 @@ class AdapterMonth:RecyclerView.Adapter<AdapterMonth.MonthView>() {
             calendar.add(Calendar.WEEK_OF_MONTH, 1)
         }
         val dayListManager = GridLayoutManager(holder.itemView.context, 7)
-        val dayListAdapter = AdapterDay(tempMonth, dayList)
+        val dayListAdapter = AdapterDay(tempMonth, dayList, key, todoList)
+
 
         holder.binding.itemMonthDayList.apply {
             layoutManager = dayListManager

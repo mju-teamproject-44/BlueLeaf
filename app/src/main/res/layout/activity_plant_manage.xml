@@ -78,5 +78,46 @@
         android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plantManageTodolist"
+
+        app:layout_constraintTop_toBottomOf="@id/plantManageCalendar"
+        android:layout_marginTop="20dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/plantAddTodoButton"-->
+
+<!--        android:src="@drawable/manage_rectangle_3"-->
+
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+
+<!--        android:layout_marginBottom="30dp"-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </ImageView>-->
+    
+<!--    <TextView-->
+<!--        android:text="일정 추가하기"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textColor="#A49B7B"-->
+<!--        android:fontFamily="@font/korail_round_gothic_light"-->
+
+<!--        android:gravity="center"-->
+
+<!--        app:layout_constraintLeft_toLeftOf="@id/plantAddTodoButton"-->
+<!--        app:layout_constraintRight_toRightOf="@id/plantAddTodoButton"-->
+<!--        app:layout_constraintTop_toTopOf="@id/plantAddTodoButton"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/plantAddTodoButton"-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </TextView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
