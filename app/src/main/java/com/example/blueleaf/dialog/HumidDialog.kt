@@ -37,11 +37,12 @@ class HumidDialog(context: Context, private val parentView: View, private val on
 
         closeButton = view.findViewById(R.id.closeBtn)
         //seekBar = view.findViewById(R.id.wateringSeekBar)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.gradient_background)
 
         closeButton.setOnClickListener {
             dismiss()
             parentView.alpha = 1f
-            parentView.setBackgroundColor(mainColor)
+            parentView.background = drawable
             onFilterByHumid(check)
         }
 
