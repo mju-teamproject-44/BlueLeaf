@@ -6,13 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.blueleaf.R
 import com.example.blueleaf.chat.Anony_dialog
 import com.example.blueleaf.chat.ChatActivity
 import com.example.blueleaf.utils.FBAuth
 import com.example.blueleaf.utils.FBRef
+import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,8 +29,11 @@ class UserAdapter(val context: Context, private var userList: MutableList<UserMo
         this.userList = userList
         notifyDataSetChanged()
     }
+
+    lateinit var user_layout_view:View
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.user_layout,parent,false)
+        user_layout_view = LayoutInflater.from(parent?.context).inflate(R.layout.user_layout,parent,false)
         Log.d("hola", "1")
         return UserViewHolder(view)
     }
@@ -41,7 +47,22 @@ class UserAdapter(val context: Context, private var userList: MutableList<UserMo
         Log.d("hola", "3")
         val currentUser = userList[position]
         var currentUserInfo:String = ""
+        val storageProfileRef = FBRef.storageRef.child("profileImage").child(currentUser.uid!!).child("profileImage.png")
+        val imgView = holder.chat_profile
+
         holder.nameText.text = currentUser.userName
+        storageProfileRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+
+            if (task.isSuccessful) {
+                Glide.with(user_layout_view)
+                    .load(task.result)
+                    .into(imgView)
+
+            } else {
+                Log.d("msgs", "실패")
+
+            }
+        })
         holder.itemView.setOnClickListener {
             // CoroutineScope을 만들어서 비동기 작업을 수행
             CoroutineScope(Dispatchers.Main).launch {
@@ -79,6 +100,7 @@ class UserAdapter(val context: Context, private var userList: MutableList<UserMo
     }
     class UserViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val nameText:TextView = itemView.findViewById(R.id.name_text)
+        val chat_profile:ImageView = itemView.findViewById(R.id.chat_profile)
     }
 
 
