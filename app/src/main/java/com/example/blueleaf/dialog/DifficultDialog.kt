@@ -41,11 +41,19 @@ class DifficultDialog(context: Context, private val parentView: View, private va
         val drawable = ContextCompat.getDrawable(context, R.drawable.gradient_background)
 
         closeButton.setOnClickListener {
-            dismiss()
-            parentView.alpha = 1f
-            parentView.background = drawable
-            onFilterByDifficult(check)
+            if (check.isNotEmpty()) {
+                dismiss()
+                parentView.alpha = 1f
+                parentView.background = drawable
+                onFilterByDifficult(check)
+            } else {
+                // 필터링을 하지 않고 다이얼로그를 닫음
+                dismiss()
+                parentView.alpha = 1f
+                parentView.background = drawable
+            }
         }
+
 
         lowerButton=view.findViewById(R.id.lowButton)
         middleButton=view.findViewById(R.id.mediumButton)
