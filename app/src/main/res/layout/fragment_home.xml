@@ -225,6 +225,72 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/homePlantFirstLinear"
+
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+
+                            android:layout_marginRight="10dp"
+                            android:visibility="gone"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/firstLinearIconWater"
+
+                                android:src="@drawable/manage_icon_water_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/firstLinearIconPlant"
+
+                                android:src="@drawable/manage_icon_plant_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/firstLinearIconFe"
+
+                                android:src="@drawable/manage_icon_fe_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/firstLinearIconSun"
+
+                                android:src="@drawable/manage_icon_sun_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/ddayfirst"
+
+                                android:text="D-00"
+                                android:textSize="18sp"
+
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+
+                        </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
@@ -269,6 +335,71 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/homePlantSecondLinear"
+
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+
+                            android:layout_marginRight="10dp"
+                            android:visibility="gone"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/secondLinearIconWater"
+
+                            android:src="@drawable/manage_icon_water_color"
+
+                            android:visibility="gone"
+
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/secondLinearIconPlant"
+
+                            android:src="@drawable/manage_icon_plant_color"
+
+                            android:visibility="gone"
+
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/secondLinearIconFe"
+
+                            android:src="@drawable/manage_icon_fe_color"
+
+                            android:visibility="gone"
+
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/secondLinearIconSun"
+
+                            android:src="@drawable/manage_icon_sun_color"
+
+                            android:visibility="gone"
+
+                            android:layout_width="20dp"
+                            android:layout_height="20dp">
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/ddaysecond"
+
+                            android:text="D-00"
+                            android:textSize="18sp"
+
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                        </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
@@ -313,6 +444,72 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/homePlantThirdLinear"
+
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+
+                            android:layout_marginRight="10dp"
+                            android:visibility="gone"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/thirdLinearIconWater"
+
+                                android:src="@drawable/manage_icon_water_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/thirdLinearIconPlant"
+
+                                android:src="@drawable/manage_icon_plant_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/thirdLinearIconFe"
+
+                                android:src="@drawable/manage_icon_fe_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/thirdLinearIconSun"
+
+                                android:src="@drawable/manage_icon_sun_color"
+
+                                android:visibility="gone"
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp">
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/ddaythird"
+
+                                android:text="D-00"
+                                android:textSize="18sp"
+
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+
+                        </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
