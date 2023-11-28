@@ -106,10 +106,12 @@ class TemperDialog(context: Context, private val parentView: View, private val o
         closeButton = view.findViewById(R.id.closeBtn)
         //seekBar = view.findViewById(R.id.wateringSeekBar)
 
+        val drawable = ContextCompat.getDrawable(context, R.drawable.gradient_background)
+
         closeButton.setOnClickListener {
             dismiss()
             parentView.alpha = 1f
-            parentView.setBackgroundColor(mainColor)
+            parentView.background = drawable
             onFilterByTemper(roundedLeftValue, roundedRightValue)
         }
     }

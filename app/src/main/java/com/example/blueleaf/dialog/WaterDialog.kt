@@ -21,6 +21,7 @@ class WaterDialog(context: Context, private val parentView: View, private val on
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // parentView의 배경을 어둡게 처리
+
         parentView.setBackgroundColor(Color.parseColor("#6b6e6c"))
         parentView.alpha = 0.4f
 
@@ -36,11 +37,12 @@ class WaterDialog(context: Context, private val parentView: View, private val on
 
         closeButton = view.findViewById(R.id.closeBtn)
         seekBar = view.findViewById(R.id.wateringSeekBar)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.gradient_background)
 
         closeButton.setOnClickListener {
             dismiss()
             parentView.alpha = 1f
-            parentView.background = ColorDrawable(mainColor)
+            parentView.background = drawable
             val selectedValue = seekBar.progress
             onFilterByWater(selectedValue)
         }

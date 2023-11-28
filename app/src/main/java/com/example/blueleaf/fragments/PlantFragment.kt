@@ -219,7 +219,8 @@ class PlantFragment : Fragment() {
                 button.setTextColor(ContextCompat.getColor(requireContext(), com.example.blueleaf.R.color.white))
             }
 
-
+            // 마지막으로 클릭된 버튼 업데이트
+            lastClickedButton = null // 이전에 클릭된 버튼을 null로 설정하여 초기화
         } else {
             // 이전에 클릭된 버튼을 초기 상태로 되돌림
             lastClickedButton?.let {
@@ -230,10 +231,11 @@ class PlantFragment : Fragment() {
             // 클릭된 버튼의 스타일 변경
             clickedButton.background = ContextCompat.getDrawable(requireContext(), com.example.blueleaf.R.drawable.button_background_after)
             clickedButton.setTextColor(ContextCompat.getColor(requireContext(), com.example.blueleaf.R.color.black))
+
+            // 마지막으로 클릭된 버튼 업데이트
+            lastClickedButton = clickedButton
         }
 
-        // 마지막으로 클릭된 버튼 업데이트
-        lastClickedButton = clickedButton
     }
 
 

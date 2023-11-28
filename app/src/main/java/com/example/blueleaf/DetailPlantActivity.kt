@@ -23,7 +23,7 @@ class DetailPlantActivity : AppCompatActivity() {
         binding.Detaildescription.text=plantData?.description ?: "기본설명"
         binding.water.text=plantData?.water ?: "기본 물주기"
         binding.sun.text=plantData?.sunlight ?: "기본 햇빛"
-        binding.difficult.text=plantData?.difficulty ?: "기본 난이도"
+        binding.difficult.text=plantData?.temperature ?: "기본 온도"
         binding.humid.text=plantData?.humidity ?: "기본 물주기"
 
         Glide.with(this)
