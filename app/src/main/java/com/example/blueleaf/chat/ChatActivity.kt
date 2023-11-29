@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ActivityChatBinding
-import com.example.blueleaf.utils.FBAuth
-import com.example.blueleaf.utils.FBRef
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -59,7 +56,10 @@ class ChatActivity:AppCompatActivity() {
         // 상대방 이름을 채팅방 상단에
         binding.chatUserName.setText(receiverName)
 
-
+        //채팅방 나가기
+        binding.chatOut.setOnClickListener{
+            finish()
+        }
         // 메시지 전송 이벤트
         binding.sendBtn.setOnClickListener{
             val message = binding.msgEdit.text.toString()
