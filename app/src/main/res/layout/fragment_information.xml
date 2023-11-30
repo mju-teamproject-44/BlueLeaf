@@ -21,39 +21,41 @@
                 android:gravity="center"
                 >
                 <LinearLayout
-                    android:layout_width="870px"
-                    android:layout_height="150px"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
+                    android:gravity="center_horizontal"
                     >
                     <TextView
-                        android:layout_width="400px"
-                        android:layout_height="100px"
+                        android:layout_width="200px"
+                        android:layout_height="match_parent"
                         android:text="정보"
                         android:textColor="@color/black"
-                        android:textSize="70px"
-                        android:paddingBottom="10px"
+                        android:textSize="28sp"
                         android:fontFamily="@font/bmdohyeon"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginRight="90dp"
                         >
                     </TextView>
 
                     <Button
+                        android:layout_marginLeft="40dp"
                         android:id="@+id/bookmarkBtn"
-                        android:gravity="center"
-                        android:layout_width="200px"
-                        android:layout_height="120px"
-                        android:text="북마크"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:fontFamily="@font/bmdohyeon"
-                        android:textSize="70px"
-                        android:layout_weight="1"
-                        >
+                        android:gravity="center"
+                        android:text="북마크"
+                        android:textSize="23sp">
+
                     </Button>
                 </LinearLayout>
 
 
                 <LinearLayout
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
