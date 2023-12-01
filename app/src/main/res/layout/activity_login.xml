@@ -19,8 +19,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="106dp"
                 android:layout_weight="1"
-                android:paddingTop="70dp"
-                android:src="@drawable/logo" />
+                android:paddingTop="100dp"
+                android:src="@drawable/logo_default" />
 
             <TextView
                 android:layout_width="match_parent"
