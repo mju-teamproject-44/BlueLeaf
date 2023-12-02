@@ -1,15 +1,25 @@
 package com.example.blueleaf.plantManage
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.blueleaf.MainActivity
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ManageListItemTodoBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: MutableList<String>, val key: String) : RecyclerView.Adapter<AdapterTodo.TodoView>() {
+
+    lateinit var database: DatabaseReference
+    lateinit var todoRef: DatabaseReference
 
     inner class TodoView(val binding: ManageListItemTodoBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -20,6 +30,11 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
 
     override fun onBindViewHolder(holder: TodoView, position: Int) {
         val todoType  = todoList[position].todo_code
+
+        //Firebase
+        database = Firebase.database.reference
+        val userUID = Firebase.auth.currentUser?.uid
+        todoRef = database.child("plantManage_todo").child(userUID!!).child(key)
 
         //일정명 변경
         allIconGone(holder, position)
@@ -52,21 +67,6 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
 //        //Data Update
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val today = Calendar.getInstance()
-//
-//            val curTargetDate = dateFormat.parse(todoList[position].target_date)
-//            var dday = curTargetDate.time- today.time.time
-//            //dday가 0 이하인 경우
-//            if(dday.toInt() < 0){
-//                var cal = Calendar.getInstance()
-//                while(dday.toInt() < 0){
-//                    cal.time = curTargetDate
-//                    cal.add(Calendar.DATE, todoList[position].cycle_date)
-//
-//                    dday = cal.time.time - today.time.time
-//                }
-//                val updateTartgetDate : String = dateFormat.format(cal.time)
-//                todoRef.child(todoKeyList[position]).setValue(TodoModel(todoList[position].todo_code, updateTartgetDate, todoList[position].cycle_date))
-//        }
 
         //기간 변경
         val selectDate = dateFormat.parse(todoList[position].target_date)
@@ -79,6 +79,14 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
 
 
         //x버튼을 눌렀을 때.
+        holder.binding.manageTodoXButton.setOnClickListener {
+            todoRef.child(todoKeyList[position]).removeValue()
+            Toast.makeText(holder.itemView.context,"일정 삭제 완료", Toast.LENGTH_SHORT).show()
+
+            //화면 ui업데이트 안되는 문제 있음. 이전페이지로 이동
+            val intent = Intent(holder.itemView.context, MainActivity::class.java)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

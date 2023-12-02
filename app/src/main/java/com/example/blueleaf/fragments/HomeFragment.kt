@@ -51,18 +51,16 @@ import java.util.Calendar
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
 
-    //Database Reference
+    //Firebase
     private lateinit var database : DatabaseReference
     private lateinit var uri: Uri
+    lateinit var userRef: DatabaseReference
+    lateinit var plantManageRef: DatabaseReference
+    lateinit var plantTodoRef: DatabaseReference
 
-    private lateinit var todoRef: DatabaseReference
-    private val plantTodoDataList = mutableListOf<TodoModel>()
-//    private val plantTodoDataList = mutableListOf<MutableList<TodoModel>>()
-
-    //Plant Manage
+    //#Datas
     private val plantDataList = mutableListOf<PlantModel>()
     private val plantKeyList = mutableListOf<String>()
-
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,179 +69,86 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
+        //Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         //Firebase Settings
         database = Firebase.database.reference
         val userUID = Firebase.auth.currentUser?.uid
-        val userRef = database.child("users").child(userUID!!)
-        val plantManageRef = database.child("plantManage").child(userUID!!)
-        val plantTodoRef = database.child("plantManage_todo").child(userUID!!)
+        userRef = database.child("users").child(userUID!!)
+        plantManageRef = database.child("plantManage").child(userUID!!)
+        plantTodoRef = database.child("plantManage_todo").child(userUID!!)
 
 
+        //Get user data from Firebase
         val userDataListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                //유저 정보를 받는다.
                 var userM : UserModel = UserModel("Temporary", "Temporary")
-
                 userM = snapshot.getValue<UserModel>()!!
-                val userName_ = userM.userName.toString()
-                val userEmail_ = userM.userEmail.toString()
-                setUserData(userName_, userEmail_)
-                Log.d("userDataListener, name", userName_)
-                Log.d("UserDataListener, email", userEmail_)
+
+                //유저 정보를 ui에 업데이트 한다.
+                setUserData(userM.userName.toString(), userM.userEmail.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                //Error
             }
         }
         userRef.addValueEventListener(userDataListener)
 
+
+        //Get plantManage data from Firebase
         plantManageRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                //식물 정보를 받는다.
                 for (data in snapshot.children){
-                    Log.d("PlantModel", data.toString())
                     val plantItem = data.getValue(PlantModel::class.java)
                     plantDataList.add(plantItem!!)
                     plantKeyList.add(data.key.toString())
                 }
 
+                //식물의 개수 만큼 반복. (O(n^2))
                 for(i in 0..<plantKeyList.size){
                     plantTodoRef.child(plantKeyList[i]).get().addOnSuccessListener {
                         val tempTodoKeyList = mutableListOf<String>()
                         val tempTodoDataList = mutableListOf<TodoModel>()
 
+                        //일정의 FB위치 = plantManage_todo -> userUID -> plantkey -> todokey -> todoModel
+
                         for(data in it.children){
                             tempTodoKeyList.add(data.key.toString())
                         }
 
+                        //일정의 개수 만큼 반복
                         for(j in 0..<tempTodoKeyList.size){
                             plantTodoRef.child(plantKeyList[i]).child(tempTodoKeyList[j]).get().addOnSuccessListener {
+                                //식물 벌 일정을 받음
                                 val todoItem : TodoModel? = it.getValue(TodoModel::class.java)
                                 tempTodoDataList.add(todoItem!!)
-                                Log.d("test2", tempTodoDataList.toString())
 
-
+                                //식물 별 일정의 List를 남은 기간 순으로 정렬.
                                 tempTodoDataList.sortBy {
                                     dateFormat.parse(it.target_date).time
                                 }
 
-                                Log.d("size", tempTodoDataList.size.toString())
                                 if(tempTodoDataList.size != 0) {
-                                    val today = Calendar.getInstance()
-                                    val selectDate = dateFormat.parse(tempTodoDataList[0].target_date)
-                                    var calcDate =
-                                        (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000)
-                                    var calcDate_s = "D-$calcDate"
+                                    //D-Day 계산
+                                    val today = Calendar.getInstance() //오늘 날짜.
+                                    val selectDate = dateFormat.parse(tempTodoDataList[0].target_date) //목표일
+                                    var calcDate = (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000) //D-Day 계산과정
+                                    var calcDate_s = "D-$calcDate" //D-Day toString
 
+                                    //일정 분류
                                     var todoType: Int = tempTodoDataList[0].todo_code
-                                    Log.d("test", todoType.toString())
 
-
-
-
-                                    when (i) {
-                                        0 -> {
-                                            binding.homePlantFirstLinear.visibility = LinearLayout.VISIBLE
-                                            binding.ddayfirst.text = calcDate_s
-                                            when (todoType) {
-                                                0 -> {
-                                                    //Water
-                                                    binding.firstLinearIconWater.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                1 -> {
-                                                    //Plant
-                                                    binding.firstLinearIconPlant.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                2 -> {
-                                                    //Fe
-                                                    binding.firstLinearIconFe.visibility = ImageView.VISIBLE
-                                                }
-
-                                                3 -> {
-                                                    //Sun
-                                                    binding.firstLinearIconSun.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-                                            }
-                                        }
-
-                                        1 -> {
-                                            binding.homePlantSecondLinear.visibility = LinearLayout.VISIBLE
-                                            binding.ddaysecond.text = calcDate_s
-                                            when (todoType) {
-                                                0 -> {
-                                                    //Water
-                                                    binding.secondLinearIconWater.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                1 -> {
-                                                    //Plant
-                                                    binding.secondLinearIconPlant.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                2 -> {
-                                                    //Fe
-                                                    binding.secondLinearIconFe.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                3 -> {
-                                                    //Sun
-                                                    binding.secondLinearIconSun.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-                                            }
-                                        }
-
-                                        2 -> {
-                                            binding.homePlantThirdLinear.visibility = LinearLayout.VISIBLE
-                                            binding.ddaythird.text = calcDate_s
-                                            when (todoType) {
-                                                0 -> {
-                                                    //Water
-                                                    binding.thirdLinearIconWater.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                1 -> {
-                                                    //Plant
-                                                    binding.thirdLinearIconPlant.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-
-                                                2 -> {
-                                                    //Fe
-                                                    binding.thirdLinearIconFe.visibility = ImageView.VISIBLE
-                                                }
-
-                                                3 -> {
-                                                    //Sun
-                                                    binding.thirdLinearIconSun.visibility =
-                                                        ImageView.VISIBLE
-                                                }
-                                            }
-                                        }
-                                    }
+                                    //식물 별, 일정 분류 별로 나누어 ui 업데이트
+                                    homePlantTodoIconReset(i, todoType, calcDate_s)
                                 }
-
-
                             }
-
-
-
                         }
-
-
-
                     }.addOnFailureListener {
-                        //
+                        //Fail
                     }
                 }
 
@@ -427,6 +332,88 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun homePlantTodoIconReset(i : Int, todoType : Int, calcDate_s: String){
+        when (i) { //i = 식물, todoType = 일정 분류 코드(0~3)
+            0 -> {
+                binding.homePlantFirstLinear.visibility = LinearLayout.VISIBLE
+                binding.ddayfirst.text = calcDate_s
+
+                //초기화
+                binding.firstLinearIconWater.visibility = ImageView.GONE
+                binding.firstLinearIconPlant.visibility = ImageView.GONE
+                binding.firstLinearIconFe.visibility = ImageView.GONE
+                binding.firstLinearIconSun.visibility = ImageView.GONE
+
+                when (todoType) {
+                    0 -> {
+                        binding.firstLinearIconWater.visibility = ImageView.VISIBLE
+                    }
+                    1 -> {
+                        binding.firstLinearIconPlant.visibility = ImageView.VISIBLE
+                    }
+                    2 -> {
+                        binding.firstLinearIconFe.visibility = ImageView.VISIBLE
+                    }
+                    3 -> {
+                        binding.firstLinearIconSun.visibility = ImageView.VISIBLE
+                    }
+                }
+            }
+
+            1 -> {
+                binding.homePlantSecondLinear.visibility = LinearLayout.VISIBLE
+                binding.ddaysecond.text = calcDate_s
+
+                //초기화
+                binding.secondLinearIconWater.visibility = ImageView.GONE
+                binding.secondLinearIconPlant.visibility = ImageView.GONE
+                binding.secondLinearIconFe.visibility = ImageView.GONE
+                binding.secondLinearIconSun.visibility = ImageView.GONE
+
+                when (todoType) {
+                    0 -> {
+                        binding.secondLinearIconWater.visibility = ImageView.VISIBLE
+                    }
+                    1 -> {
+                        binding.secondLinearIconPlant.visibility = ImageView.VISIBLE
+                    }
+                    2 -> {
+                        binding.secondLinearIconFe.visibility = ImageView.VISIBLE
+                    }
+                    3 -> {
+                        binding.secondLinearIconSun.visibility = ImageView.VISIBLE
+                    }
+                }
+            }
+
+            2 -> {
+                binding.homePlantThirdLinear.visibility = LinearLayout.VISIBLE
+                binding.ddaythird.text = calcDate_s
+
+                //초기화
+                binding.thirdLinearIconWater.visibility = ImageView.GONE
+                binding.thirdLinearIconPlant.visibility = ImageView.GONE
+                binding.thirdLinearIconFe.visibility = ImageView.GONE
+                binding.thirdLinearIconSun.visibility = ImageView.GONE
+
+                when (todoType) {
+                    0 -> {
+                        binding.thirdLinearIconWater.visibility = ImageView.VISIBLE
+                    }
+                    1 -> {
+                        binding.thirdLinearIconPlant.visibility = ImageView.VISIBLE
+                    }
+                    2 -> {
+                        binding.thirdLinearIconFe.visibility = ImageView.VISIBLE
+                    }
+                    3 -> {
+                        binding.thirdLinearIconSun.visibility = ImageView.VISIBLE
+                    }
+                }
+            }
+        }
+    }
+
     private fun imageDownload() {
         val storage = Firebase.storage
         val userUID = Firebase.auth.currentUser?.uid
@@ -512,41 +499,5 @@ class HomeFragment : Fragment() {
             binding.homeSaveImageView.visibility = ImageView.GONE
         }
     }
-
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    private fun addPlantDialog(){
-//        val userUID = Firebase.auth.currentUser?.uid
-//        plantRef = database.child("plantManage").child(userUID!!)
-//
-//        //다이얼 로그를 띄운다.
-//        val builder = AlertDialog.Builder(this)
-//        val dialogView = layoutInflater.inflate(R.layout.manage_plant_add_dialog, null)
-//
-//        val dialogText = dialogView.findViewById<EditText>(R.id.plantAddDialogEditText)
-//
-//        builder.setView(dialogView)
-//            .setPositiveButton("확인"){ dialogInterface, i ->
-//                val plantName = dialogText.text.toString()
-//
-//                Log.d("SuccessAddPlant", dialogText.text.toString())
-//                key = plantRef.push().key.toString()
-//
-//                plantRef.child(key)
-//                    .setValue(PlantModel(plantName, LocalDate.now().toString()))
-//
-//                activity?.let{
-//                val intent = Intent(context, PlantManageActivity::class.java)
-//                intent.putExtra("key", key)
-//                Log.d("Dialog Finish", key)
-//                startActivity(intent)
-//            }
-//
-//            }
-//            .setNegativeButton("취소") { dialogInterface, i ->
-//                Log.d("CancelAddPlant", "Canceled")
-//            }
-//            .show()
-//    }
-
 }
 

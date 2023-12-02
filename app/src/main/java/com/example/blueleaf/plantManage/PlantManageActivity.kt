@@ -1,28 +1,16 @@
 package com.example.blueleaf.plantManage
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.ListAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blueleaf.databinding.ActivityPlantManageBinding
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.blueleaf.MainActivity
-import com.example.blueleaf.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,10 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.reflect.Array.set
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 
 class PlantManageActivity : AppCompatActivity() {
 
@@ -100,11 +85,8 @@ class PlantManageActivity : AppCompatActivity() {
                     plantTodoKeyList.add(data.key.toString())
                 }
 
-
-                //Data Sort
-                plantTodoDataList.sortBy {
-                    dateFormat.parse(it.target_date).time
-                }
+                //Quick Sort를 이용해서, 두 리스트를 동시에 정렬한다.
+                todoQuickSort(plantTodoDataList, plantTodoKeyList, 0, plantTodoDataList.size-1)
 
                 //RVAdapter update
                 todoListAdapter.notifyDataSetChanged()
@@ -154,6 +136,36 @@ class PlantManageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    private fun todoQuickSort(plantTodoDataList: MutableList<TodoModel>, plantTodoKeyList: MutableList<String>, start: Int, end: Int) {
+        if (start + 1 > end) return
+        val pivot_arr = plantTodoDataList[end]
+        val pivot_arr2 = plantTodoKeyList[end]
+        val pivot = dateFormat.parse(plantTodoDataList[end].target_date).time
+        var i = start - 1
+
+        for (j in start..end-1) {
+            if (dateFormat.parse(plantTodoDataList[j].target_date).time < pivot) {
+                i += 1
+                val term = plantTodoDataList[j]
+                plantTodoDataList[j] = plantTodoDataList[i]
+                plantTodoDataList[i] = term
+
+                val term2 = plantTodoKeyList[j]
+                plantTodoKeyList[j] = plantTodoKeyList[i]
+                plantTodoKeyList[i] = term2
+            }
+        }
+
+        plantTodoDataList[end] = plantTodoDataList[i+1]
+        plantTodoDataList[i+1] = pivot_arr
+
+        plantTodoKeyList[end] = plantTodoKeyList[i+1]
+        plantTodoKeyList[i+1] = pivot_arr2
+
+        todoQuickSort(plantTodoDataList, plantTodoKeyList, start, i) // pivot 기존 왼쪽 배열 정렬
+        todoQuickSort(plantTodoDataList, plantTodoKeyList, i+2, end) // pivot 기존 오른쪽 배열 정렬
     }
 
 
