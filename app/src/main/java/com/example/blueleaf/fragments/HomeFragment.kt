@@ -24,7 +24,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.blueleaf.Plant
 import com.example.blueleaf.R
 import com.example.blueleaf.board.MyBoardPostsActivity
 import com.example.blueleaf.contentsList.UserModel
@@ -118,6 +117,9 @@ class HomeFragment : Fragment() {
                         break
                     }
 
+                    //나의 식물 ui 설정
+                    setPlant(i)
+
                     plantTodoRef.child(plantKeyList[i]).get().addOnSuccessListener {
                         val tempTodoKeyList = mutableListOf<String>()
                         val tempTodoDataList = mutableListOf<TodoModel>()
@@ -148,10 +150,10 @@ class HomeFragment : Fragment() {
                                 var selectDate = dateFormat.parse(tempTodoDataList[j].target_date) //목표일
                                 var calcDate = calcDDay(selectDate, today.time)
 
+                                //만약 계산한 날이 음수(DDay를 넘긴 경우)
                                 val tempDate = Calendar.getInstance()
                                 tempDate.time = selectDate
 
-                                //만약 계산한 날이 음수(DDay를 넘긴 경우)
                                 if(calcDate < 0){
                                     Log.d("일정 음수", "!!!")
                                     tempDate.add(Calendar.DATE, tempTodoDataList[j].cycle_date)
@@ -169,10 +171,8 @@ class HomeFragment : Fragment() {
                                 selectDate = dateFormat.parse(tempTodoDataList[0].target_date)
                                 calcDate = calcDDay(selectDate, today.time)
 
-                                var calcDate_s = "D-$calcDate" //D-Day toString
-
-                                //일정 분류
-                                var todoType: Int = tempTodoDataList[0].todo_code
+                                val calcDate_s = "D-$calcDate" //D-Day toString
+                                val todoType: Int = tempTodoDataList[0].todo_code //일정 분류
 
                                 //식물 별, 일정 분류 별로 나누어 ui 업데이트
                                 homePlantTodoIconReset(i, todoType, calcDate_s)
@@ -180,32 +180,6 @@ class HomeFragment : Fragment() {
                         }
                     }.addOnFailureListener {
                         //Fail
-                    }
-                }
-
-
-                for (i: Int in 0..2){
-                    if(i >= plantKeyList.size)
-                        break
-
-                    when(i){
-                        0 -> {
-                            binding.homePlantFirstAddButton.visibility = ImageView.GONE
-                            binding.homePlantFirstTextView.visibility = TextView.VISIBLE
-                            binding.homePlantFirstTextView.text = plantDataList[i].name
-                            binding.homePlantSecondAddButton.visibility = ImageView.VISIBLE
-                        }
-                        1 -> {
-                            binding.homePlantSecondAddButton.visibility = ImageView.GONE
-                            binding.homePlantSecondTextView.visibility = TextView.VISIBLE
-                            binding.homePlantSecondTextView.text = plantDataList[i].name
-                            binding.homePlantThirdAddButton.visibility = ImageView.VISIBLE
-                        }
-                        2 -> {
-                            binding.homePlantThirdAddButton.visibility = ImageView.GONE
-                            binding.homePlantThirdTextView.visibility = TextView.VISIBLE
-                            binding.homePlantThirdTextView.text = plantDataList[i].name
-                        }
                     }
                 }
             }
@@ -216,11 +190,9 @@ class HomeFragment : Fragment() {
         })
 
        try {
-           // #3. Details - Display UserName & Email
            if (userUID == null) {
                throw Exception("userUID is null")
            }
-
            //프로필 이미지 다운로드 후 업데이트
            imageDownload_preload()
 
@@ -250,45 +222,15 @@ class HomeFragment : Fragment() {
            Log.e("Error", e.message.toString())
        }
 
+        //각 식물칸 이벤트
         binding.homePlantFirst.setOnClickListener{
-            activity?.let{
-                var intent: Intent
-                if(plantKeyList.size < 1){
-                    intent = Intent(context, NoPlantManageActivity::class.java)
-                } else{
-                    intent = Intent(context, PlantManageActivity::class.java)
-                    intent.putExtra("key", plantKeyList[0])
-                }
-                startActivity(intent)
-            }
+            movePlant(0)
         }
-
         binding.homePlantSecond.setOnClickListener{
-            activity?.let{
-                var intent: Intent
-                if(plantKeyList.size < 2){
-                    //intent = Intent(context, NoPlantManageActivity::class.java)
-                    addPlantDialog(plantManageRef)
-                } else{
-                    intent = Intent(context, PlantManageActivity::class.java)
-                    intent.putExtra("key", plantKeyList[1])
-                    startActivity(intent)
-                }
-            }
+            movePlant(1)
         }
-
         binding.homePlantThird.setOnClickListener{
-            activity?.let{
-                var intent: Intent
-                if(plantKeyList.size < 3){
-                    //intent = Intent(context, NoPlantManageActivity::class.java)
-                    addPlantDialog(plantManageRef)
-                } else{
-                    intent = Intent(context, PlantManageActivity::class.java)
-                    intent.putExtra("key", plantKeyList[2])
-                    startActivity(intent)
-                }
-            }
+            movePlant(2)
         }
 
         //* Profile image (Jinhyun)
@@ -342,8 +284,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-    //storage
+    //Functions
     private fun imageUpload(uri: Uri){
         val storage = Firebase.storage
         //val storageRef = storage.reference
@@ -448,24 +389,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun imageDownload() {
-        val storage = Firebase.storage
-        val userUID = Firebase.auth.currentUser?.uid
-        val storageRef = storage.getReference("profileImage").child(userUID!!)
-
-        // storage에서 가져올 파일명 선언
-        val fileName = "profileImage"
-        val mountainsRef = storageRef.child("${fileName}.png")
-        val downloadTask = mountainsRef.downloadUrl
-        downloadTask.addOnSuccessListener { uri ->
-            // 파일 다운로드 성공
-            // Glide를 사용하여 이미지를 ImageView에 직접 가져오기
-            Glide.with(this).load(uri).into(binding.homeProfileImageView)
-        }.addOnFailureListener {
-            // 파일 다운로드 실패
-        }
-    }
-
     private fun imageDownload_preload() {
         val storage = Firebase.storage
         val userUID = Firebase.auth.currentUser?.uid
@@ -495,8 +418,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
     private val registerForActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
@@ -509,7 +430,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-    //Functions
     private fun setUserData(newName: String, newEmail: String){
         binding.homeUsernameTextView.text = newName
         binding.homeUsernameEditText.hint = newName
@@ -566,6 +486,47 @@ class HomeFragment : Fragment() {
                 Log.d("CancelAddPlant", "Canceled")
             }
             .show()
+    }
+
+    //나의 식물 정보 표시
+    private fun setPlant(i : Int){
+        when(i){
+            0 -> {
+                binding.homePlantFirstAddButton.visibility = ImageView.GONE
+                binding.homePlantFirstTextView.visibility = TextView.VISIBLE
+                binding.homePlantFirstTextView.text = plantDataList[i].name
+                binding.homePlantSecondAddButton.visibility = ImageView.VISIBLE
+            }
+            1 -> {
+                binding.homePlantSecondAddButton.visibility = ImageView.GONE
+                binding.homePlantSecondTextView.visibility = TextView.VISIBLE
+                binding.homePlantSecondTextView.text = plantDataList[i].name
+                binding.homePlantThirdAddButton.visibility = ImageView.VISIBLE
+            }
+            2 -> {
+                binding.homePlantThirdAddButton.visibility = ImageView.GONE
+                binding.homePlantThirdTextView.visibility = TextView.VISIBLE
+                binding.homePlantThirdTextView.text = plantDataList[i].name
+            }
+        }
+    }
+
+    //나의 식물 페이지로 이동
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun movePlant(i : Int){
+        activity?.let{
+            var intent: Intent
+            if(plantKeyList.size < 1){
+                intent = Intent(context, NoPlantManageActivity::class.java)
+                startActivity(intent)
+            } else if(plantKeyList.size < i + 1){
+                addPlantDialog(plantManageRef)
+            } else{
+                intent = Intent(context, PlantManageActivity::class.java)
+                intent.putExtra("key", plantKeyList[i])
+                startActivity(intent)
+            }
+        }
     }
 }
 

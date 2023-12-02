@@ -101,7 +101,7 @@ class PlantManageActivity : AppCompatActivity() {
         })
 
 
-        //Calendar RecyclerView
+        //캘린더 RecyclerView
         val monthListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         monthListAdapter = AdapterMonth(key, plantTodoDataList)
 
@@ -113,7 +113,6 @@ class PlantManageActivity : AppCompatActivity() {
         val snap = PagerSnapHelper()
         snap.attachToRecyclerView(binding.plantManageCalendar)
 
-
         //일정 Recyclerview
         val todoListManager = LinearLayoutManager(this)
         todoListAdapter = AdapterTodo(plantTodoDataList, plantTodoKeyList, key)
@@ -122,8 +121,7 @@ class PlantManageActivity : AppCompatActivity() {
             adapter = todoListAdapter
         }
 
-
-        //좌 상단 뒤로가기 버튼
+        //좌 상단 뒤로 가기 버튼
         binding.plantManageBackImageView.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -189,5 +187,4 @@ class PlantManageActivity : AppCompatActivity() {
             }
             .show()
     }
-
 }

@@ -63,8 +63,7 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
                 holder.binding.manageRVSun.visibility = ImageView.VISIBLE
             }
         }
-//
-//        //Data Update
+
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val today = Calendar.getInstance()
 
