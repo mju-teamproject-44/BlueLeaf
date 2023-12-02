@@ -9,8 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
 class MessageAdapter(private val context: Context, private val messageList: ArrayList<Message>, private val receiverName:String):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -29,14 +27,12 @@ class MessageAdapter(private val context: Context, private val messageList: Arra
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // 현재 메시지
         val currentMsg = messageList[position]
-        // 보내는 데이터
+        // 보낸 데이터를 View로
         if(holder.javaClass == SendViewHolder::class.java) {
             val viewHolder = holder as SendViewHolder // 타입 변환
-            //viewHolder.sendMessage.text = currentMsg.message
             viewHolder.sendMessage.text = currentMsg.message
-        }else{ //받는 데이터
+        }else{ //받은 데이터 View로
             val viewHolder = holder as ReceiveViewHolder // 타입 변환
-            //viewHolder.sendMessage.text = currentMsg.message
             viewHolder.receiveMessage.text = currentMsg.message
             viewHolder.partnerName.text = receiverName
 

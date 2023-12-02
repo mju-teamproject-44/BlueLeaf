@@ -24,8 +24,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginTop="35dp"
-                    android:paddingTop="40dp"
-                    app:srcCompat="@drawable/logo" />
+                    android:paddingTop="55dp"
+                    app:srcCompat="@drawable/logo_default" />
 
                 <TextView
                     android:id="@+id/textView"
