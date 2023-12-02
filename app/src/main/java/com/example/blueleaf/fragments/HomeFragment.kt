@@ -338,6 +338,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     //storage
     private fun imageUpload(uri: Uri){
         val storage = Firebase.storage

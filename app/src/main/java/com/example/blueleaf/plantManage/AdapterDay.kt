@@ -19,14 +19,11 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: String, val todoList: MutableList<TodoModel>): RecyclerView.Adapter<AdapterDay.DayView>() {
     val ROW = 5
-
-    private val database : DatabaseReference = Firebase.database.reference
-    private val userUID = Firebase.auth.currentUser?.uid
-    private val todoRef = database.child("plantManage_todo").child(userUID!!).child(key)
 
     private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
@@ -41,11 +38,20 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         //각 일자를 눌렀을 때,
         holder.binding.itemDayLayout.setOnClickListener{
 
-                //날짜를 눌렀을 때, 일정 추가 페이지로 이동 및 정보 전달(key, 선택한 날짜)
-                val intent = Intent(holder.itemView.context, TodoAddActivity::class.java)
-                intent.putExtra("key", key)
-                intent.putExtra("selectDate", format.format(dayList[position]))
-                holder.itemView.context.startActivity(intent)
+            //과거의 날짜를 눌렀을 때에는 리스너가 끝나도록 해야됨.
+            val selectDay = dayList[position]
+            val today = Calendar.getInstance()
+            val calcDay = selectDay.time - today.time.time
+            if(calcDay <  0){
+                Toast.makeText(holder.itemView.context, "과거의 날짜는 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //날짜를 눌렀을 때, 일정 추가 페이지로 이동 및 정보 전달(key, 선택한 날짜)
+            val intent = Intent(holder.itemView.context, TodoAddActivity::class.java)
+            intent.putExtra("key", key)
+            intent.putExtra("selectDate", format.format(dayList[position]))
+            holder.itemView.context.startActivity(intent)
 
         }
 
@@ -56,7 +62,7 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         for(i in todoList){
             val targetdate = format.parse(i.target_date)
 
-            //각 년 월에 맞는지 확인f
+            //각 년 월에 맞는지 확인
             if((targetdate.month == dayList[position].month) && (targetdate.year == dayList[position].year)){
                 //각 일에만 해당
                 if(targetdate.date == dayList[position].date){
@@ -110,8 +116,5 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         return ROW * 7
     }
 
-    interface OnItemClickListener{
-        fun onClick(v: View)
-    }
 
 }

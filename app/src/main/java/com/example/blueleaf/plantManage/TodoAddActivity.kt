@@ -3,7 +3,6 @@ package com.example.blueleaf.plantManage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -15,8 +14,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.reflect.Array
-import java.lang.reflect.Array.set
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -109,7 +106,6 @@ class TodoAddActivity : AppCompatActivity() {
             //Activity Move
             val intent = Intent(this, PlantManageActivity::class.java)
             intent.putExtra("key", key)
-//            intent.putExtra("todokey", todokey)
             startActivity(intent)
         }
 

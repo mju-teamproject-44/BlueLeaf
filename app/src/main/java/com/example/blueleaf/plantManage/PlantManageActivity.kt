@@ -138,6 +138,11 @@ class PlantManageActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun todoQuickSort(plantTodoDataList: MutableList<TodoModel>, plantTodoKeyList: MutableList<String>, start: Int, end: Int) {
         if (start + 1 > end) return
         val pivot_arr = plantTodoDataList[end]
