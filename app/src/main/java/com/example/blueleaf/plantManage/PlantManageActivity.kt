@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.util.Log
 
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blueleaf.databinding.ActivityPlantManageBinding
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.blueleaf.MainActivity
+import com.example.blueleaf.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -127,13 +129,9 @@ class PlantManageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //임시로 식물 삭제 설정(수정 예정)
-        binding.plantManageMorePlantImageView.setOnClickListener{
-            plantRef.removeValue()
-            Toast.makeText(this, "식물 삭제 완료", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        //식물 삭제 버튼
+        binding.plantManageRemovePlantButton.setOnClickListener{
+            removePlantDialog(plantRef, todoRef)
         }
 
     }
@@ -173,5 +171,23 @@ class PlantManageActivity : AppCompatActivity() {
         todoQuickSort(plantTodoDataList, plantTodoKeyList, i+2, end) // pivot 기존 오른쪽 배열 정렬
     }
 
+    private fun removePlantDialog(plantRef : DatabaseReference, todoRef : DatabaseReference){
+        //다이얼 로그를 띄운다.
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.manage_plant_remove_dialog, null)
+        builder.setView(dialogView)
+            .setPositiveButton("확인"){ dialogInterface, i ->
+                plantRef.removeValue()
+                todoRef.removeValue()
+                Toast.makeText(this, "식물 삭제 완료", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            .setNegativeButton("취소") { dialogInterface, i ->
+                Log.d("CancelAddPlant", "Canceled")
+            }
+            .show()
+    }
 
 }

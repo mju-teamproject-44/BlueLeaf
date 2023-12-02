@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
     lateinit var plantTodoRef: DatabaseReference
 
     //#Datas
+    private lateinit var key: String //식물 추가시에만 사용
     private val plantDataList = mutableListOf<PlantModel>()
     private val plantKeyList = mutableListOf<String>()
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -68,7 +69,8 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         //Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
@@ -265,12 +267,13 @@ class HomeFragment : Fragment() {
             activity?.let{
                 var intent: Intent
                 if(plantKeyList.size < 2){
-                    intent = Intent(context, NoPlantManageActivity::class.java)
+                    //intent = Intent(context, NoPlantManageActivity::class.java)
+                    addPlantDialog(plantManageRef)
                 } else{
                     intent = Intent(context, PlantManageActivity::class.java)
                     intent.putExtra("key", plantKeyList[1])
+                    startActivity(intent)
                 }
-                startActivity(intent)
             }
         }
 
@@ -278,12 +281,13 @@ class HomeFragment : Fragment() {
             activity?.let{
                 var intent: Intent
                 if(plantKeyList.size < 3){
-                    intent = Intent(context, NoPlantManageActivity::class.java)
+                    //intent = Intent(context, NoPlantManageActivity::class.java)
+                    addPlantDialog(plantManageRef)
                 } else{
                     intent = Intent(context, PlantManageActivity::class.java)
                     intent.putExtra("key", plantKeyList[2])
+                    startActivity(intent)
                 }
-                startActivity(intent)
             }
         }
 
@@ -533,6 +537,35 @@ class HomeFragment : Fragment() {
     private fun calcDDay(d1 : Date, d2 : Date): Long {
         val i  = (d1.time - d2.time) / (60 * 60 * 24 * 1000)
         return i
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addPlantDialog(plantManageRef : DatabaseReference){
+        //다이얼 로그를 띄운다.
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.manage_plant_add_dialog, null)
+
+        val dialogText = dialogView.findViewById<EditText>(R.id.plantAddDialogEditText)
+
+        builder.setView(dialogView)
+            .setPositiveButton("확인"){ dialogInterface, i ->
+                val plantName = dialogText.text.toString()
+
+                Log.d("SuccessAddPlant", dialogText.text.toString())
+                key = plantManageRef.push().key.toString()
+
+                plantManageRef.child(key)
+                    .setValue(PlantModel(plantName, LocalDate.now().toString()))
+
+                val intent = Intent(requireContext(), PlantManageActivity::class.java)
+                intent.putExtra("key", key)
+                Log.d("Dialog Finish", key)
+                startActivity(intent)
+            }
+            .setNegativeButton("취소") { dialogInterface, i ->
+                Log.d("CancelAddPlant", "Canceled")
+            }
+            .show()
     }
 }
 
