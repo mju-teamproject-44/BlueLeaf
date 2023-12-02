@@ -47,6 +47,7 @@ import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
+import java.util.Date
 
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
@@ -110,41 +111,69 @@ class HomeFragment : Fragment() {
 
                 //식물의 개수 만큼 반복. (O(n^2))
                 for(i in 0..<plantKeyList.size){
+                    //만약 식물이 존재 하지 않는다면 break한다.
+                    if(plantKeyList.size == 0){
+                        break
+                    }
+
                     plantTodoRef.child(plantKeyList[i]).get().addOnSuccessListener {
                         val tempTodoKeyList = mutableListOf<String>()
                         val tempTodoDataList = mutableListOf<TodoModel>()
 
                         //일정의 FB위치 = plantManage_todo -> userUID -> plantkey -> todokey -> todoModel
-
                         for(data in it.children){
                             tempTodoKeyList.add(data.key.toString())
                         }
 
                         //일정의 개수 만큼 반복
                         for(j in 0..<tempTodoKeyList.size){
+                            //만약 일정의 개수가 0이면 break 한다.
+                            if(tempTodoKeyList.size == 0){
+                                break;
+                            }
+
                             plantTodoRef.child(plantKeyList[i]).child(tempTodoKeyList[j]).get().addOnSuccessListener {
                                 //식물 벌 일정을 받음
                                 val todoItem : TodoModel? = it.getValue(TodoModel::class.java)
                                 tempTodoDataList.add(todoItem!!)
+
+                                //일정의 개수가 0이면 종료한다.
+                                if(tempTodoDataList.size == 0){
+                                    return@addOnSuccessListener
+                                }
+
+                                val today = Calendar.getInstance() //오늘 날짜.
+                                var selectDate = dateFormat.parse(tempTodoDataList[j].target_date) //목표일
+                                var calcDate = calcDDay(selectDate, today.time)
+
+                                val tempDate = Calendar.getInstance()
+                                tempDate.time = selectDate
+
+                                //만약 계산한 날이 음수(DDay를 넘긴 경우)
+                                if(calcDate < 0){
+                                    Log.d("일정 음수", "!!!")
+                                    tempDate.add(Calendar.DATE, tempTodoDataList[j].cycle_date)
+                                    tempTodoDataList[j].target_date = dateFormat.format(tempDate.time)
+                                    val tempModel = TodoModel(tempTodoDataList[j].todo_code, tempTodoDataList[j].target_date, tempTodoDataList[j].cycle_date)
+                                    plantTodoRef.child(plantKeyList[i]).child(tempTodoKeyList[j]).setValue(tempModel)
+                                }
 
                                 //식물 별 일정의 List를 남은 기간 순으로 정렬.
                                 tempTodoDataList.sortBy {
                                     dateFormat.parse(it.target_date).time
                                 }
 
-                                if(tempTodoDataList.size != 0) {
-                                    //D-Day 계산
-                                    val today = Calendar.getInstance() //오늘 날짜.
-                                    val selectDate = dateFormat.parse(tempTodoDataList[0].target_date) //목표일
-                                    var calcDate = (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000) //D-Day 계산과정
-                                    var calcDate_s = "D-$calcDate" //D-Day toString
+                                //정렬 이후 index 0 -> DDay가 가장 짧은 일정
+                                selectDate = dateFormat.parse(tempTodoDataList[0].target_date)
+                                calcDate = calcDDay(selectDate, today.time)
 
-                                    //일정 분류
-                                    var todoType: Int = tempTodoDataList[0].todo_code
+                                var calcDate_s = "D-$calcDate" //D-Day toString
 
-                                    //식물 별, 일정 분류 별로 나누어 ui 업데이트
-                                    homePlantTodoIconReset(i, todoType, calcDate_s)
-                                }
+                                //일정 분류
+                                var todoType: Int = tempTodoDataList[0].todo_code
+
+                                //식물 별, 일정 분류 별로 나누어 ui 업데이트
+                                homePlantTodoIconReset(i, todoType, calcDate_s)
                             }
                         }
                     }.addOnFailureListener {
@@ -498,6 +527,11 @@ class HomeFragment : Fragment() {
             binding.homeUsernameEditText.visibility = TextView.GONE
             binding.homeSaveImageView.visibility = ImageView.GONE
         }
+    }
+
+    private fun calcDDay(d1 : Date, d2 : Date): Long {
+        val i  = (d1.time - d2.time) / (60 * 60 * 24 * 1000)
+        return i
     }
 }
 
