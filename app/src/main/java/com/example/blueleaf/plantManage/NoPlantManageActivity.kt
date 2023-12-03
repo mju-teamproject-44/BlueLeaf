@@ -46,7 +46,6 @@ class NoPlantManageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         //식물 추가 버튼
         binding.noPlantManageAddPlantImageView.setOnClickListener {
             //다이얼 로그를 띄운다.

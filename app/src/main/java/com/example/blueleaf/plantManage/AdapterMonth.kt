@@ -2,10 +2,7 @@ package com.example.blueleaf.plantManage
 
 import android.icu.util.Calendar
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blueleaf.R
@@ -16,19 +13,6 @@ class AdapterMonth(val key: String, val todoList: MutableList<TodoModel>):Recycl
 
     val center = Int.MAX_VALUE/2
     private var calendar = Calendar.getInstance()
-
-    //
-    interface OnItemClickListener{
-        fun onClick(v: View, position: Int)
-    }
-
-    fun setItemClickListener(onItemClickListener: OnItemClickListener){
-        this.itemClickListener = onItemClickListener
-    }
-
-    private lateinit var itemClickListener : OnItemClickListener
-
-
 
     inner class MonthView(val binding: ManageListItemMonthBinding): RecyclerView.ViewHolder(binding.root)
 
