@@ -1,20 +1,10 @@
 package com.example.blueleaf.plantManage
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.ListAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
@@ -30,10 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.reflect.Array.set
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 
 class PlantManageActivity : AppCompatActivity() {
 
@@ -100,11 +87,8 @@ class PlantManageActivity : AppCompatActivity() {
                     plantTodoKeyList.add(data.key.toString())
                 }
 
-
-                //Data Sort
-                plantTodoDataList.sortBy {
-                    dateFormat.parse(it.target_date).time
-                }
+                //Quick Sort를 이용해서, 두 리스트를 동시에 정렬한다.
+                todoQuickSort(plantTodoDataList, plantTodoKeyList, 0, plantTodoDataList.size-1)
 
                 //RVAdapter update
                 todoListAdapter.notifyDataSetChanged()
@@ -117,7 +101,7 @@ class PlantManageActivity : AppCompatActivity() {
         })
 
 
-        //Calendar RecyclerView
+        //캘린더 RecyclerView
         val monthListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         monthListAdapter = AdapterMonth(key, plantTodoDataList)
 
@@ -129,7 +113,6 @@ class PlantManageActivity : AppCompatActivity() {
         val snap = PagerSnapHelper()
         snap.attachToRecyclerView(binding.plantManageCalendar)
 
-
         //일정 Recyclerview
         val todoListManager = LinearLayoutManager(this)
         todoListAdapter = AdapterTodo(plantTodoDataList, plantTodoKeyList, key)
@@ -138,23 +121,70 @@ class PlantManageActivity : AppCompatActivity() {
             adapter = todoListAdapter
         }
 
-
-        //좌 상단 뒤로가기 버튼
+        //좌 상단 뒤로 가기 버튼
         binding.plantManageBackImageView.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-        //임시로 식물 삭제 설정(수정 예정)
-        binding.plantManageMorePlantImageView.setOnClickListener{
-            plantRef.removeValue()
-            Toast.makeText(this, "식물 삭제 완료", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        //식물 삭제 버튼
+        binding.plantManageRemovePlantButton.setOnClickListener{
+            removePlantDialog(plantRef, todoRef)
         }
 
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
+    private fun todoQuickSort(plantTodoDataList: MutableList<TodoModel>, plantTodoKeyList: MutableList<String>, start: Int, end: Int) {
+        if (start + 1 > end) return
+        val pivot_arr = plantTodoDataList[end]
+        val pivot_arr2 = plantTodoKeyList[end]
+        val pivot = dateFormat.parse(plantTodoDataList[end].target_date).time
+        var i = start - 1
+
+        for (j in start..end-1) {
+            if (dateFormat.parse(plantTodoDataList[j].target_date).time < pivot) {
+                i += 1
+                val term = plantTodoDataList[j]
+                plantTodoDataList[j] = plantTodoDataList[i]
+                plantTodoDataList[i] = term
+
+                val term2 = plantTodoKeyList[j]
+                plantTodoKeyList[j] = plantTodoKeyList[i]
+                plantTodoKeyList[i] = term2
+            }
+        }
+
+        plantTodoDataList[end] = plantTodoDataList[i+1]
+        plantTodoDataList[i+1] = pivot_arr
+
+        plantTodoKeyList[end] = plantTodoKeyList[i+1]
+        plantTodoKeyList[i+1] = pivot_arr2
+
+        todoQuickSort(plantTodoDataList, plantTodoKeyList, start, i) // pivot 기존 왼쪽 배열 정렬
+        todoQuickSort(plantTodoDataList, plantTodoKeyList, i+2, end) // pivot 기존 오른쪽 배열 정렬
+    }
+
+    private fun removePlantDialog(plantRef : DatabaseReference, todoRef : DatabaseReference){
+        //다이얼 로그를 띄운다.
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.manage_plant_remove_dialog, null)
+        builder.setView(dialogView)
+            .setPositiveButton("확인"){ dialogInterface, i ->
+                plantRef.removeValue()
+                todoRef.removeValue()
+                Toast.makeText(this, "식물 삭제 완료", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            .setNegativeButton("취소") { dialogInterface, i ->
+                Log.d("CancelAddPlant", "Canceled")
+            }
+            .show()
+    }
 }
