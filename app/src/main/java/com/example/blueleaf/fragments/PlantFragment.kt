@@ -85,7 +85,6 @@ class PlantFragment : Fragment() {
 
         }
 
-        //val testdata = getJsonData("plant.json")
         testdata?.plants?.forEach { plant ->
             val normalizedKoreanName = Normalizer.normalize(plant.name, Normalizer.Form.NFD)
                 .replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
@@ -308,7 +307,8 @@ class PlantFragment : Fragment() {
                 for ((key, plant) in koreanNameMap) {
                     val normalizedKoreanName = normalizeString(plant.name)
 
-                    if (normalizedKoreanName.equals(normalizedCharText)) {
+                    // 부분 일치를 확인하도록 변경
+                    if (normalizedKoreanName.contains(normalizedCharText)) {
                         filteredPlants.add(plant)
                     }
                 }
@@ -338,9 +338,6 @@ class PlantFragment : Fragment() {
             val gson = Gson()
 
             result = gson.fromJson(reader, plantList::class.java)
-
-            // 이 부분을 제거합니다.
-            // originalDataset = result?.plants ?: emptyList()
 
             // 한글 이름을 키로 해시맵에 추가
             koreanNameMap.clear() // 기존 데이터를 지우고 다시 추가합니다.
