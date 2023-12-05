@@ -198,22 +198,32 @@ class HomeFragment : Fragment() {
 
            // #4. Details - Editing UserName
            binding.homeEditImageView.setOnClickListener {
+               if(binding.homeUsernameEditText.hint.toString() == "" || binding.homeUsernameEditText.hint.toString() == "\n"){
+                   binding.homeUsernameEditText.hint == "사용자 명"
+               }
                setEditMode(true)
                binding.homeUsernameEditText.setOnEditorActionListener{v, actionId, event ->
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
-                   setUserData(newUserName)
+                   if(newUserName != ""){
+                       binding.homeUsernameEditText.hint = "사용자 명"
+                       setUserData(newUserName)
+                       database.child("users").child(userUID!!).child("userName").setValue(newUserName)
+                   }
                    //Edit Database
-                   database.child("users").child(userUID!!).child("userName").setValue(newUserName)
                    setEditMode(false)
                    false
+
                }
                binding.homeSaveImageView.setOnClickListener {
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
-                   setUserData(newUserName)
+                   if(newUserName != ""){
+                       binding.homeUsernameEditText.hint = "사용자 명"
+                       setUserData(newUserName)
+                       database.child("users").child(userUID!!).child("userName").setValue(newUserName)
+                   }
                    //Edit Database
-                   database.child("users").child(userUID!!).child("userName").setValue(newUserName)
                    setEditMode(false)
                }
            }
