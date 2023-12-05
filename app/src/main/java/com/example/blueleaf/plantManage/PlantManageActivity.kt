@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -89,6 +90,11 @@ class PlantManageActivity : AppCompatActivity() {
 
                 //Quick Sort를 이용해서, 두 리스트를 동시에 정렬한다.
                 todoQuickSort(plantTodoDataList, plantTodoKeyList, 0, plantTodoDataList.size-1)
+
+                //일정이 없는 경우를 제외한 상황
+                if(plantTodoKeyList.size != 0){
+                    binding.plantManageAddTextLinearLayout.visibility = LinearLayout.GONE
+                }
 
                 //RVAdapter update
                 todoListAdapter.notifyDataSetChanged()
