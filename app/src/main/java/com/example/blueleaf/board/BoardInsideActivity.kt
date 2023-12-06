@@ -13,6 +13,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.blueleaf.R
+import com.example.blueleaf.chat.Anony_dialog
+import com.example.blueleaf.chat.ChatActivity
 import com.example.blueleaf.comment.CommentLVAdapter
 import com.example.blueleaf.comment.CommentModel
 import com.example.blueleaf.databinding.ActivityBoardInsideBinding
@@ -28,6 +30,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class BoardInsideActivity : AppCompatActivity() {
 
@@ -37,8 +45,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
     private lateinit var key: String
     private lateinit var writerUid: String
-//    private lateinit var boardCategory:String
-//    private lateinit var boardCategoryRef: DatabaseReference
+    private lateinit var writerUsername: String
 
     private val commentDataList = mutableListOf<CommentModel>()
     private lateinit var commentAdapter: CommentLVAdapter
@@ -47,6 +54,7 @@ class BoardInsideActivity : AppCompatActivity() {
     private lateinit var commentWriter: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var currentUserInfo:String = ""
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
@@ -66,47 +74,13 @@ class BoardInsideActivity : AppCompatActivity() {
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
-        // 첫 번째 방법으로 게시판 내용 전달 받기(각각의 내용을 전달받음)
-//
-//        // 각각의 값을 불러와 변수에 저장
-//        val title = intent.getStringExtra("title").toString()
-//        val content = intent.getStringExtra("content").toString()
-//        val time = intent.getStringExtra("time").toString()
-//        val uid = intent.getStringExtra("uid").toString()
-//
-//        // 지정한 레이아웃 위치(id를 통해 구분)에 각각의 값(내용) 연결
-//        binding.titleArea.text = title
-//        binding.contentArea.text = content
-//        binding.timeArea.text = time
-//        binding.uidArea.text = uid
-//
-//        // 아래는 정상적으로 값이 들어가는지 확인하기 위한 log 출력용 코드(없어도 된다)
-//        Log.d(TAG,title)
-//        Log.d(TAG,content)
-//        Log.d(TAG,time)
-//        Log.d(TAG,uid)
 
         // 두 번째 방법으로 게시판 내용 전달 받기(key값 하나만 전달받음)
         key = intent.getStringExtra("key").toString()
 
-//        // 게시판 유형도 전달받는다
-//        boardCategory = intent.getStringExtra("boardCategory").toString()
-//
-//        when(boardCategory){
-//            "정보 게시판"->{
-//                boardCategoryRef = FBRef.boardInfoRef
-//            }
-//            "식물 자랑 게시판"->{
-//                boardCategoryRef = FBRef.boardShowRef
-//            }
-//            "거래 게시판"->{
-//                boardCategoryRef = FBRef.boardTransRef
-//            }
-//        }
 
         getBoardData(key)
         getImageData(key)
-//        getProfileImage()
 
 
         commentAdapter = CommentLVAdapter(commentDataList)
@@ -118,8 +92,44 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         getCommentData(key)
+
+
+        binding.userArea.setOnClickListener {
+            // CoroutineScope을 만들어서 비동기 작업을 수행
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    currentUserInfo = getUid()
+                    Log.d("msgs", currentUserInfo)
+                    if(currentUserInfo != writerUid){
+                        if (currentUserInfo == "비회원 사용자") {
+                            Log.d("msgs","성공!")
+                            val intent = Intent(this@BoardInsideActivity, Anony_dialog::class.java)
+                            this@BoardInsideActivity.startActivity(intent)
+                        } else {
+                            val intent = Intent(this@BoardInsideActivity, ChatActivity::class.java)
+                            intent.putExtra("name", writerUsername)
+                            intent.putExtra("uId", writerUid)
+                            this@BoardInsideActivity.startActivity(intent)
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    Log.e("msgs", "Error: ${e.message}")
+                }
+            }
+        }
     }
 
+    suspend fun getUid(): String {
+        return suspendCancellableCoroutine { continuation ->
+            FBRef.users.child(FBAuth.getUid()).get().addOnSuccessListener {
+                val uid = it.child("uid").value as String
+                continuation.resume(uid)
+            }.addOnFailureListener {
+                continuation.resumeWithException(it)
+            }
+        }
+    }
 
     fun getCommentData(key: String) {
         val postListener = object : ValueEventListener {
@@ -207,9 +217,10 @@ class BoardInsideActivity : AppCompatActivity() {
 
                     val myUid = FBAuth.getUid()
                     writerUid = dataModel.uid
+                    writerUsername = dataModel!!.username
                     getProfileImage(writerUid)
                     if (myUid.equals(writerUid)) {
-                        Toast.makeText(baseContext, "글쓴이 O", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(baseContext, "글쓴이 O", Toast.LENGTH_LONG).show()
                         binding.boardSettingIcon.isVisible = true
                     } else {
 

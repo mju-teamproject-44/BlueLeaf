@@ -509,42 +509,63 @@
                     android:layout_marginTop="10dp"
                     android:src="@drawable/home_bottom_bar"></ImageView>
 
-                <ImageView
-                    android:id="@+id/homeMyBoardIconImageView"
 
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeMyPlantContentLineImageView"
-                    android:layout_marginLeft="30dp"
-
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/home_vertical_line"></ImageView>
-
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/myBoardPosts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/homeMyBoardIconImageView"
-                    android:layout_marginLeft="10dp"
-
-                    android:layout_toRightOf="@id/homeMyBoardIconImageView"
-                    android:fontFamily="@font/korail_round_gothic_medium"
-                    android:text="나의 게시글"
-
-                    android:textColor="@color/black"
-                    android:textSize="15sp"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-
+                    android:layout_width="358dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/homeMyPlantContentLineImageView"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="7dp"
-
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="35dp"
-                    android:src="@drawable/home_chevron_left"></ImageView>
+                    android:layout_marginBottom="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/homeMyBoardIconImageView"
+
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/home_vertical_line"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignBottom="@id/homeMyBoardIconImageView"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_toRightOf="@id/homeMyBoardIconImageView"
+                        android:fontFamily="@font/korail_round_gothic_medium"
+                        android:text="나의 게시글"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/homeMyBoardIconImageView"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+
+                        android:src="@drawable/home_chevron_left"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.985"
+                        app:layout_constraintStart_toEndOf="@+id/textView5"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"></ImageView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/homeMyBoardTextLineImageView"
@@ -552,10 +573,9 @@
                     android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/homeMyBoardIconImageView"
+                    android:layout_below="@id/myBoardPosts"
                     android:layout_centerHorizontal="true"
 
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/home_bottom_bar"></ImageView>
 
 

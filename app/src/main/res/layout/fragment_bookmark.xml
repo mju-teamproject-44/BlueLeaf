@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             app:iconifiedByDefault="false"
-            android:layout_marginRight="7dp"
+            android:layout_margin="20dp"
+            app:queryBackground="@drawable/background_radius_gray"
+            app:queryHint="유저 이름을 입력하시오"
             />
 
         <androidx.recyclerview.widget.RecyclerView
