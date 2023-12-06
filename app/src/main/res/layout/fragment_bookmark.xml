@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.BookmarkFragment"
@@ -12,29 +12,43 @@
         >
 
         <androidx.appcompat.widget.SearchView
-            android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:id="@+id/user_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             app:iconifiedByDefault="false"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="7dp"
             />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/user_search_view"
+            android:layout_above="@+id/navigation"
+            tools:listitem="@layout/user_layout">
 
+        </androidx.recyclerview.widget.RecyclerView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            >
+
+            <!--
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/user_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@+id/linearLayout5"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 tools:listitem="@layout/user_layout">
+
             </androidx.recyclerview.widget.RecyclerView>
+            -->
 
 
             <LinearLayout
@@ -119,5 +133,5 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
