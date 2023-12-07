@@ -16,8 +16,7 @@ import java.util.Date
 class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: String, val todoList: MutableList<TodoModel>): RecyclerView.Adapter<AdapterDay.DayView>() {
     val ROW = 5
 
-    private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    private lateinit var today : Calendar
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     inner class DayView(val binding: ManageListItemDayBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -27,15 +26,14 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
     }
 
     override fun onBindViewHolder(holder: DayView, position: Int) {
-        today = Calendar.getInstance()
+        val today = dateFormat.parse(getTodayString())
 
         //각 일자를 눌렀을 때,
         holder.binding.itemDayLayout.setOnClickListener{
 
             //과거의 날짜를 눌렀을 때에는 리스너가 끝나도록 해야됨.
             val selectDay = dayList[position]
-            val today = Calendar.getInstance()
-            val calcDay = calcDDay(selectDay, today.time)
+            val calcDay = calcDDay(selectDay, today)
             if(calcDay <  0){
                 Toast.makeText(holder.itemView.context, "과거의 날짜는 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -44,7 +42,7 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
             //날짜를 눌렀을 때, 일정 추가 페이지로 이동 및 정보 전달(key, 선택한 날짜)
             val intent = Intent(holder.itemView.context, TodoAddActivity::class.java)
             intent.putExtra("key", key)
-            intent.putExtra("selectDate", format.format(dayList[position]))
+            intent.putExtra("selectDate", dateFormat.format(dayList[position]))
             holder.itemView.context.startActivity(intent)
 
         }
@@ -54,16 +52,18 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
 
         //TodoList에서 일자를 확인하고, 각 맞는 아이콘으로 변경한다.
         for(i in todoList){
-            val targetdate = format.parse(i.target_date)
-            val cycleDate = i.cycle_date
+            val targetdate = dateFormat.parse(i.target_date)
+            val cycleDate : Int = i.cycle_date
             val todo_code = i.todo_code
 
-            val dday = calcDDay(dayList[position], today.time)
-            val tododday = calcDDay(targetdate, today.time)
+            val tododday = calcDDay(targetdate, dayList[position])
+
 
             //주기 세팅
-            //DDay % cycle == 0, 정한 일정 남은 기간보다 크고, 최대 120일 까지만
-            if((dday % cycleDate).toInt() == 0 && dday >= tododday && dday < 120){
+            if((tododday % cycleDate == 0) &&
+                (targetdate.time <= dayList[position].time) &&
+                (calcDDay(dayList[position], today) < 120)){
+
                 setIcon(todo_code, holder)
             }
 
@@ -84,7 +84,7 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         })
 
         //과거 일자 색 변경
-        if(calcDDay(dayList[position], today.time) < 0){
+        if(calcDDay(dayList[position], today) < 0){
             holder.binding.itemDayText.setTextColor(Color.RED)
         }
 
@@ -98,9 +98,14 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         return ROW * 7
     }
 
-    private fun calcDDay(d1 : Date, d2 : Date): Long {
+    private fun calcDDay(d1 : Date, d2 : Date): Int {
         val i  = (d1.time - d2.time) / (60 * 60 * 24 * 1000)
-        return i
+        return i.toInt()
+    }
+
+    private fun getTodayString(): String{
+        val today = Calendar.getInstance()
+        return dateFormat.format(today.time)
     }
 
     private fun setIcon(todo_code: Int, holder: DayView){

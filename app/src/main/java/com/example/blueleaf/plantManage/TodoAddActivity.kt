@@ -26,6 +26,9 @@ private val binding get() = mBinding!!
 lateinit var database: DatabaseReference
 lateinit var todoRef: DatabaseReference
 
+//Date
+private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
 //#ExtraPath
 lateinit var key: String
 lateinit var todokey: String
@@ -56,12 +59,12 @@ class TodoAddActivity : AppCompatActivity() {
         //#getExtra
         key = intent.getStringExtra("key").toString()
         selectDate_s = intent.getStringExtra("selectDate").toString()
+
         //String to Date
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         selectDate = dateFormat.parse(selectDate_s)
-        val today = Calendar.getInstance()
-        var calcuDate = (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000)
-        dday = calcuDate.toInt()
+        val today = dateFormat.parse(getTodayString())
+        var calcuDate = (selectDate.time - today.time) / (60 * 60 * 24 * 1000)
+        dday = calcuDate.toInt() + 1
 
         //#Firebase setting
         database = Firebase.database.reference
@@ -112,5 +115,8 @@ class TodoAddActivity : AppCompatActivity() {
 
     }
 
-
+    private fun getTodayString(): String{
+        val today = Calendar.getInstance()
+        return dateFormat.format(today.time)
+    }
 }

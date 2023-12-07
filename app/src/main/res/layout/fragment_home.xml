@@ -34,7 +34,9 @@
                     android:layout_centerHorizontal="true"
 
                     android:layout_marginTop="60dp"
-                    android:src="@drawable/home_profile"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:src="@drawable/home_profile">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
 
                 <Button
                     android:id="@+id/homeProfileImageUploadButton"

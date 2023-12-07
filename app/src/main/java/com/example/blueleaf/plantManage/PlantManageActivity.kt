@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class PlantManageActivity : AppCompatActivity() {
 
@@ -37,7 +38,7 @@ class PlantManageActivity : AppCompatActivity() {
     private val plantTodoKeyList = mutableListOf<String>()
     private val plantTodoDataList = mutableListOf<TodoModel>()
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     //Binding
     private var mBinding: ActivityPlantManageBinding? = null
@@ -193,4 +194,9 @@ class PlantManageActivity : AppCompatActivity() {
             }
             .show()
     }
+
+//    private fun getTodayString(): String{
+//        val today = Calendar.getInstance()
+//        return dateFormat.format(today.time)
+//    }
 }

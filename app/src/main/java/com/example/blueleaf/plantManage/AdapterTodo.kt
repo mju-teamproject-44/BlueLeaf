@@ -21,6 +21,8 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
     lateinit var database: DatabaseReference
     lateinit var todoRef: DatabaseReference
 
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
     inner class TodoView(val binding: ManageListItemTodoBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoView {
@@ -64,12 +66,11 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
             }
         }
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        val today = Calendar.getInstance()
+        val today = dateFormat.parse(getTodayString())
 
         //기간 변경
         val selectDate = dateFormat.parse(todoList[position].target_date)
-        var calcuDate = (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000)
+        var calcuDate = (selectDate.time - today.time) / (60 * 60 * 24 * 1000) + 1
 
         val temp1 = calcuDate.toInt().toString()
         val temp2: String = "일 뒤"
@@ -97,5 +98,10 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
         holder.binding.manageRVPlant.visibility = ImageView.GONE
         holder.binding.manageRVFe.visibility = ImageView.GONE
         holder.binding.manageRVSun.visibility = ImageView.GONE
+    }
+
+    private fun getTodayString(): String{
+        val today = Calendar.getInstance()
+        return dateFormat.format(today.time)
     }
 }
