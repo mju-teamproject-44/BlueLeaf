@@ -194,9 +194,4 @@ class PlantManageActivity : AppCompatActivity() {
             }
             .show()
     }
-
-//    private fun getTodayString(): String{
-//        val today = Calendar.getInstance()
-//        return dateFormat.format(today.time)
-//    }
 }

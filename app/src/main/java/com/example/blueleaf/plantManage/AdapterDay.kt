@@ -27,14 +27,16 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
 
     override fun onBindViewHolder(holder: DayView, position: Int) {
         val today = dateFormat.parse(getTodayString())
+        //형식에 맞게 날짜 변환
+        val selectDay_s = dateFormat.format(dayList[position]) //String 형태
+        val selectDay = dateFormat.parse(selectDay_s) //Date 형태
 
         //각 일자를 눌렀을 때,
         holder.binding.itemDayLayout.setOnClickListener{
 
             //과거의 날짜를 눌렀을 때에는 리스너가 끝나도록 해야됨.
-            val selectDay = dayList[position]
-            val calcDay = calcDDay(selectDay, today)
-            if(calcDay <  0){
+            //계산한 dday가 음수(과거의 날짜)면 리스너를 종료한다.
+            if(calcDDay(selectDay, today) < 0){
                 Toast.makeText(holder.itemView.context, "과거의 날짜는 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -42,13 +44,12 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
             //날짜를 눌렀을 때, 일정 추가 페이지로 이동 및 정보 전달(key, 선택한 날짜)
             val intent = Intent(holder.itemView.context, TodoAddActivity::class.java)
             intent.putExtra("key", key)
-            intent.putExtra("selectDate", dateFormat.format(dayList[position]))
+            intent.putExtra("selectDate", selectDay_s)
             holder.itemView.context.startActivity(intent)
-
         }
 
         //dayList에 맞춰서 일 텍스트 설정
-        holder.binding.itemDayText.text = dayList[position].date.toString()
+        holder.binding.itemDayText.text = selectDay.date.toString()
 
         //TodoList에서 일자를 확인하고, 각 맞는 아이콘으로 변경한다.
         for(i in todoList){
@@ -56,21 +57,21 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
             val cycleDate : Int = i.cycle_date
             val todo_code = i.todo_code
 
-            val tododday = calcDDay(targetdate, dayList[position])
+            val tododday = calcDDay(targetdate, selectDay)
 
 
             //주기 세팅
             if((tododday % cycleDate == 0) &&
-                (targetdate.time <= dayList[position].time) &&
-                (calcDDay(dayList[position], today) < 120)){
+                (targetdate.time <= selectDay.time) &&
+                (calcDDay(selectDay, today) < 120)){
 
                 setIcon(todo_code, holder)
             }
 
             //각 년 월에 맞는지 확인
-            if((targetdate.month == dayList[position].month) && (targetdate.year == dayList[position].year)){
+            if((targetdate.month == selectDay.month) && (targetdate.year == selectDay.year)){
                 //각 일에만 해당
-                if(targetdate.date == dayList[position].date){
+                if(targetdate.date == selectDay.date){
                     setIcon(todo_code, holder)
                 }
             }
@@ -84,12 +85,12 @@ class AdapterDay(val tempMonth: Int, val dayList: MutableList<Date>, val key: St
         })
 
         //과거 일자 색 변경
-        if(calcDDay(dayList[position], today) < 0){
+        if(calcDDay(selectDay, today) < 0){
             holder.binding.itemDayText.setTextColor(Color.RED)
         }
 
         //해당 월 밖의 일 설정
-        if(tempMonth != dayList[position].month){
+        if(tempMonth != selectDay.month){
             holder.binding.itemDayText.alpha = 0.4f
         }
     }

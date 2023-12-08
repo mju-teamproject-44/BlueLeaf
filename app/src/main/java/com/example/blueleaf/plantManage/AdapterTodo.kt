@@ -15,6 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 
 class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: MutableList<String>, val key: String) : RecyclerView.Adapter<AdapterTodo.TodoView>() {
 
@@ -66,17 +67,12 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
             }
         }
 
-        val today = dateFormat.parse(getTodayString())
+        val today = dateFormat.parse(getTodayString()) //Date 형태 - 오늘 날짜
 
         //기간 변경
         val selectDate = dateFormat.parse(todoList[position].target_date)
-        var calcuDate = (selectDate.time - today.time) / (60 * 60 * 24 * 1000) + 1
-
-        val temp1 = calcuDate.toInt().toString()
-        val temp2: String = "일 뒤"
-        val temp: String = temp1 + temp2
-        holder.binding.manageDdayTextView.text = temp
-
+        val dday_s = calcDDay(selectDate, today).toString() + "일 뒤"
+        holder.binding.manageDdayTextView.text = dday_s
 
         //x버튼을 눌렀을 때.
         holder.binding.manageTodoXButton.setOnClickListener {
@@ -103,5 +99,10 @@ class AdapterTodo(val todoList: MutableList<TodoModel>, val todoKeyList: Mutable
     private fun getTodayString(): String{
         val today = Calendar.getInstance()
         return dateFormat.format(today.time)
+    }
+
+    private fun calcDDay(d1 : Date, d2 : Date): Int {
+        val i  = (d1.time - d2.time) / (60 * 60 * 24 * 1000)
+        return i.toInt()
     }
 }

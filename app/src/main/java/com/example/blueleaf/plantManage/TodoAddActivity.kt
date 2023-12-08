@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ActivityTodoAddBinding
 import com.google.firebase.auth.ktx.auth
@@ -58,13 +59,8 @@ class TodoAddActivity : AppCompatActivity() {
 
         //#getExtra
         key = intent.getStringExtra("key").toString()
-        selectDate_s = intent.getStringExtra("selectDate").toString()
+        selectDate_s = intent.getStringExtra("selectDate").toString() //String 형태
 
-        //String to Date
-        selectDate = dateFormat.parse(selectDate_s)
-        val today = dateFormat.parse(getTodayString())
-        var calcuDate = (selectDate.time - today.time) / (60 * 60 * 24 * 1000)
-        dday = calcuDate.toInt() + 1
 
         //#Firebase setting
         database = Firebase.database.reference
@@ -111,12 +107,6 @@ class TodoAddActivity : AppCompatActivity() {
             intent.putExtra("key", key)
             startActivity(intent)
         }
-
-
     }
 
-    private fun getTodayString(): String{
-        val today = Calendar.getInstance()
-        return dateFormat.format(today.time)
-    }
 }
