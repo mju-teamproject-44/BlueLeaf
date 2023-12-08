@@ -56,21 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
-<!--            <ImageView-->
-<!--                android:id="@+id/plantManageMorePlantImageView"-->
 
-<!--                android:layout_width="wrap_content"-->
-
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="10dp"-->
-
-<!--                android:layout_marginTop="68dp"-->
-<!--                android:src="@drawable/manage_icon_2"-->
-
-<!--                app:layout_constraintLeft_toRightOf="@id/plantManagePlantNameTextView"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
-<!--            </ImageView>-->
-        </LinearLayout>
+    </LinearLayout>
 
 
 
@@ -96,6 +83,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/plantManageAddTextLinearLayout"
+
+        app:layout_constraintTop_toBottomOf="@+id/plantManageTodolist"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        android:visibility="visible"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/manage_calender_icon"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp">
+        </ImageView>
+
+        <TextView
+            android:text="캘린더에 날짜를 터치해\n일정을 추가해보세요"
+            android:textSize="17sp"
+            android:fontFamily="@font/korail_round_gothic_medium"
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/plantManageRemovePlantButton"

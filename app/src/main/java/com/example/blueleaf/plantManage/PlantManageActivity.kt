@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class PlantManageActivity : AppCompatActivity() {
 
@@ -36,7 +38,7 @@ class PlantManageActivity : AppCompatActivity() {
     private val plantTodoKeyList = mutableListOf<String>()
     private val plantTodoDataList = mutableListOf<TodoModel>()
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     //Binding
     private var mBinding: ActivityPlantManageBinding? = null
@@ -89,6 +91,11 @@ class PlantManageActivity : AppCompatActivity() {
 
                 //Quick Sort를 이용해서, 두 리스트를 동시에 정렬한다.
                 todoQuickSort(plantTodoDataList, plantTodoKeyList, 0, plantTodoDataList.size-1)
+
+                //일정이 없는 경우를 제외한 상황
+                if(plantTodoKeyList.size != 0){
+                    binding.plantManageAddTextLinearLayout.visibility = LinearLayout.GONE
+                }
 
                 //RVAdapter update
                 todoListAdapter.notifyDataSetChanged()

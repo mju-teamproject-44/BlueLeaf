@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.blueleaf.R
 import com.example.blueleaf.databinding.ActivityTodoAddBinding
 import com.google.firebase.auth.ktx.auth
@@ -25,6 +26,9 @@ private val binding get() = mBinding!!
 //#Firebase
 lateinit var database: DatabaseReference
 lateinit var todoRef: DatabaseReference
+
+//Date
+private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
 //#ExtraPath
 lateinit var key: String
@@ -55,13 +59,8 @@ class TodoAddActivity : AppCompatActivity() {
 
         //#getExtra
         key = intent.getStringExtra("key").toString()
-        selectDate_s = intent.getStringExtra("selectDate").toString()
-        //String to Date
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        selectDate = dateFormat.parse(selectDate_s)
-        val today = Calendar.getInstance()
-        var calcuDate = (selectDate.time - today.time.time) / (60 * 60 * 24 * 1000)
-        dday = calcuDate.toInt()
+        selectDate_s = intent.getStringExtra("selectDate").toString() //String 형태
+
 
         //#Firebase setting
         database = Firebase.database.reference
@@ -108,9 +107,6 @@ class TodoAddActivity : AppCompatActivity() {
             intent.putExtra("key", key)
             startActivity(intent)
         }
-
-
     }
-
 
 }
