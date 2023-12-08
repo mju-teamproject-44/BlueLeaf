@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
     private lateinit var key: String //식물 추가시에만 사용
     private val plantDataList = mutableListOf<PlantModel>()
     private val plantKeyList = mutableListOf<String>()
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,16 +146,18 @@ class HomeFragment : Fragment() {
                                     return@addOnSuccessListener
                                 }
 
-                                val today = Calendar.getInstance() //오늘 날짜.
+                                val today = dateFormat.parse(getTodayString())
                                 var selectDate = dateFormat.parse(tempTodoDataList[j].target_date) //목표일
-                                var calcDate = calcDDay(selectDate, today.time)
+                                var calcDate = calcDDay(selectDate, today)
 
                                 //만약 계산한 날이 음수(DDay를 넘긴 경우)
-                                val tempDate = Calendar.getInstance()
-                                tempDate.time = selectDate
+
 
                                 if(calcDate < 0){
-                                    Log.d("일정 음수", "!!!")
+                                    val tempDate = Calendar.getInstance()
+                                    tempDate.time = selectDate
+
+                                    Log.d("일정 음수, 주기 업데이트", tempTodoDataList[j].cycle_date.toString())
                                     tempDate.add(Calendar.DATE, tempTodoDataList[j].cycle_date)
                                     tempTodoDataList[j].target_date = dateFormat.format(tempDate.time)
                                     val tempModel = TodoModel(tempTodoDataList[j].todo_code, tempTodoDataList[j].target_date, tempTodoDataList[j].cycle_date)
@@ -169,7 +171,7 @@ class HomeFragment : Fragment() {
 
                                 //정렬 이후 index 0 -> DDay가 가장 짧은 일정
                                 selectDate = dateFormat.parse(tempTodoDataList[0].target_date)
-                                calcDate = calcDDay(selectDate, today.time)
+                                calcDate = calcDDay(selectDate, today)
 
                                 val calcDate_s = "D-$calcDate" //D-Day toString
                                 val todoType: Int = tempTodoDataList[0].todo_code //일정 분류
@@ -198,22 +200,32 @@ class HomeFragment : Fragment() {
 
            // #4. Details - Editing UserName
            binding.homeEditImageView.setOnClickListener {
+               if(binding.homeUsernameEditText.hint.toString() == "" || binding.homeUsernameEditText.hint.toString() == "\n"){
+                   binding.homeUsernameEditText.hint == "사용자 명"
+               }
                setEditMode(true)
                binding.homeUsernameEditText.setOnEditorActionListener{v, actionId, event ->
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
-                   setUserData(newUserName)
+                   if(newUserName != ""){
+                       binding.homeUsernameEditText.hint = "사용자 명"
+                       setUserData(newUserName)
+                       database.child("users").child(userUID!!).child("userName").setValue(newUserName)
+                   }
                    //Edit Database
-                   database.child("users").child(userUID!!).child("userName").setValue(newUserName)
                    setEditMode(false)
                    false
+
                }
                binding.homeSaveImageView.setOnClickListener {
                    //Edit Local
                    val newUserName: String = binding.homeUsernameEditText.text.toString()
-                   setUserData(newUserName)
+                   if(newUserName != ""){
+                       binding.homeUsernameEditText.hint = "사용자 명"
+                       setUserData(newUserName)
+                       database.child("users").child(userUID!!).child("userName").setValue(newUserName)
+                   }
                    //Edit Database
-                   database.child("users").child(userUID!!).child("userName").setValue(newUserName)
                    setEditMode(false)
                }
            }
@@ -454,9 +466,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun calcDDay(d1 : Date, d2 : Date): Long {
+    private fun calcDDay(d1 : Date, d2 : Date): Int {
         val i  = (d1.time - d2.time) / (60 * 60 * 24 * 1000)
-        return i
+        return i.toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -527,6 +539,11 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun getTodayString(): String{
+        val today = Calendar.getInstance()
+        return dateFormat.format(today.time)
     }
 }
 
