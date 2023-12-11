@@ -84,8 +84,8 @@
       "humidity": "40% 이하",
       "temperature": "15~30℃",
       "image": "https://huga.s3.ap-northeast-2.amazonaws.com/plantImages/1689855582507334313169_936665734132942_4209384405659095888_n.jpg",
-      "difficulty": "상급자",
-      "dialog_water": "4",
+      "difficulty": "초급자",
+      "dialog_water": "1",
       "temper_min": "15",
       "temper_max": "30",
       "dialog_humid": "1"
@@ -100,7 +100,7 @@
       "temperature": "16~29℃",
       "image": "https://huga.s3.ap-northeast-2.amazonaws.com/plantImages/16898596478321.jpg",
       "difficulty": "중급자",
-      "dialog_water": "4",
+      "dialog_water": "1",
       "temper_min": "16",
       "temper_max": "29",
       "dialog_humid": "1"
