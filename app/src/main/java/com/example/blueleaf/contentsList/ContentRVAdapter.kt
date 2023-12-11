@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.blueleaf.R
@@ -107,7 +106,7 @@ class ContentRVAdapter(val context : Context,
             // 북마크 영역의 클릭 이벤트 리 스너
             bookmarkArea.setOnClickListener {
                 Log.d("ContentRVAdapter", FBAuth.getUid())
-                Toast.makeText(context, key, Toast.LENGTH_LONG).show() // 선택된 아이템의 키를 toast
+                // Toast.makeText(context, key, Toast.LENGTH_LONG).show() // 선택된 아이템의 키를 toast
 
                 // 만약 지금 클릭된 아이템의 키값이 북마크 리스트에 포함되어 있다면 그 key를 제거해라
                 // bookmarkIdList.contains(key)
